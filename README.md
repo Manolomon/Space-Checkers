@@ -1,14 +1,20 @@
-# Space-Checkers
+<h1 align="center">
+    <img src="https://user-images.githubusercontent.com/31350932/46589812-b3b78a00-ca73-11e8-9d81-ffbe52b86895.png">
+</h1>
 
-## Requerimientos
+[![GitHub last commit](https://img.shields.io/github/last-commit/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers) [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg?longCache=true&style=for-the-badge)](https://opensource.org/licenses/MIT) ![Made With](https://img.shields.io/badge/made%20with-unity-lightgrey.svg?longCache=true&style=for-the-badge&colorB=222C37&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxMyAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yNjQwNSA2LjUwMDM3TDEwLjUzNzYgMi41NzE5N0wxMS42MzYyIDYuNTAwMzdMMTAuNTM3NiAxMC40Mjc5TDguMjY0MDUgNi41MDAzN1pNNy4xNTU5IDcuMTM4MzJMOS40Mjk4MiAxMS4wNjYxTDUuNDY5NjIgMTAuMDUwOUwyLjYwODY0IDcuMTM4MzJINy4xNTU5Wk05LjQyOTI5IDEuOTMzNUw3LjE1NTkgNS44NjE5SDIuNjA4NjRMNS40Njk2MiAyLjk0OTEzTDkuNDI5MjkgMS45MzM1Wk0xMi42NzUgNS4xNjM0OUwxMS4yODc5IDBMNi4xMTA4IDEuMzgzOEw1LjM0NDQ1IDIuNzMyMDRMMy43ODkzNSAyLjcyMDg5TDAgNi41MDA3NEwzLjc4OTM1IDEwLjI3OTdIMy43ODk1MUw1LjM0MzkyIDEwLjI2ODJMNi4xMTEzOSAxMS42MTY0TDExLjI4NzkgMTNMMTIuNjc1IDcuODM3NDZMMTEuODg3MyA2LjUwMDM3TDEyLjY3NSA1LjE2MzQ5WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=) [![GitHub release](https://img.shields.io/github/release/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge&colorB=yellow)](https://github.com/dannyhvalenz/Space-Checkers)
 
-- La aplicación deberá poder invitar a otros usuarios registrados a una partida, ya sea por correo electrónico o link de invitación
-- La aplicación deberá poder registrar nuevos usuarios
-- La aplicación deberá poder ingresar a la aplicación si es que tiene una cuenta registrada
-- La aplicación deberá tener un chat dentro de la partida para la comunicación entre los jugadores
-- La aplicación deberá permitir jugar entre varios jugadores (máximo 6) una partida de damas chinas
-- La aplicación deberá permitir a los jugadores en la partida mover sus piezas respectivas con base a los movimientos permitidos
-- La aplicación deberá mostrar al jugador en turno los movimientos posibles que puede hacer con una determinada pieza (si es que tiene la opción activada)
+## Especificaciones de Proyecto
 
-## Casos de Uso
-
+Consiste en desarrollar una aplicación (juego)
+multijugador que permita:
+* [ ] Registro de usuarios y confirmación vía email
+* [ ] Inicio de sesión de usuarios
+* [ ] Generación del tablero y colocación de fichas
+* [ ] Administrar los tiros por jugador
+* [ ] Generación de puntuación
+* [ ] Tabla de mejores jugadores
+* [ ] Monitoreo del avance de cada jugador
+* [ ] Envío de invitación al juego
+* [ ] Unirse al juego (invitado y usuarios registrados)
+* [ ] Sección para comunicarse en tiempo real
