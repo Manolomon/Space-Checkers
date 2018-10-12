@@ -444,7 +444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Usernamer
+  m_Text: Username
 --- !u!222 &148107954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7007,8 +7007,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 166}
-  m_SizeDelta: {x: 126.5, y: 50.65}
+  m_AnchoredPosition: {x: 0.000011444, y: 174.05}
+  m_SizeDelta: {x: 243.09, y: 50.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261512267
 MonoBehaviour:
@@ -7042,7 +7042,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sig In
+  m_Text: Sign In
 --- !u!222 &1261512268
 CanvasRenderer:
   m_ObjectHideFlags: 0
