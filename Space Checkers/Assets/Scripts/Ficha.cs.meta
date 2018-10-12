@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: bfcddad5ad30f3640aa22058900490e7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - colorCasilla: {fileID: 21300000, guid: ac95f1216d8adaa439fec9b5a12d9010, type: 3}
+  - casilla: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
