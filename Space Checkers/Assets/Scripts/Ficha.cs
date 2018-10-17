@@ -14,7 +14,7 @@ public class Ficha : MonoBehaviour {
 	void Start () 
 	{
 		ren = this.GetComponent<SpriteRenderer>();
-		ren.color = colorC;
+		ren.color = Color.white;
 		ren.sprite = colorCasilla;
 		sCasilla = casilla.GetComponent<Casilla>();
 		sCasilla.Ocupada = true;
