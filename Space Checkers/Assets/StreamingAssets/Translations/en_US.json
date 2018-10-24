@@ -1,4 +1,6 @@
 {"items":[
-    {"key":"game_title","value":"Quiz Game"},
-    {"key":"start_button","value":"Start Game"}]
+    {"key":"login_button","value":"Log In"},
+    {"key":"sign_up_button","value":"Sign Up"},
+    {"key":"join_game_button","value":"Join Game"},
+    {"key":"quit_button","value":"Quit"}]
 }

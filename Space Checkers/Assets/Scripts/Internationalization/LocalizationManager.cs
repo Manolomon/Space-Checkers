@@ -5,18 +5,29 @@ using System.IO;
 
 public class LocalizationManager : MonoBehaviour {
 
+	public static LocalizationManager instance;
 	private Dictionary<string, string> localizedText;
+	private bool isReady = false;
+	private string missingTextString = "Localized text not found";
 
-	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
-
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != null)
+		{
+			Destroy (gameObject);
+		}
+		DontDestroyOnLoad(gameObject);
 	}
 
 	public void LoadLocalizedText (string filename)
 	{
 		localizedText = new Dictionary<string, string> ();
-		string filePath = Path.Combine(Application.streamingAssetsPath, filename);
+		string translationPath = Path.Combine("Translations", filename);
+		string filePath = Path.Combine(Application.streamingAssetsPath, translationPath);
 		if (File.Exists (filePath))
 		{
 			string dataAsJason = File.ReadAllText (filePath);
@@ -27,11 +38,27 @@ public class LocalizationManager : MonoBehaviour {
 				localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
 			}
 
-			Debug.Log ("Data loaded, dictionary contains" + localizedText.Count + " entries");
+			Debug.Log ("Data loaded, " + filename + " dictionary contains " + localizedText.Count + " entries");
 		}
 		else
 		{
 			Debug.LogError("Cannot find language file");
 		}
+		isReady = true;
+	}
+
+	public string GetLocalizedValue (string key)
+	{
+		string result = missingTextString;
+		if (localizedText.ContainsKey (key))
+		{
+			result = localizedText[key];
+		}
+		return result;
+	}
+
+	public bool GetIsReady ()
+	{
+		return isReady;
 	}
 }

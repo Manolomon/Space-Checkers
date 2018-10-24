@@ -1,4 +1,6 @@
 {"items":[
-    {"key":"game_title","value":"Quiz Spiel"},
-    {"key":"start_button","value":"Spiel Beginnen"}]
+    {"key":"login_button","value":"Iniciar Sesión"},
+    {"key":"sign_up_button","value":"Crear Cuenta"},
+    {"key":"join_game_button","value":"Unirse a Partida"},
+    {"key":"quit_button","value":"Salir"}]
 }

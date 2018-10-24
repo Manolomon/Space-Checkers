@@ -12,6 +12,8 @@ public class ToggleSwitchLanguage : MonoBehaviour
 	public GameObject secondState;
 	public Text secondLabel;
 	public Color disactiveColor;
+
+	public GameObject localizationManager;
 	// Use this for initialization
 	void Start () {
 		toggleLanguage = GetComponent<Toggle>();
@@ -42,12 +44,14 @@ public class ToggleSwitchLanguage : MonoBehaviour
 			firstLabel.color = activeColor;
 			secondLabel.color = disactiveColor;
 			secondState.SetActive(false);
+			localizationManager.GetComponent<LocalizationManager>().LoadLocalizedText("en_US.json");
 		}
 		else
 		{
 			firstLabel.color = disactiveColor;
 			secondLabel.color = activeColor;
 			secondState.SetActive(true);
+			localizationManager.GetComponent<LocalizationManager>().LoadLocalizedText("es_MX.json");
 		}
     }
 }
