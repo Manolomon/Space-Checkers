@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
@@ -40,7 +40,11 @@ public class MailingManager : MonoBehaviour
         };
 
         string body = string.Empty;
-        using (StreamReader reader = new StreamReader("Assets/invitationMailTemplate.html"))
+
+        string templatePath = Path.Combine("MailTemplates", "invitationMailTemplate.html");
+		string filePath = Path.Combine(Application.streamingAssetsPath, templatePath);
+        
+        using (StreamReader reader = new StreamReader(filePath))
         {
 
             body = reader.ReadToEnd();
@@ -48,7 +52,7 @@ public class MailingManager : MonoBehaviour
         }
 
         body = body.Replace("{invitationCode}", invitationCode);
-        body = body.Replace("{fsender}", senderName);
+        body = body.Replace("{senderName}", senderName);
 
         var message = new MailMessage(fromAddress, toAddress)
         {

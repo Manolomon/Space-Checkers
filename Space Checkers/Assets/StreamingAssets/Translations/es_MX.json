@@ -1,6 +1,16 @@
-{"items":[
-    {"key":"login_button","value":"Iniciar Sesión"},
-    {"key":"sign_up_button","value":"Crear Cuenta"},
-    {"key":"join_game_button","value":"Unirse a Partida"},
-    {"key":"quit_button","value":"Salir"}]
+{"items":
+    [
+        {"key":"login_button","value":"Iniciar Sesión"},
+        {"key":"sign_up_button","value":"Crear Cuenta"},
+        {"key":"join_game_button","value":"Unirse a Partida"},
+        {"key":"quit_button","value":"Salir"},
+        {"key":"login_panel_title","value":"Iniciar Sesión"},
+        {"key":"login_text_field_username","value":"Nombre de Usuario"},
+        {"key":"login_text_field_password","value":"Contraseña"},
+        {"key":"login_panel_button","value":"Acceder"},
+        {"key":"code_panel_title","value":"Código de Invitado"},
+        {"key":"code_text_field_hint","value":"Ingrese su código"},
+        {"key":"code_join_game_button","value":"Unirse como Invitado"},
+        {"key":"game_quit_button", "value":"Rendirse"}
+    ]
 }

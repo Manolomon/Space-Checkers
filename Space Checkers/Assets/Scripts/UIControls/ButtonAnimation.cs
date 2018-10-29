@@ -8,26 +8,25 @@ using System.Collections.Generic;
 public class ButtonAnimation : MonoBehaviour,
 IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    #region Public Properties
+    
     public Image targetImage;
     public Text targetText;
+    public AudioSource targetFx;
  
     public Sprite hoverSprite;
     public Color hoverTextColor;
+    public AudioClip hoverFx;
     public Sprite pressedSprite;
     public Color pressedTextColor;
+    public AudioClip pressedFx;
  
     public UnityEvent OnClick;
-    #endregion
-    //--------------------------------------------------------------------------------
-    #region Private Properties
+    
     Sprite normalSprite;
     Color normalTextColor;
     bool tracking;
     bool inBounds;
-    #endregion
-    //--------------------------------------------------------------------------------
-    #region Interface Methods
+    
     void Start() {
         normalSprite = targetImage.sprite;
         normalTextColor = targetText.color;
@@ -36,6 +35,7 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
     public void OnPointerEnter(PointerEventData eventData) {
         inBounds = true;
         UpdateStyle();
+        targetFx.PlayOneShot (hoverFx);
     }
  
     public void OnPointerExit(PointerEventData eventData) {
@@ -47,6 +47,7 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
         tracking = true;
         inBounds = true;
         UpdateStyle();
+        targetFx.PlayOneShot (pressedFx);
     }
    
     public void OnPointerUp(PointerEventData eventData) {
@@ -55,13 +56,12 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
         inBounds = false;
         UpdateStyle();
     }
-    #endregion
-    //--------------------------------------------------------------------------------
-    #region Private Methods
+    
     void Set(Sprite sprite, Color textColor) {
         targetImage.sprite = sprite;
         targetText.color = textColor;
     }
+
     void UpdateStyle() {
         if (!inBounds) {
             Set(normalSprite, normalTextColor);
@@ -71,5 +71,5 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
             Set(hoverSprite, hoverTextColor);
         }
     }
-    #endregion
+    
 }
