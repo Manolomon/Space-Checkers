@@ -2,13 +2,12 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-var io = require("socket.io");
+var io = require("socket.io")(5000);
 
 var app = module.exports = loopback();
 
 app.start = function() {
   // start the web server
-  io.listen(5000);
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
@@ -22,23 +21,23 @@ app.start = function() {
 
 io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
-
   cliente.on("login", function(sesion){
-    // inicio de sesión
+    
   });
-  
+
   cliente.on("registro", function(datos){
     // registro de usuario
   });
 
   cliente.on("createGame", function(){
     // creacion de partida
+    // room = codigo de la sala. Aqui generar el codigo de sala
   });
 
   cliente.on("joinGame", function(partida){
     // unirse a partida
+    // join = codigo de sala
   });
-
 });
 
 // Bootstrap the application, configure models, datasources and middleware.
