@@ -1,0 +1,33 @@
+{
+  "name": "jugador",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "idJugador": {
+      "type": "number",
+      "required": true
+    },
+    "username": {
+      "type": "string"
+    },
+    "correo": {
+      "type": "string"
+    },
+    "pass": {
+      "type": "string"
+    },
+    "partidasJugadas": {
+      "type": "number"
+    },
+    "partidasGanadas": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
