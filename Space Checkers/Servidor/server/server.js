@@ -22,13 +22,13 @@ app.start = function() {
 io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
   cliente.on("login", function(datos){
-    var filtro = {where: {username : datos[0]}};
+    var filtro = {where: {username : "Deklok"}};
     app.models.Jugador.find(filtro, function (err, user) {
       if (err) throw err;
       
       console.log(user);
       if (user != null) {
-        cliente.emit("loginCliente",true);
+        cliente.emit("loginCliente",user);
       } else {
         cliente.emit("loginCliente",false);
       }
@@ -62,9 +62,4 @@ boot(app, __dirname, function(err) {
   // start the server if `$ node server.js`
   if (require.main === module)
     app.start();
-    var filtro = {where: {username : "Deklok"}};
-    app.models.Jugador.find(filtro, function (err2, user) {
-      if (err2) throw err2;
-      console.log(user);
-    });
 });
