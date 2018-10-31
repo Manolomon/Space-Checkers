@@ -11,6 +11,8 @@
         {"key":"code_panel_title","value":"Invitation Code"},
         {"key":"code_text_field_hint","value":"Enter your code"},
         {"key":"code_join_game_button","value":"Join as Guest"},
-        {"key":"game_quit_button", "value":"Give Up"}
+        {"key":"game_quit_button", "value":"Give Up"},
+        {"key":"lobby_title", "value":"CHOOSE YOUR SIDE"},
+        {"key":"holis", "value":"Holis in English"}
     ]
 }

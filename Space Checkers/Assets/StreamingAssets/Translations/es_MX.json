@@ -11,6 +11,8 @@
         {"key":"code_panel_title","value":"Código de Invitado"},
         {"key":"code_text_field_hint","value":"Ingrese su código"},
         {"key":"code_join_game_button","value":"Unirse como Invitado"},
-        {"key":"game_quit_button", "value":"Rendirse"}
+        {"key":"game_quit_button", "value":"Rendirse"},
+        {"key":"lobby_title", "value":"ESCOGE TU LADO"},
+        {"key":"holis", "value":"Holis en Español"}
     ]
 }
