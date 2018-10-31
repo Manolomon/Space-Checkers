@@ -21,22 +21,36 @@ app.start = function() {
 
 io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
-  cliente.on("login", function(sesion){
-    
+  cliente.on("login", function(datos){
+    var filtro = {where: {username : datos[0]}};
+    app.models.Jugador.find(filtro, function (err, user) {
+      if (err) throw err;
+      
+      console.log(user);
+      if (user != null) {
+        cliente.emit("loginCliente",true);
+      } else {
+        cliente.emit("loginCliente",false);
+      }
+    });
   });
 
   cliente.on("registro", function(datos){
-    // registro de usuario
+    app.models.Jugador.create(datos, function(err, response) {
+      if (err) throw err;
+    });
   });
 
   cliente.on("createGame", function(){
-    // creacion de partida
-    // room = codigo de la sala. Aqui generar el codigo de sala
+    //generacion de codigo. ej: e4g2s
+    //cliente.join('e4g2s');
+    //enviar evento a cliente de respuesta
   });
 
   cliente.on("joinGame", function(partida){
-    // unirse a partida
-    // join = codigo de sala
+    cliente.join(partida);
+    io.to(partida).emit('userJoined');
+    //enviar evento a cliente de respuesta
   });
 });
 
@@ -48,4 +62,9 @@ boot(app, __dirname, function(err) {
   // start the server if `$ node server.js`
   if (require.main === module)
     app.start();
+    var filtro = {where: {username : "Deklok"}};
+    app.models.Jugador.find(filtro, function (err2, user) {
+      if (err2) throw err2;
+      console.log(user);
+    });
 });
