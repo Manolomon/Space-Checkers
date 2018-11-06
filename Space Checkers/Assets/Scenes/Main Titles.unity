@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 50594459}
   - component: {fileID: 50594458}
   - component: {fileID: 50594461}
+  - component: {fileID: 50594462}
   m_Layer: 5
   m_Name: Login Button
   m_TagString: Untagged
@@ -279,12 +280,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 50594461}
-        m_MethodName: SendMail
+        m_MethodName: clickLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 50594462}
+        m_MethodName: LoadByIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -333,13 +345,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 50594456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e92d50682c49e5f4889125669224b99e, type: 3}
+  m_Script: {fileID: 11500000, guid: d62be068c400c9f439721c1902bec3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toMailAddress: manolope338@gmail.com
-  toMailName: Manolo
-  invitationCode: 3312
-  senderName: "Da\xF1i"
+--- !u!114 &50594462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 50594456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04842023874f17b42b81770cdb92983f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &55206636
 GameObject:
   m_ObjectHideFlags: 0

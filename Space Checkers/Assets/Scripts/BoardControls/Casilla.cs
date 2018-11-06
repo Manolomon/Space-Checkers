@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Casilla : MonoBehaviour {
 	private bool ocupada;
+	private List<GameObject> casillasDisponibles = new List<GameObject>();
+	private ControlTurnos control;
 	public bool Ocupada
 	{
 		get {return ocupada;}
 		set {ocupada = value;}	
 	}
-	private SpriteRenderer rend;
+
+	public List<GameObject> CasillasDisponibles
+	{
+		get {return casillasDisponibles;}
+	}
 	public GameObject casillaUI;
 	public GameObject casillaUD;
 	public GameObject casillaD;
 	public GameObject casillaDD;
 	public GameObject casillaDI;
 	public GameObject casillaI;
-	private List<GameObject> casillasDisponibles = new List<GameObject>();
 
 
 	private string nombreCasilla(GameObject casilla)
@@ -29,72 +34,195 @@ public class Casilla : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> obtenerCasillasDisponibles(GameObject casilla, GameObject casillaSiguiente)
+	public List<GameObject> casillasDisponiblesUI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
-		Casilla tempCasilla = casilla.GetComponent<Casilla>();
-		Casilla tempCasillaSiguiente = casillaSiguiente.GetComponent<Casilla>();
-		if (tempCasilla.Ocupada == true && tempCasillaSiguiente.Ocupada == false)
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaUI != null && casillaActual.casillaUI.GetComponent<Casilla>().casillaUI != null)
 		{
-			listaCasillas.Add(casillaSiguiente);
-			if (tempCasillaSiguiente.casillaUI != null && tempCasillaSiguiente.casillaUI.GetComponent<Casilla>().casillaUI != null)
+			GameObject casillaSiguiente = casillaActual.casillaUI.GetComponent<Casilla>().casillaUI;
+			if(casillaActual.casillaUI.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaUI.GetComponent<Casilla>().casillaUI.GetComponent<Casilla>().Ocupada == false)
 			{
+				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaUI, tempCasillaSiguiente.casillaUI.GetComponent<Casilla>().casillaUI
-					)
+					casillasDisponiblesUI(casillaSiguiente)
 				);
-			}
-			if (tempCasillaSiguiente.casillaUD != null && tempCasillaSiguiente.casillaUD.GetComponent<Casilla>().casillaUD != null)
-			{
 				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaUD, tempCasillaSiguiente.casillaUD.GetComponent<Casilla>().casillaUD
-					)
+					casillasDisponiblesUD(casillaSiguiente)
 				);
-			}
-			if (tempCasillaSiguiente.casillaD != null && tempCasillaSiguiente.casillaD.GetComponent<Casilla>().casillaD != null)
-			{
 				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaD, tempCasillaSiguiente.casillaD.GetComponent<Casilla>().casillaD
-					)
+					casillasDisponiblesD(casillaSiguiente)
 				);
-			}
-			if (tempCasillaSiguiente.casillaDD != null && tempCasillaSiguiente.casillaDD.GetComponent<Casilla>().casillaDD != null)
-			{
 				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaDD, tempCasillaSiguiente.casillaDD.GetComponent<Casilla>().casillaDD
-					)
+					casillasDisponiblesDI(casillaSiguiente)
 				);
-			}
-			if (tempCasillaSiguiente.casillaDI != null && tempCasillaSiguiente.casillaDI.GetComponent<Casilla>().casillaDI != null)
-			{
 				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaDI, tempCasillaSiguiente.casillaDI.GetComponent<Casilla>().casillaDI
-					)
-				);
-			}
-			if (tempCasillaSiguiente.casillaI != null && tempCasillaSiguiente.casillaI.GetComponent<Casilla>().casillaI != null)
-			{
-				listaCasillas.AddRange(
-					obtenerCasillasDisponibles(
-						tempCasillaSiguiente.casillaI, tempCasillaSiguiente.casillaI.GetComponent<Casilla>().casillaI
-					)
+					casillasDisponiblesD(casillaSiguiente)
 				);
 			}
 		}
 		return listaCasillas;
 	}
 
-	public void iluminarCasillasDisponibles() 
+	public List<GameObject> casillasDisponiblesUD(GameObject casilla)
 	{
+		List<GameObject> listaCasillas = new List<GameObject>();
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaUD != null && casillaActual.casillaUD.GetComponent<Casilla>().casillaUD != null)
+		{
+			GameObject casillaSiguiente = casillaActual.casillaUD.GetComponent<Casilla>().casillaUD;
+			if(casillaActual.casillaUD.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaUD.GetComponent<Casilla>().casillaUD.GetComponent<Casilla>().Ocupada == false)
+			{
+				listaCasillas.Add(casillaSiguiente);
+				listaCasillas.AddRange(
+					casillasDisponiblesUI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesUD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesI(casillaSiguiente)
+				);
+			}
+		}
+		return listaCasillas;
+	}
+
+	public List<GameObject> casillasDisponiblesD(GameObject casilla)
+	{
+		List<GameObject> listaCasillas = new List<GameObject>();
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaD != null && casillaActual.casillaD.GetComponent<Casilla>().casillaD != null)
+		{
+			GameObject casillaSiguiente = casillaActual.casillaD.GetComponent<Casilla>().casillaD;
+			if(casillaActual.casillaD.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaD.GetComponent<Casilla>().casillaD.GetComponent<Casilla>().Ocupada == false)
+			{
+				listaCasillas.Add(casillaSiguiente);
+				listaCasillas.AddRange(
+					casillasDisponiblesUI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesUD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDI(casillaSiguiente)
+				);
+			}
+		}
+		return listaCasillas;
+	}
+
+	public List<GameObject> casillasDisponiblesDD(GameObject casilla)
+	{
+		List<GameObject> listaCasillas = new List<GameObject>();
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaDD != null && casillaActual.casillaDD.GetComponent<Casilla>().casillaDD != null)
+		{
+			GameObject casillaSiguiente = casillaActual.casillaDD.GetComponent<Casilla>().casillaDD;
+			if(casillaActual.casillaDD.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaDD.GetComponent<Casilla>().casillaDD.GetComponent<Casilla>().Ocupada == false)
+			{
+				listaCasillas.Add(casillaSiguiente);
+				listaCasillas.AddRange(
+					casillasDisponiblesUD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesI(casillaSiguiente)
+				);
+			}
+		}
+		return listaCasillas;
+	}
+
+	public List<GameObject> casillasDisponiblesDI(GameObject casilla)
+	{
+		List<GameObject> listaCasillas = new List<GameObject>();
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaDI != null && casillaActual.casillaDI.GetComponent<Casilla>().casillaDI != null)
+		{
+			GameObject casillaSiguiente = casillaActual.casillaDI.GetComponent<Casilla>().casillaDI;
+			if(casillaActual.casillaDI.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaDI.GetComponent<Casilla>().casillaDI.GetComponent<Casilla>().Ocupada == false)
+			{
+				listaCasillas.Add(casillaSiguiente);
+				listaCasillas.AddRange(
+					casillasDisponiblesUI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesI(casillaSiguiente)
+				);
+			}
+		}
+		return listaCasillas;
+	}
+
+	public List<GameObject> casillasDisponiblesI(GameObject casilla)
+	{
+		List<GameObject> listaCasillas = new List<GameObject>();
+		Casilla casillaActual = casilla.GetComponent<Casilla>();
+		if (casillaActual.casillaI != null && casillaActual.casillaI.GetComponent<Casilla>().casillaI != null)
+		{
+			GameObject casillaSiguiente = casillaActual.casillaI.GetComponent<Casilla>().casillaI;
+			if(casillaActual.casillaI.GetComponent<Casilla>().Ocupada == true && casillaActual.casillaI.GetComponent<Casilla>().casillaI.GetComponent<Casilla>().Ocupada == false)
+			{
+				listaCasillas.Add(casillaSiguiente);
+				listaCasillas.AddRange(
+					casillasDisponiblesUI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesUD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDD(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesDI(casillaSiguiente)
+				);
+				listaCasillas.AddRange(
+					casillasDisponiblesI(casillaSiguiente)
+				);
+			}
+		}
+		return listaCasillas;
+	}
+
+	public List<GameObject> obtenerCasillasDisponibles()
+	{
+		casillasDisponibles.Clear();
 		List<GameObject> casillasAdyacentes = new List<GameObject> {
 		casillaUI, casillaUD, casillaD, casillaDD, casillaDI, casillaI
 		};
-		SpriteRenderer sr;
 		foreach (GameObject casilla in casillasAdyacentes)
 		{
 			if (casilla != null)
@@ -106,64 +234,76 @@ public class Casilla : MonoBehaviour {
 				}
 			}
 		}
-		Casilla tempCasilla = this.GetComponent<Casilla>();
-		if (tempCasilla.casillaUI != null && tempCasilla.casillaUI.GetComponent<Casilla>().casillaUI != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaUI, tempCasilla.casillaUI.GetComponent<Casilla>().casillaUI
-				)
-			);
-		}
-		if (tempCasilla.casillaUD != null && tempCasilla.casillaUD.GetComponent<Casilla>().casillaUD != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaUD, tempCasilla.casillaUD.GetComponent<Casilla>().casillaUD
-				)
-			);
-		}
-		if (tempCasilla.casillaD != null && tempCasilla.casillaD.GetComponent<Casilla>().casillaD != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaD, tempCasilla.casillaD.GetComponent<Casilla>().casillaD
-				)
-			);
-		}
-		if (tempCasilla.casillaDD != null && tempCasilla.casillaDD.GetComponent<Casilla>().casillaDD != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaDD, tempCasilla.casillaDD.GetComponent<Casilla>().casillaDD
-				)
-			);
-		}
-		if (tempCasilla.casillaDI != null && tempCasilla.casillaDI.GetComponent<Casilla>().casillaDI != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaDI, tempCasilla.casillaDI.GetComponent<Casilla>().casillaDI
-				)
-			);
-		}
-		if (tempCasilla.casillaI != null && tempCasilla.casillaI.GetComponent<Casilla>().casillaI != null)
-		{
-			casillasDisponibles.AddRange(
-				obtenerCasillasDisponibles(
-					tempCasilla.casillaI, tempCasilla.casillaI.GetComponent<Casilla>().casillaI
-				)
-			);
-		}
+		casillasDisponibles.AddRange(
+			casillasDisponiblesUI(this.gameObject)
+		);
+		casillasDisponibles.AddRange(
+			casillasDisponiblesUD(this.gameObject)
+		);
+		casillasDisponibles.AddRange(
+			casillasDisponiblesD(this.gameObject)
+		);
+		casillasDisponibles.AddRange(
+			casillasDisponiblesDD(this.gameObject)
+		);
+		casillasDisponibles.AddRange(
+			casillasDisponiblesDI(this.gameObject)
+		);
+		casillasDisponibles.AddRange(
+			casillasDisponiblesI(this.gameObject)
+		);
+		
+		return casillasDisponibles;
+	}
+
+	public void iluminarCasillasDisponibles() 
+	{
+		SpriteRenderer sr;
+		obtenerCasillasDisponibles();
 		foreach (GameObject casilla in casillasDisponibles)
 		{
 			sr = casilla.GetComponent<SpriteRenderer>();
-			sr.color = Color.green;
+			sr.color = Color.black;
+			Debug.Log(casilla);
 		}
 	}
 	private void Start () 
 	{
-		rend = GetComponent<SpriteRenderer>();
+		control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+	}
+
+	private void OnMouseDown()
+	{
+		Debug.Log(this.gameObject.name.ToString());
+		if (control.SeleccionCasilla == true)
+		{
+			bool movimientovalido = false;
+			foreach (GameObject casilla in control.CasillasValidas)
+			{
+				if (casilla.Equals(this.gameObject))
+				{
+					movimientovalido = true;
+					break;
+				}
+			}
+			if (movimientovalido)
+			{
+				control.FichaSeleccionada.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
+				Ficha scriptFicha = control.FichaSeleccionada.GetComponent<Ficha>();
+				Casilla scriptCasilla = scriptFicha.casilla.GetComponent<Casilla>();
+				scriptCasilla.Ocupada = false;
+				scriptFicha.casilla = this.gameObject;
+				this.Ocupada = true;
+				control.SeleccionCasilla = false;
+				SpriteRenderer sr;
+				foreach (GameObject casilla in control.CasillasValidas)
+				{
+					sr = casilla.GetComponent<SpriteRenderer>();
+					sr.color = Color.white;
+				}
+				// terminar turno
+			}
+		}
 	}
 
 }

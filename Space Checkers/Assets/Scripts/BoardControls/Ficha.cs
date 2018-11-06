@@ -5,37 +5,32 @@ using UnityEngine;
 public class Ficha : MonoBehaviour {
 
 	private bool seleccionado;
-	private SpriteRenderer ren;
 	public Sprite colorCasilla;
 	public Color colorC;
 	public GameObject casilla;
 	private Casilla sCasilla;
+	private ControlTurnos control;
 
 	void Start () 
 	{
-		ren = this.GetComponent<SpriteRenderer>();
-		ren.color = Color.white;
-		ren.sprite = colorCasilla;
 		sCasilla = casilla.GetComponent<Casilla>();
 		sCasilla.Ocupada = true;
-		this.transform.position = casilla.transform.position;
+		Vector3 posicion = casilla.transform.position;
+		this.gameObject.transform.position = new Vector3(posicion.x, posicion.y, posicion.z - 10);
+		control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 	}
 	
-	private void OnMouseEnter()
-	{
-		ren.color = Color.gray;
-	}
-
-	private void OnMouseExit()
-	{
-		ren.color = colorC;
-	}
 	private void OnMouseDown()
 	{
-		Debug.Log("Click");
-		Debug.Log(casilla.name.ToString());
-		sCasilla.iluminarCasillasDisponibles();
-		this.seleccionado = true;
+		Debug.Log("Click a ficha" + this.gameObject.name.ToString());
+		if (control.SeleccionCasilla == false)
+		{
+			control.FichaSeleccionada = this.gameObject;
+			Casilla scriptCasilla = casilla.GetComponent<Casilla>();
+			scriptCasilla.iluminarCasillasDisponibles();
+			control.SeleccionCasilla = true;
+			control.CasillasValidas = scriptCasilla.CasillasDisponibles;
+		} 
 	}	
 
 }
