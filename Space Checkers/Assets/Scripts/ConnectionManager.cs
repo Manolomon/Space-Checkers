@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Quobject.SocketIoClientDotNet.Client;
-using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 
 public class ConnectionManager : MonoBehaviour {
@@ -32,9 +32,10 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("loginCliente", (datos) =>
 		{
 			Debug.Log("login existoso");
-			string jugador = datos.ToString();
-			Jugador.instance = JsonConvert.DeserializeObject<Jugador>(jugador);
-			Debug.Log(Jugador.instance.Username);			
+			string datosJugador = datos.ToString();
+			Debug.Log(datosJugador);
+			Jugador.instance = JsonConvert.DeserializeObject<Jugador>(datosJugador);
+			Debug.Log(Jugador.instance.Username);
 		});		
 	}
 	

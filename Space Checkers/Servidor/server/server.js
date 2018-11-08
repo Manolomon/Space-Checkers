@@ -23,7 +23,7 @@ io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
   cliente.on("login", function(datos){
     var filtro = {where: {username : "Deklok"}};
-    app.models.Jugador.find(filtro, function (err, user) {
+    app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
       console.log(user);

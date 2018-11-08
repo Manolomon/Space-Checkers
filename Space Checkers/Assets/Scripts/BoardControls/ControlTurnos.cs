@@ -18,20 +18,9 @@ public class ControlTurnos : MonoBehaviour {
 		get {return seleccionCasilla;}
 		set {seleccionCasilla = value;}	
 	}
-
 	public List<GameObject> CasillasValidas
 	{
 		get {return casillasValidas;}
 		set {casillasValidas = value;}	
-	}
-	
-	// Use this for initialization
-	void Start () {
-			
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Jugador : MonoBehaviour{
 	private string username;
 	private string correo;
@@ -9,6 +10,7 @@ public class Jugador : MonoBehaviour{
 	private int partidasJugadas;
 	private int partidasGanadas;
 	private int id;
+	public static Jugador instance;
 	public string Username
 	{
 		get {return username;}
@@ -39,8 +41,10 @@ public class Jugador : MonoBehaviour{
 		get {return id;}
 		set {id = value;}
 	}
-
-	public static Jugador instance;
+	public static Jugador CreateFromJSON(string jsonString)
+    {
+        return JsonUtility.FromJson<Jugador>(jsonString);
+    }
 
 	void Awake () 
 	{
