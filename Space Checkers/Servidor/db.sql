@@ -1,5 +1,7 @@
 CREATE DATABASE spacecheckers;
 
+USE spacecheckers;
+
 GRANT ALL PRIVILEGES ON *.* TO 'spacecheckers'@'localhost' IDENTIFIED BY 'space123';
 
 CREATE TABLE jugador (
