@@ -6,7 +6,6 @@ public class Ficha : MonoBehaviour {
 
 	private bool seleccionado;
 	public Sprite colorCasilla;
-	public Color colorC;
 	public GameObject casilla;
 	private Casilla sCasilla;
 	private ControlTurnos control;
@@ -20,6 +19,7 @@ public class Ficha : MonoBehaviour {
 		control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 	}
 	
+	// Al dar click a la ficha, comprueba la casilla en donde esta e ilumina las casillas disponibles para moverse
 	private void OnMouseDown()
 	{
 		Debug.Log("Click a ficha" + this.gameObject.name.ToString());

@@ -21,13 +21,16 @@ app.start = function() {
 
 io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
-  cliente.on("login", function(datos){
-    var filtro = {where: {username : "Deklok"}};
+  // Evento llamado por cliente al clicker iniciar sesion (ButtonLogin.cs)
+  cliente.on("login", function(usernameData){
+    var filtro = {where: {username : '"'+usernameData+'"'}};
+    console.log(filtro);
     app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
       console.log(user);
       if (user != null) {
+        // manda la info del usuario si lo encuentra
         cliente.emit("loginCliente",user);
       } else {
         cliente.emit("loginCliente",false);
@@ -35,22 +38,37 @@ io.on("connection", function(cliente) {
     });
   });
 
+  // Evento llamado por cliente al clicker registrar (TO DO in client)
   cliente.on("registro", function(datos){
     app.models.Jugador.create(datos, function(err, response) {
       if (err) throw err;
     });
   });
 
+  // Evento llamado por cliente al clickear create game (implemented in ButtonLogin.cs atm)
   cliente.on("createGame", function(){
-    //generacion de codigo. ej: e4g2s
-    //cliente.join('e4g2s');
-    //enviar evento a cliente de respuesta
+    cliente.join('1A2B');
+    cliente.emit("createLobby", "1A2B");
   });
 
-  cliente.on("joinGame", function(partida){
-    cliente.join(partida);
-    io.to(partida).emit('userJoined');
-    //enviar evento a cliente de respuesta
+  // Evento llamado por cliente al clicker join game (TO DO in client)
+  cliente.on("joinGame", function(user){
+    cliente.join('1A2B');
+    io.to('1A2B').emit('userJoinedRoomCliente', user);
+    cliente.on("getLobbyInfo", function(lobbyInfo) {
+      cliente.emit("setLobbyInfo", lobbyInfo);
+    });
+  });
+
+  // Evento llamado por cliente al dar click en Start Game (no se ha definido aun, probably clase nueva)
+  cliente.on("startGame", function(room){
+    io.to('1A2B').emit('startGameCliente');
+  });
+
+  // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
+  cliente.on("moverPieza", function(datos) {
+    var movement = {ficha: datos[1], casilla: datos[2]};
+    io.to(datos[0]).emit('moverPiezaCliente', movement);
   });
 });
 

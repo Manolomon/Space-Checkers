@@ -16,6 +16,8 @@ public class Casilla : MonoBehaviour {
 	{
 		get {return casillasDisponibles;}
 	}
+
+	// Se declaran publicos para asignarles el valor en el inspector
 	public GameObject casillaUI;
 	public GameObject casillaUD;
 	public GameObject casillaD;
@@ -34,6 +36,7 @@ public class Casilla : MonoBehaviour {
 		}
 	}
 
+	// Obtiene las casillas disponibles arriba a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesUI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -64,6 +67,7 @@ public class Casilla : MonoBehaviour {
 		return listaCasillas;
 	}
 
+	// Obtiene las casillas disponibles arriba a la derecha y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesUD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -94,6 +98,7 @@ public class Casilla : MonoBehaviour {
 		return listaCasillas;
 	}
 
+	// Obtiene las casillas disponibles a la derecha y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -124,6 +129,7 @@ public class Casilla : MonoBehaviour {
 		return listaCasillas;
 	}
 
+	// Obtiene las casillas disponibles abajo a la derecha y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesDD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -154,6 +160,7 @@ public class Casilla : MonoBehaviour {
 		return listaCasillas;
 	}
 
+	// Obtiene las casillas disponibles abajo a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesDI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -183,7 +190,7 @@ public class Casilla : MonoBehaviour {
 		}
 		return listaCasillas;
 	}
-
+	// Obtiene las casillas disponibles a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
 	public List<GameObject> casillasDisponiblesI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
@@ -216,7 +223,8 @@ public class Casilla : MonoBehaviour {
 		}
 		return listaCasillas;
 	}
-
+	// Funcion que llena la lista de las casillas disponibles. Utiliza recursividad para llamar a las
+	// funciones que llaman a checar las casillas disponibles a todos los lados posibles
 	public List<GameObject> obtenerCasillasDisponibles()
 	{
 		casillasDisponibles.Clear();
@@ -255,7 +263,7 @@ public class Casilla : MonoBehaviour {
 		
 		return casillasDisponibles;
 	}
-
+	// Itera sobre la lista de casillas disponibles para iluminarlas
 	public void iluminarCasillasDisponibles() 
 	{
 		SpriteRenderer sr;
@@ -269,39 +277,46 @@ public class Casilla : MonoBehaviour {
 	}
 	private void Start () 
 	{
+		// obtener la referencia del objeto de control de turnos
 		control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 	}
 
 	private void OnMouseDown()
 	{
-		Debug.Log(this.gameObject.name.ToString());
-		if (control.SeleccionCasilla == true)
+		if (control.ActualTurn == control.MyTurn)
 		{
-			bool movimientovalido = false;
-			foreach (GameObject casilla in control.CasillasValidas)
+			Debug.Log(this.gameObject.name.ToString());
+			if (control.SeleccionCasilla == true)
 			{
-				if (casilla.Equals(this.gameObject))
-				{
-					movimientovalido = true;
-					break;
-				}
-			}
-			if (movimientovalido)
-			{
-				control.FichaSeleccionada.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
-				Ficha scriptFicha = control.FichaSeleccionada.GetComponent<Ficha>();
-				Casilla scriptCasilla = scriptFicha.casilla.GetComponent<Casilla>();
-				scriptCasilla.Ocupada = false;
-				scriptFicha.casilla = this.gameObject;
-				this.Ocupada = true;
-				control.SeleccionCasilla = false;
-				SpriteRenderer sr;
+				bool movimientovalido = false;
 				foreach (GameObject casilla in control.CasillasValidas)
 				{
-					sr = casilla.GetComponent<SpriteRenderer>();
-					sr.color = Color.white;
+					if (casilla.Equals(this.gameObject))
+					{
+						movimientovalido = true;
+						break;
+					}
 				}
-				// terminar turno
+				if (movimientovalido)
+				{
+					control.FichaSeleccionada.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
+					Ficha scriptFicha = control.FichaSeleccionada.GetComponent<Ficha>();
+					Casilla scriptCasilla = scriptFicha.casilla.GetComponent<Casilla>();
+					scriptCasilla.Ocupada = false;
+					scriptFicha.casilla = this.gameObject;
+					this.Ocupada = true;
+					control.SeleccionCasilla = false;
+					SpriteRenderer sr;
+					foreach (GameObject casilla in control.CasillasValidas)
+					{
+						sr = casilla.GetComponent<SpriteRenderer>();
+						sr.color = Color.white;
+					}
+					ConnectionManager.instance.socket.Emit("moverPieza", 
+					"{ficha : " + control.FichaSeleccionada.gameObject.name +
+					 "casilla : " + this.gameObject.name);
+					// terminar turno
+				}
 			}
 		}
 	}
