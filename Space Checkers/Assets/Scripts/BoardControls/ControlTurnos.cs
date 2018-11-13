@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class ControlTurnos : MonoBehaviour {
 	// Referencia de la ficha seleccionada a mover
@@ -50,5 +51,12 @@ public class ControlTurnos : MonoBehaviour {
 	{
 		get {return turnActive;}
 		set {turnActive = value;}	
+	}
+
+	// Metodo para enviar un movimiento especifico a los demas de la sala
+	public void EnviarMovimiento(string ficha, string casilla)
+	{
+		DatosMovimiento movimiento = new DatosMovimiento(ficha,casilla);
+		ConnectionManager.instance.socket.Emit("moverPieza", JsonConvert.SerializeObject(movimiento));
 	}
 }

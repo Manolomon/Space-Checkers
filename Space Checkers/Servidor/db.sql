@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'spacecheckers'@'localhost' IDENTIFIED BY 'space1
 CREATE TABLE jugador (
     username varchar(50),
     correo varchar(100),
-    pass varchar(50), 
+    pass varchar(64), 
     partidasJugadas int,
     partidasGanadas int,
     id int AUTO_INCREMENT,
@@ -15,5 +15,5 @@ CREATE TABLE jugador (
 );
 
 INSERT INTO jugador VALUES (
-    'Deklok','danix100@hotmail.com','12345',1,1,1
+    'Deklok','danix100@hotmail.com','5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5',1,1,1
 );

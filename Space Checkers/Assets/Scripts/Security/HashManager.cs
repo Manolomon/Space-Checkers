@@ -26,7 +26,7 @@ public class HashManager : MonoBehaviour
 		return Sb.ToString();
 	}
 
-	public static void CheckPasswordHash (string password, string hash)
+	public static bool CheckPasswordHash (string password, string hash)
 	{
 		string passwordHash = GeneratePasswordHash(password);
 		return passwordHash == hash;

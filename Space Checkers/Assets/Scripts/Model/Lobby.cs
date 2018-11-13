@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 // Clase de referencia para interpretacion de informacion
+[System.Serializable]
 public class PlayerLobby {
 	public PlayerLobby(string username)
 	{
@@ -10,7 +11,7 @@ public class PlayerLobby {
 	public string Username {get; set;}
 	public string Color {get; set;}
 }
-
+[System.Serializable]
 public class Lobby : MonoBehaviour {
 
 	public static Lobby instance;

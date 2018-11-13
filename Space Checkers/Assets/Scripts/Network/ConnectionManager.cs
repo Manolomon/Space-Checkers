@@ -32,7 +32,7 @@ public class ConnectionManager : MonoBehaviour {
 		// Evento que llama el servidor al terminar de recuperar el usuario
 		socket.On("loginCliente", (datos) =>
 		{
-			Debug.Log("login existoso");
+			Debug.Log("Llamada a loginCliente");
 			string datosJugador = datos.ToString();
 			Debug.Log(datosJugador);
 			Jugador.instance = JsonConvert.DeserializeObject<Jugador>(datosJugador);
@@ -60,6 +60,7 @@ public class ConnectionManager : MonoBehaviour {
 			Lobby.instance.Players.Add(newPlayer);
 			Lobby lobby = Lobby.instance;
 			string dataLobby = JsonConvert.SerializeObject(lobby);
+			socket.Emit("getLobbyInfo", dataLobby);
 		});
 		// Evento que llama el servidor cuando un usuario selecciona un color para actualizar las opciones de los demas jugadores
 		socket.On("userSelectedColor", (datos) =>
@@ -95,10 +96,14 @@ public class ConnectionManager : MonoBehaviour {
 			}
 		});
 		// Evento que llama el servidor cuando el jugador en turno mueve su pieza y termina el turno
-		// TO DO: determinar la clase para interpretar la informacion de movimiento
 		socket.On("moverPiezaCliente", (datos) =>
 		{
-			
+			string dataMovement = datos.ToString();
+			DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(dataMovement);
+			ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+			control.FichaSeleccionada = GameObject.Find(movimiento.Ficha);
+			Casilla casilla = control.FichaSeleccionada.GetComponent<Ficha>().casilla.GetComponent<Casilla>();
+			casilla.Mover();
 		});
 	}
 

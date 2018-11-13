@@ -30,7 +30,6 @@ public class Ficha : MonoBehaviour {
 			scriptCasilla.iluminarCasillasDisponibles();
 			control.SeleccionCasilla = true;
 			control.CasillasValidas = scriptCasilla.CasillasDisponibles;
-		} 
+		}
 	}	
-
 }

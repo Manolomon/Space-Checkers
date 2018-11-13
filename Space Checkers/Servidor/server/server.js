@@ -23,17 +23,15 @@ io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
   // Evento llamado por cliente al clicker iniciar sesion (ButtonLogin.cs)
   cliente.on("login", function(usernameData){
-    var filtro = {where: {username : '"'+usernameData+'"'}};
+    var filtro = {where: {username : usernameData}};
     console.log(filtro);
     app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
-      console.log(user);
       if (user != null) {
         // manda la info del usuario si lo encuentra
-        cliente.emit("loginCliente",user);
-      } else {
-        cliente.emit("loginCliente",false);
+        cliente.emit("loginCliente", user);
+        console.log(user);
       }
     });
   });
@@ -68,7 +66,7 @@ io.on("connection", function(cliente) {
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
     var movement = {ficha: datos[1], casilla: datos[2]};
-    io.to(datos[0]).emit('moverPiezaCliente', movement);
+    io.to('1A2B').emit('moverPiezaCliente', movement);
   });
 });
 

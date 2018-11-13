@@ -283,6 +283,11 @@ public class Casilla : MonoBehaviour {
 
 	private void OnMouseDown()
 	{
+		Mover();
+	}
+
+	public void Mover()
+	{
 		if (control.ActualTurn == control.MyTurn)
 		{
 			Debug.Log(this.gameObject.name.ToString());
@@ -312,9 +317,7 @@ public class Casilla : MonoBehaviour {
 						sr = casilla.GetComponent<SpriteRenderer>();
 						sr.color = Color.white;
 					}
-					ConnectionManager.instance.socket.Emit("moverPieza", 
-					"{ficha : " + control.FichaSeleccionada.gameObject.name +
-					 "casilla : " + this.gameObject.name);
+					control.EnviarMovimiento(control.FichaSeleccionada.name, this.gameObject.name);
 					// terminar turno
 				}
 			}
