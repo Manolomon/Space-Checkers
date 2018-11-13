@@ -11,8 +11,17 @@
         {"key":"code_panel_title","value":"Código de Invitado"},
         {"key":"code_text_field_hint","value":"Ingrese su código"},
         {"key":"code_join_game_button","value":"Unirse como Invitado"},
-        {"key":"game_quit_button", "value":"Rendirse"},
+
+        {"key":"game_quit_button", "value":"ABANDONAR"},
+        {"key":"game_chat_title", "value":"Chat de Partida"},
+        {"key":"game_chat_hint_message", "value":"Escribe tu mensaje"},
+
         {"key":"lobby_title", "value":"ESCOGE TU LADO"},
-        {"key":"holis", "value":"Holis en Español"}
+        {"key":"lobby_back_button", "value":"VOLVER"},
+        {"key":"lobby_prediction_toggle", "value":"PREDICCIÓN"},
+        {"key":"toast_lobby_code_copied", "value":"Código copiado en portapapeles"},
+        {"key":"lobby_invite_friends_button", "value":"INVITAR"},
+        {"key":"lobby_start_button", "value":"COMENZAR"}
+
     ]
 }
