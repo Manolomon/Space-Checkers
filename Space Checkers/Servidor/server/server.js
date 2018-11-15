@@ -1,26 +1,33 @@
 'use strict';
 
+var express = require('express')();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-var io = require("socket.io")(5000);
+var http = require('http').Server(express);
+var io = require("socket.io")(http, { pingInterval: 500 });
 
 var app = module.exports = loopback();
+
+http.listen(5000, function() {
+  console.log("socket.io escuchando en 5000");
+});
 
 app.start = function() {
   // start the web server
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
-    console.log('Web server listening at: %s', baseUrl);
-    if (app.get('loopback-component-explorer')) {
-      var explorerPath = app.get('loopback-component-explorer').mountPath;
-      console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
-    }
+    console.log("Servidor listo...");
   });
 };
 
 io.on("connection", function(cliente) {
   console.log("Usuario conectado a servidor");
+  cliente.emit("test", "aaaaa!");
+  cliente.on("error", (reason) =>
+  {
+    console.log(reason);
+  });
   // Evento llamado por cliente al clicker iniciar sesion (ButtonLogin.cs)
   cliente.on("login", function(usernameData){
     var filtro = {where: {username : usernameData}};
@@ -28,10 +35,13 @@ io.on("connection", function(cliente) {
     app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
+      cliente.emit("loginCliente", user);
+      cliente.emit("test", "aaaaa!");
       if (user != null) {
         // manda la info del usuario si lo encuentra
         cliente.emit("loginCliente", user);
         console.log(user);
+        io.to(cliente.id).emit("test", "aaaaaaaaaaa");
       }
     });
   });

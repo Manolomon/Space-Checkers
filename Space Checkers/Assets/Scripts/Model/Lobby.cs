@@ -16,7 +16,7 @@ public class Lobby : MonoBehaviour {
 
 	public static Lobby instance;
 	private string idLobby;
-	private List<PlayerLobby> players;
+	private List<PlayerLobby> players = new List<PlayerLobby>();
 	public string IdLobby
 	{
 		get {return idLobby;}
