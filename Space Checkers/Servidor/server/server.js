@@ -89,3 +89,97 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'spacecheckers@gmail.com',
+      pass: 'anitalavalatina',
+  },
+}),
+EmailTemplate = require('email-templates').EmailTemplate,
+path = require('path'),
+Promise = require('bluebird');
+
+// Metodo generador de codigos
+var randomCode = function(length){
+  var codigo = "";
+  var caracteresPermitidos = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+  for(var i = 0; i < length; i++) {
+      codigo += caracteresPermitidos.charAt(Math.floor(Math.random() * caracteresPermitidos.length)); 
+  }
+  return codigo;
+}
+
+var codigo = randomCode(7);
+
+//Metodo para sacar la informacion del usuario
+var correo;
+var nombre;
+io.on("connection", function(cliente) {
+    console.log("Email: Recolectando datos");
+    // Evento llamado por cliente al clicker Partida (EnviarCodigo.cs)
+    cliente.on("enviarCorreo", function(usernameData) {
+        var usuario = {where: {username : usernameData}};
+        console.log(usuario);
+        app.models.Jugador.findOne(usuario, function(err, user) {
+            if (err) throw err;
+
+            if (user != null) {
+                // si encuentra el username busca el correo de ese usuario
+                nombre = user['username'];
+                correo = user['correo'];
+                cliente.emit("correoCliente", user);
+                console.log(user);
+            } else {
+                // 
+            }
+        });
+    });
+});
+
+//var nombre = 'Dany';
+//var correo = 'dannyhvalenz@gmail.com'
+var senderName = 'Manolo'
+var emailType = 'Activation Code'
+
+let emailData = [
+  {
+      name: nombre,
+      email: correo,
+      code: codigo,
+      sender: senderName,
+  },
+];
+
+function sendEmail (obj) {
+  return transporter.sendMail(obj);
+}
+
+function loadTemplate (templateName, contexts) {
+  let template = new EmailTemplate(path.join(__dirname, 'templates', templateName));
+  return Promise.all(contexts.map((context) => {
+      return new Promise((resolve, reject) => {
+          template.render(context, (err, result) => {
+              if (err) reject(err);
+              else resolve({
+                  email: result,
+                  context,
+              });
+          });
+      });
+  }));
+}
+
+loadTemplate(emailType, emailData).then((results) => {
+  return Promise.all(results.map((result) => {
+      sendEmail({
+          to: result.context.email,
+          from: 'Space Checkers',
+          subject: result.email.subject,
+          html: result.email.html,
+      });
+  }));
+}).then(() => {
+  console.log('The email has been sent');
+});
