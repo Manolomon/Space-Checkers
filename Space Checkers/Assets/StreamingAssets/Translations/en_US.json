@@ -19,9 +19,10 @@
         {"key":"lobby_title", "value":"CHOOSE YOUR SIDE"},
         {"key":"lobby_back_button", "value":"BACK"},
         {"key":"lobby_prediction_toggle", "value":"PREDICTION"},
-        {"key":"toast_lobby_code_copied", "value":"Code copied to Clipboard"},
         {"key":"lobby_invite_friends_button", "value":"INVITE"},
-        {"key":"lobby_start_button", "value":"START GAME"}
+        {"key":"lobby_start_button", "value":"START GAME"},
+
+        {"key":"message_lobby_code_copied", "value":"Code copied to Clipboard"}
 
     ]
 }

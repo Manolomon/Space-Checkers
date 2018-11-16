@@ -19,9 +19,10 @@
         {"key":"lobby_title", "value":"ESCOGE TU LADO"},
         {"key":"lobby_back_button", "value":"VOLVER"},
         {"key":"lobby_prediction_toggle", "value":"PREDICCIÓN"},
-        {"key":"toast_lobby_code_copied", "value":"Código copiado en portapapeles"},
         {"key":"lobby_invite_friends_button", "value":"INVITAR"},
-        {"key":"lobby_start_button", "value":"COMENZAR"}
+        {"key":"lobby_start_button", "value":"COMENZAR"},
+
+        {"key":"message_lobby_code_copied", "value":"Código copiado en Portapapeles"}
 
     ]
 }

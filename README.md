@@ -20,9 +20,9 @@ Consiste en desarrollar una aplicación (juego) multijugador que permita:
 * [ ] Generación de puntuación
 * [ ] Tabla de mejores jugadores
 * [ ] Monitoreo del avance de cada jugador
-* [ ] Envío de invitación al juego
+* [x] Envío de invitación al juego
 * [ ] Unirse al juego (invitado y usuarios registrados)
-* [x] Sección para comunicarse en tiempo real
+* [x] Sección para comunicarse en tiempo r
 
 ## Consideraciones	técnicas
 	
@@ -35,7 +35,7 @@ El proyecto debe contener:
 * [x] Uso de framework de UI
 * [ ] Seguridad en acceso a datos, validación de entradas
 * [ ] Prácticas de escritura de código
-* [ ] Seguridad en la BD
+* [x] Seguridad en la BD
 * [ ] Evitar el uso de antipatrones
 * [x] Soporte a inglés y español
 * [ ] Pruebas
