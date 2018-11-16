@@ -22,7 +22,7 @@ Consiste en desarrollar una aplicación (juego) multijugador que permita:
 * [ ] Monitoreo del avance de cada jugador
 * [x] Envío de invitación al juego
 * [ ] Unirse al juego (invitado y usuarios registrados)
-* [x] Sección para comunicarse en tiempo r
+* [x] Sección para comunicarse en tiempo real
 
 ## Consideraciones	técnicas
 	
@@ -33,9 +33,9 @@ El proyecto debe contener:
 * [x] Uso de framework de persistencia
 * [x] Uso de framework de comunicación en red
 * [x] Uso de framework de UI
-* [ ] Seguridad en acceso a datos, validación de entradas
-* [ ] Prácticas de escritura de código
+* [x] Seguridad en acceso a datos, validación de entradas
+* [x] Prácticas de escritura de código
 * [x] Seguridad en la BD
-* [ ] Evitar el uso de antipatrones
+* [x] Evitar el uso de antipatrones
 * [x] Soporte a inglés y español
 * [ ] Pruebas
