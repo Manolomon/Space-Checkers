@@ -41,8 +41,17 @@ public class Lobby : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
-	void startGame()
+	public void StartGame()
 	{
 		ConnectionManager.instance.socket.Emit("startGame", "1A2B");
+	}
+
+	public void PrintLobby()
+	{
+		Debug.Log("ID Lobby: " + idLobby);
+		foreach (PlayerLobby player in players)
+		{
+			Debug.Log("Player: " + player.Username + " / Color: " + player.Color);
+		}
 	}
 }

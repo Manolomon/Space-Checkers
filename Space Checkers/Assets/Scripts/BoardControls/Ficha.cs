@@ -23,7 +23,7 @@ public class Ficha : MonoBehaviour {
 	private void OnMouseDown()
 	{
 		Debug.Log("Click a ficha" + this.gameObject.name.ToString());
-		if (control.SeleccionCasilla == false)
+		if (control.SeleccionCasilla == false && control.Color == this.gameObject.tag)
 		{
 			control.FichaSeleccionada = this.gameObject;
 			Casilla scriptCasilla = casilla.GetComponent<Casilla>();

@@ -21,6 +21,10 @@ public class ControlTurnos : MonoBehaviour {
 
 	// Lista de las casillas validas para el movimiento a realizar con base a la ficha seleccionada
 	private List<GameObject> casillasValidas;
+
+	// Color correspondiente al jugador
+	private string color;
+
 	public GameObject FichaSeleccionada
 	{
 		get {return fichaSeleccionada;}
@@ -51,6 +55,12 @@ public class ControlTurnos : MonoBehaviour {
 	{
 		get {return turnActive;}
 		set {turnActive = value;}	
+	}
+
+	public string Color
+	{
+		get {return color;}
+		set {color = value;}
 	}
 
 	// Metodo para enviar un movimiento especifico a los demas de la sala

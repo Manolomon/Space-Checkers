@@ -7,6 +7,7 @@ using System;
 using BestHTTP;
 using BestHTTP.SocketIO;
 using SimpleJSON;
+using UnityEngine.UI;
 
 
 public class ConnectionManager : MonoBehaviour {
@@ -53,23 +54,6 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("startGameCliente", OnStartGame);
 		socket.On("moverPiezaCliente", OnMoverPieza);
 		/*
-		// Evento que llama el servidor al recibir la informacion del lobby al cual intenta entrar el cliente
-		socket.On("setLobbyInfo", (datos) =>
-		{
-			string lobbyInfo = datos.ToString();
-			Lobby lobby = JsonConvert.DeserializeObject<Lobby>(lobbyInfo);
-			Lobby.instance = lobby;
-		});
-		// Evento que llama el servidor para obtener los datos del lobby para proporcionarselo a un nuevo jugador
-		socket.On("userJoinedRoomCliente", (datos) =>
-		{
-			string newUser = datos.ToString();
-			PlayerLobby newPlayer = new PlayerLobby(newUser);
-			Lobby.instance.Players.Add(newPlayer);
-			Lobby lobby = Lobby.instance;
-			string dataLobby = JsonConvert.SerializeObject(lobby);
-			socket.Emit("getLobbyInfo", dataLobby);
-		});
 		// Evento que llama el servidor cuando un usuario selecciona un color para actualizar las opciones de los demas jugadores
 		socket.On("userSelectedColor", (datos) =>
 		{
@@ -90,29 +74,7 @@ public class ConnectionManager : MonoBehaviour {
 		{
 			
 		});
-		// Evento que llama el servidor cuando el owner inicia la partida
-		socket.On("startGameCliente", () =>
-		{
-			foreach (PlayerLobby player in Lobby.instance.Players)
-			{
-				if (player.Username == Jugador.instance.Username)
-				{
-					ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
-					control.MyTurn = Lobby.instance.Players.IndexOf(player) + 1;
-					control.ActualTurn = 1;
-				}
-			}
-		});
-		// Evento que llama el servidor cuando el jugador en turno mueve su pieza y termina el turno
-		socket.On("moverPiezaCliente", (datos) =>
-		{
-			string dataMovement = datos.ToString();
-			DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(dataMovement);
-			ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
-			control.FichaSeleccionada = GameObject.Find(movimiento.Ficha);
-			Casilla casilla = control.FichaSeleccionada.GetComponent<Ficha>().casilla.GetComponent<Casilla>();
-			casilla.Mover();
-		});*/
+		*/
 	}
 
 	private void OnConnect(Socket socket, Packet packet, params object[] args)
@@ -146,27 +108,64 @@ public class ConnectionManager : MonoBehaviour {
 
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		var datos = JSON.Parse(packet.ToString());
+		string lobbyInfo = datos[1].ToString();
+		Lobby lobby = JsonConvert.DeserializeObject<Lobby>(lobbyInfo);
+		Lobby.instance = lobby;
+		Lobby.instance.PrintLobby();
 	}
 
 	private void OnUserJoinedRoom(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		var datos = JSON.Parse(packet.ToString());
+		string newUser = datos[1].ToString();
+		PlayerLobby newPlayer = new PlayerLobby(newUser);
+		Lobby.instance.Players.Add(newPlayer);
+		Lobby lobby = Lobby.instance;
+		string dataLobby = JsonConvert.SerializeObject(lobby);
+		socket.Emit("getLobbyInfo", dataLobby);
 	}
 
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		var datos = JSON.Parse(packet.ToString());
+		string playerData = datos[1].ToString();
+		PlayerLobby playerWithNewColor = JsonConvert.DeserializeObject<PlayerLobby>(playerData);
+		foreach (PlayerLobby player in Lobby.instance.Players)
+		{
+			if (player.Username == playerWithNewColor.Username)
+			{
+				player.Color = playerWithNewColor.Color;
+			}
+		}
+		Toggle button = GameObject.Find("Toggle"+playerWithNewColor.Color).GetComponent<Toggle>();
+		// togglear a encendido el boton del color encontrado
+		button.isOn = true;
 	}
 
 	private void OnStartGame(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+		foreach (PlayerLobby player in Lobby.instance.Players)
+		{
+			if (player.Username == Jugador.instance.Username)
+			{
+				control.MyTurn = Lobby.instance.Players.IndexOf(player) + 1;
+				control.Color = player.Color;
+			}
+		}
+		control.ActualTurn = 1;
 	}
 
 	private void OnMoverPieza(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		var datos = JSON.Parse(packet.ToString());
+		string dataMovement = datos[1].ToString();
+		DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(dataMovement);
+		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+		control.FichaSeleccionada = GameObject.Find(movimiento.Ficha);
+		Casilla casilla = control.FichaSeleccionada.GetComponent<Ficha>().casilla.GetComponent<Casilla>();
+		casilla.Mover();
 	}
 
 	void Start () 
