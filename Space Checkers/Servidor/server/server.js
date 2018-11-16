@@ -1,7 +1,6 @@
 'use strict';
 
 const nodemailer = require('nodemailer');
-const path = require('path');
 
 var express = require('express')();
 var loopback = require('loopback');
@@ -101,6 +100,7 @@ var transporter = nodemailer.createTransport({
   },
 }),
 EmailTemplate = require('email-templates').EmailTemplate,
+path = require('path'),
 Promise = require('bluebird');
 
 // Metodo generador de codigos
@@ -120,7 +120,7 @@ var codigo;
 var senderName;
 var emailType;
 io.on("connection", function(cliente) {
-    console.log("Email: Recolectando datos");
+     console.log("Email: Recolectando datos");
     // Evento llamado por cliente al clicker Partida (EnviarCodigo.cs)
     cliente.on("enviarCorreo", function(usernameData) {
         var usuario = {where: {username : usernameData}};
@@ -140,22 +140,23 @@ io.on("connection", function(cliente) {
             } else {
                 // 
             }
-        });
-    });
-});
+         });
+     });
+ });
 
-//var nombre = 'Dany';
-//var correo = 'dannyhvalenz@gmail.com'
-//var senderName = 'Manolo'
-//var emailType = 'Activation Code'
+// codigo = randomCode(7);
+// nombre = 'Dany';
+// correo = 'dannyhvalenz@gmail.com'
+// senderName = 'Manolo'
+// emailType = 'Invitation'
 
 let emailData = [
-  {
-      name: nombre,
-      email: correo,
-      code: codigo,
-      sender: senderName,
-  },
+    {
+        name: nombre,
+        email: correo,
+        code: codigo,
+        sender: senderName,
+    },
 ];
 
 function sendEmail (obj) {
@@ -177,15 +178,15 @@ function loadTemplate (templateName, contexts) {
   }));
 }
 
-loadTemplate(emailType, emailData).then((results) => {
-  return Promise.all(results.map((result) => {
-      sendEmail({
-          to: result.context.email,
-          from: 'Space Checkers',
-          subject: result.email.subject,
-          html: result.email.html,
-      });
-  }));
-}).then(() => {
-  console.log('The email has been sent');
-});
+// loadTemplate(emailType, emailData).then((results) => {
+//   return Promise.all(results.map((result) => {
+//       sendEmail({
+//           to: result.context.email,
+//           from: 'Space Checkers',
+//           subject: result.email.subject,
+//           html: result.email.html,
+//       });
+//   }));
+// }).then(() => {
+//   console.log('The email has been sent');
+// });

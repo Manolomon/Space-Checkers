@@ -1101,7 +1101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000035440662}
+  m_AnchoredPosition: {x: 0, y: 0.00000703374}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &92137154
@@ -14247,7 +14247,6 @@ GameObject:
   - component: {fileID: 1213294271}
   - component: {fileID: 1213294270}
   - component: {fileID: 1213294269}
-  - component: {fileID: 1213294268}
   m_Layer: 5
   m_Name: Send Button
   m_TagString: Untagged
@@ -14275,17 +14274,6 @@ RectTransform:
   m_AnchoredPosition: {x: 126.3, y: -0.00000095367}
   m_SizeDelta: {x: 54.69, y: 54.69}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1213294268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1213294266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a6eaa9efa41844890325132c22595a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1213294269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14326,12 +14314,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 1818103836}
+        m_MethodName: ClickSend
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -26692,7 +26680,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 0}
   fontSize: 10
   chatBox: {fileID: 410302194}
-  sendButton: {fileID: 0}
+  sendButton: {fileID: 1213294269}
 --- !u!4 &1818103837
 Transform:
   m_ObjectHideFlags: 0
