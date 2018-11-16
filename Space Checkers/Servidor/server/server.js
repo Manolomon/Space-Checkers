@@ -1,5 +1,8 @@
 'use strict';
 
+const nodemailer = require('nodemailer');
+const path = require('path');
+
 var express = require('express')();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
@@ -98,7 +101,6 @@ var transporter = nodemailer.createTransport({
   },
 }),
 EmailTemplate = require('email-templates').EmailTemplate,
-path = require('path'),
 Promise = require('bluebird');
 
 // Metodo generador de codigos
@@ -111,11 +113,12 @@ var randomCode = function(length){
   return codigo;
 }
 
-var codigo = randomCode(7);
-
 //Metodo para sacar la informacion del usuario
 var correo;
 var nombre;
+var codigo;
+var senderName;
+var emailType;
 io.on("connection", function(cliente) {
     console.log("Email: Recolectando datos");
     // Evento llamado por cliente al clicker Partida (EnviarCodigo.cs)
@@ -129,6 +132,9 @@ io.on("connection", function(cliente) {
                 // si encuentra el username busca el correo de ese usuario
                 nombre = user['username'];
                 correo = user['correo'];
+                codigo = randomCode(7);
+                emailType = 'Activation Code';
+                senderName = 'Manolo';
                 cliente.emit("correoCliente", user);
                 console.log(user);
             } else {
@@ -140,8 +146,8 @@ io.on("connection", function(cliente) {
 
 //var nombre = 'Dany';
 //var correo = 'dannyhvalenz@gmail.com'
-var senderName = 'Manolo'
-var emailType = 'Activation Code'
+//var senderName = 'Manolo'
+//var emailType = 'Activation Code'
 
 let emailData = [
   {
