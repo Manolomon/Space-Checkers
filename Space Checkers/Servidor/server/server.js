@@ -1,5 +1,7 @@
 'use strict';
 
+const nodemailer = require('nodemailer');
+
 var express = require('express')();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
@@ -128,13 +130,14 @@ var randomCode = function(length){
   return codigo;
 }
 
-var codigo = randomCode(7);
-
 //Metodo para sacar la informacion del usuario
 var correo;
 var nombre;
+var codigo;
+var senderName;
+var emailType;
 io.on("connection", function(cliente) {
-    console.log("Email: Recolectando datos");
+     console.log("Email: Recolectando datos");
     // Evento llamado por cliente al clicker Partida (EnviarCodigo.cs)
     cliente.on("enviarCorreo", function(usernameData) {
         var usuario = {where: {username : usernameData}};
@@ -146,27 +149,31 @@ io.on("connection", function(cliente) {
                 // si encuentra el username busca el correo de ese usuario
                 nombre = user['username'];
                 correo = user['correo'];
+                codigo = randomCode(7);
+                emailType = 'Activation Code';
+                senderName = 'Manolo';
                 cliente.emit("correoCliente", user);
                 console.log(user);
             } else {
                 // 
             }
-        });
-    });
-});
+         });
+     });
+ });
 
-//var nombre = 'Dany';
-//var correo = 'dannyhvalenz@gmail.com'
-var senderName = 'Manolo'
-var emailType = 'Activation Code'
+// codigo = randomCode(7);
+// nombre = 'Dany';
+// correo = 'dannyhvalenz@gmail.com'
+// senderName = 'Manolo'
+// emailType = 'Invitation'
 
 let emailData = [
-  {
-      name: nombre,
-      email: correo,
-      code: codigo,
-      sender: senderName,
-  },
+    {
+        name: nombre,
+        email: correo,
+        code: codigo,
+        sender: senderName,
+    },
 ];
 
 function sendEmail (obj) {

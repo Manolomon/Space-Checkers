@@ -14247,9 +14247,8 @@ GameObject:
   - component: {fileID: 1213294271}
   - component: {fileID: 1213294270}
   - component: {fileID: 1213294269}
-  - component: {fileID: 1213294268}
   m_Layer: 5
-  m_Name: Send Buton
+  m_Name: Send Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14275,17 +14274,6 @@ RectTransform:
   m_AnchoredPosition: {x: 126.3, y: -0.00000095367}
   m_SizeDelta: {x: 54.69, y: 54.69}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1213294268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1213294266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a6eaa9efa41844890325132c22595a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1213294269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14325,7 +14313,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1213294270}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1818103836}
+        m_MethodName: ClickSend
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1213294270
@@ -26680,6 +26679,8 @@ MonoBehaviour:
   chatFont: {fileID: 12800000, guid: 5ac6b7a3f6d745a459535bfaa65f573c, type: 3}
   textColor: {r: 0, g: 0, b: 0, a: 0}
   fontSize: 10
+  chatBox: {fileID: 410302194}
+  sendButton: {fileID: 1213294269}
 --- !u!4 &1818103837
 Transform:
   m_ObjectHideFlags: 0

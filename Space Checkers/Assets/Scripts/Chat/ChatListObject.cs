@@ -8,4 +8,5 @@ public class ChatListObject : MonoBehaviour {
 	public Image chatbarImage;
 	public Text senderName;
 	public Text childText;
+	
 }
