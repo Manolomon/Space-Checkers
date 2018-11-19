@@ -1,28 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Clase de referencia para interpretacion de informacion
-[System.Serializable]
-public class PlayerLobby {
-	public PlayerLobby(string username)
-	{
-		this.Username = username;
-	}
-	public string Username {get; set;}
-	public string Color {get; set;}
-}
+
 [System.Serializable]
 public class Lobby : MonoBehaviour {
 
-	public static Lobby instance;
 	private string idLobby;
-	private List<PlayerLobby> players = new List<PlayerLobby>();
+	private Dictionary <string, string> players = new Dictionary<string, string>();
+	public static Lobby instance;
 	public string IdLobby
 	{
 		get {return idLobby;}
 		set {idLobby = value;}
 	}
-	public List<PlayerLobby> Players
+	public Dictionary<string, string> Players
 	{
 		get {return players;}
 		set {players = value;}
@@ -43,15 +34,15 @@ public class Lobby : MonoBehaviour {
 
 	public void StartGame()
 	{
-		ConnectionManager.instance.socket.Emit("startGame", "1A2B");
+		ConnectionManager.instance.socket.Emit("startGame", idLobby);
 	}
 
 	public void PrintLobby()
 	{
 		Debug.Log("ID Lobby: " + idLobby);
-		foreach (PlayerLobby player in players)
+		foreach (KeyValuePair<string, string> kvp in players)
 		{
-			Debug.Log("Player: " + player.Username + " / Color: " + player.Color);
+			Debug.Log(string.Format("Player: {0} / Color: {1}", kvp.Key, kvp.Value));
 		}
 	}
 }

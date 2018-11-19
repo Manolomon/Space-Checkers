@@ -4,8 +4,7 @@ var express = require('express')();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var http = require('http').Server(express);
-var io = require("socket.io")(http, { pingInterval: 500 });
-
+var io = require("socket.io")(http, { 'pingInterval': 5000,'pingTimeout': 15000 });
 var app = module.exports = loopback();
 
 http.listen(5000, function() {
@@ -22,11 +21,13 @@ app.start = function() {
 };
 
 io.on("connection", function(cliente) {
-  console.log("Usuario conectado a servidor");
-  cliente.emit("test", "aaaaa!");
+  console.log("Usuario conectado a servidor " + cliente.id);
   cliente.on("error", (reason) =>
   {
-    console.log(reason);
+    console.log(reason + " " + cliente.id);
+  });
+  cliente.on('disconnect', (reason) => {
+    console.log(reason + " " + cliente.id);
   });
   // Evento llamado por cliente al clicker iniciar sesion (ButtonLogin.cs)
   cliente.on("login", function(usernameData){
@@ -36,12 +37,10 @@ io.on("connection", function(cliente) {
       if (err) throw err;
       
       cliente.emit("loginCliente", user);
-      cliente.emit("test", "aaaaa!");
       if (user != null) {
         // manda la info del usuario si lo encuentra
         cliente.emit("loginCliente", user);
         console.log(user);
-        io.to(cliente.id).emit("test", "aaaaaaaaaaa");
       }
     });
   });
@@ -55,41 +54,59 @@ io.on("connection", function(cliente) {
 
   // Evento llamado por cliente al clickear create game (implemented in ButtonLogin.cs atm)
   cliente.on("createGame", function(){
-    cliente.join('1A2B');
-    cliente.emit("createLobby", "1A2B");
+    var codigo = '1A2B'; //generacion de codigo
+    cliente.join(codigo);
+    cliente.emit("createLobby", codigo);
   });
 
   // Evento llamado por cliente al clicker join game (TO DO in client)
   cliente.on("joinGame", function(user){
-    cliente.join('1A2B');
-    io.to('1A2B').emit('userJoinedRoomCliente', user);
-    cliente.on("getLobbyInfo", function(lobbyInfo) {
-      cliente.emit("setLobbyInfo", lobbyInfo);
-    });
+    var codigo = '1A2B'; //codigo que llega del cliente
+    io.to(codigo).emit('userJoinedRoomCliente', user);
+    cliente.join(codigo);
+    //console.log(io.sockets.clients(codigo));
+    io.sockets.in(codigo).emit("getLobbyInfo");
+    console.log("Usuario uniendose a sala " + codigo);
+  });
+
+  cliente.on("setLobbyInfo", function(lobby){
+    console.log("info de lobby raw");
+    console.log(lobby);
+    var jsonlobby = JSON.parse(lobby);
+    console.log("lobby en json");
+    console.log(jsonlobby);
+    var stringlobby = JSON.stringify(jsonlobby);
+    io.sockets.in('1A2B').emit("setLobbyInfo", stringlobby);
   });
 
   // Evento llamado por cliente al dar click en Start Game (no se ha definido aun, probably clase nueva)
   cliente.on("startGame", function(room){
-    io.to('1A2B').emit('startGameCliente');
+    console.log("iniciando juego en: " + room);
+    io.sockets.in(room).emit("startGameCliente");
   });
 
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
     var movement = {ficha: datos[1], casilla: datos[2]};
-    io.to('1A2B').emit('moverPiezaCliente', movement);
+    io.sockets.in('1A2B').emit('moverPiezaCliente', movement);
   });
 });
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
-  if (err) throw err;
+  //if (err) throw err;
 
   // start the server if `$ node server.js`
   if (require.main === module)
     app.start();
 });
 
+/*
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -182,4 +199,4 @@ loadTemplate(emailType, emailData).then((results) => {
   }));
 }).then(() => {
   console.log('The email has been sent');
-});
+});*/

@@ -11,10 +11,12 @@ using UnityEngine.UI;
 
 
 public class ConnectionManager : MonoBehaviour {
-	public static ConnectionManager instance;
 	private SocketManager refSocket;
 	public Socket socket;
+	private bool isOwner = false;
 	private string url = "http://localhost:5000/socket.io/";
+	public static ConnectionManager instance;
+	public bool ToJoin {get; set;}
 	void Awake () 
 	{
 		if (instance == null)
@@ -30,14 +32,14 @@ public class ConnectionManager : MonoBehaviour {
 	
 	public void CreateSocketRef()
 	{
-		TimeSpan miliSecForReconnect = TimeSpan.FromMilliseconds (1000); 
-
         SocketOptions options = new SocketOptions ();
+		options.Timeout = TimeSpan.FromMilliseconds(15000);
         options.ReconnectionAttempts = 3;
-        options.AutoConnect = true;
-        options.ReconnectionDelay = miliSecForReconnect;
+		options.Reconnection = true;
+        //options.AutoConnect = true;
+        options.ReconnectionDelay = TimeSpan.FromMilliseconds(5000);
         //Server URI
-    	refSocket = new SocketManager (new Uri (url), options);
+    	refSocket = new SocketManager (new Uri (url));
 		socket = refSocket.GetSocket();
 		SetAllEvents();
 	}
@@ -49,32 +51,11 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("loginCliente", OnLogin);
 		socket.On("createLobby", OnCreateLobby);
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
+		socket.On("getLobbyInfo", OnGetLobbyInfo);
 		socket.On("userJoinedRoomCliente", OnUserJoinedRoom);
 		socket.On("userSelectedColor", OnUserSelectedColor);
 		socket.On("startGameCliente", OnStartGame);
 		socket.On("moverPiezaCliente", OnMoverPieza);
-		/*
-		// Evento que llama el servidor cuando un usuario selecciona un color para actualizar las opciones de los demas jugadores
-		socket.On("userSelectedColor", (datos) =>
-		{
-			string playerData = datos.ToString();
-			PlayerLobby playerWithNewColor = JsonConvert.DeserializeObject<PlayerLobby>(playerData);
-			foreach (PlayerLobby player in Lobby.instance.Players)
-			{
-				if (player.Username == playerWithNewColor.Username)
-				{
-					player.Color = playerWithNewColor.Color;
-				}
-			}
-			//GameObject button = GameObject.Find("Toggle"+playerWithNewColor.Color);
-			// togglear a encendido el boton del color encontrado
-		});
-		// Evento que llama el servidor cuando un usuario deja el lobby
-		socket.On("userLeftRoomCliente", (datos) =>
-		{
-			
-		});
-		*/
 	}
 
 	private void OnConnect(Socket socket, Packet packet, params object[] args)
@@ -94,65 +75,90 @@ public class ConnectionManager : MonoBehaviour {
 		string jugadorString = datosJugador[1].ToString();
 		Jugador jugador = JsonConvert.DeserializeObject<Jugador>(jugadorString);
 		Debug.Log(jugador.Username);
+		Jugador.instance = jugador;
 		ConnectionManager.instance.socket.Emit("createGame");
 	}
 
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
-		string idlobby = datos[1].ToString();
+		string idlobby = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log(idlobby);
 		Lobby.instance.IdLobby = idlobby;
-		Lobby.instance.Players.Add(new PlayerLobby(Jugador.instance.Username));
+		Debug.Log("Dueno: " + Jugador.instance.Username);
+		if (!Lobby.instance.Players.ContainsKey(Jugador.instance.Username))
+		{
+			Lobby.instance.Players.Add(Jugador.instance.Username, null);
+		}
+		Lobby.instance.PrintLobby();
+		isOwner = true;
 	}
 
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
-		var datos = JSON.Parse(packet.ToString());
-		string lobbyInfo = datos[1].ToString();
-		Lobby lobby = JsonConvert.DeserializeObject<Lobby>(lobbyInfo);
-		Lobby.instance = lobby;
-		Lobby.instance.PrintLobby();
+		if (ToJoin)
+		{
+			var datos = JSON.Parse(packet.ToString());
+			string lobbyInfo = datos[1].ToString();
+			lobbyInfo = lobbyInfo.Substring(1, lobbyInfo.Length - 2);
+			lobbyInfo = lobbyInfo.Replace(@"\", "");
+			Debug.Log(lobbyInfo);
+			DatosLobby lobby = JsonConvert.DeserializeObject<DatosLobby>(lobbyInfo);
+			Lobby.instance.IdLobby = lobby.IdLobby;
+			Lobby.instance.Players = lobby.Players;
+			Lobby.instance.PrintLobby();
+			//Lobby.instance = lobby;
+			//Lobby.instance.PrintLobby();
+		}
+	}
+
+	private void OnGetLobbyInfo(Socket socket, Packet packet, params object[] args)
+	{
+		if (isOwner)
+		{
+			Debug.Log("obteniendo info de lobby");
+			//string idLobby = Lobby.instance.IdLobby;
+			//Dictionary<string, string> players = Lobby.instance.Players;
+			DatosLobby datosLobby = new DatosLobby(Lobby.instance.IdLobby, Lobby.instance.Players);
+			string dataLobby = JsonConvert.SerializeObject(datosLobby);
+			socket.Emit("setLobbyInfo", dataLobby);
+		}
 	}
 
 	private void OnUserJoinedRoom(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
-		string newUser = datos[1].ToString();
-		PlayerLobby newPlayer = new PlayerLobby(newUser);
-		Lobby.instance.Players.Add(newPlayer);
-		Lobby lobby = Lobby.instance;
-		string dataLobby = JsonConvert.SerializeObject(lobby);
-		socket.Emit("getLobbyInfo", dataLobby);
+		string newUser = datos[1].ToString().Trim( new Char[] {'"'});
+		Debug.Log("Se unio: " + newUser);
+		Lobby.instance.Players.Add(newUser, null);
 	}
 
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
 		string playerData = datos[1].ToString();
-		PlayerLobby playerWithNewColor = JsonConvert.DeserializeObject<PlayerLobby>(playerData);
-		foreach (PlayerLobby player in Lobby.instance.Players)
-		{
-			if (player.Username == playerWithNewColor.Username)
-			{
-				player.Color = playerWithNewColor.Color;
-			}
-		}
-		Toggle button = GameObject.Find("Toggle"+playerWithNewColor.Color).GetComponent<Toggle>();
+		KeyValuePair<string, string> playerWithNewColor = JsonConvert.DeserializeObject<KeyValuePair<string, string>>(playerData);
+		Lobby.instance.Players.Remove(playerWithNewColor.Key);
+		Lobby.instance.Players.Add(playerWithNewColor.Key, playerWithNewColor.Value);
+		Toggle button = GameObject.Find("Toggle"+playerWithNewColor.Value).GetComponent<Toggle>();
 		// togglear a encendido el boton del color encontrado
 		button.isOn = true;
 	}
 
 	private void OnStartGame(Socket socket, Packet packet, params object[] args)
 	{
+		Debug.Log("Game starting!");
+		SceneManager.LoadScene(2);
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
-		foreach (PlayerLobby player in Lobby.instance.Players)
+		int count = 1;
+		foreach (KeyValuePair<string, string> kvp in Lobby.instance.Players)
 		{
-			if (player.Username == Jugador.instance.Username)
+			if (kvp.Key == Jugador.instance.Username)
 			{
-				control.MyTurn = Lobby.instance.Players.IndexOf(player) + 1;
-				control.Color = player.Color;
+				control.MyTurn = count;
+				control.Color = kvp.Value;
 			}
+			count++;
 		}
 		control.ActualTurn = 1;
 	}
