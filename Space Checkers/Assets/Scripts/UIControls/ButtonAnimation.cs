@@ -35,9 +35,7 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
     public void OnPointerEnter(PointerEventData eventData) {
         inBounds = true;
         UpdateStyle();
-        targetFx.PlayOneShot (hoverFx);
-        // SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue ("holis"),
-        //     SSTools.Position.bottom, SSTools.Time.oneSecond);
+        targetFx.PlayOneShot(hoverFx);
     }
  
     public void OnPointerExit(PointerEventData eventData) {
