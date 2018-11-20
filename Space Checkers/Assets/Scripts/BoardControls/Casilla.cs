@@ -37,7 +37,7 @@ public class Casilla : MonoBehaviour {
 	}
 
 	// Obtiene las casillas disponibles arriba a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesUI(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesUI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -48,19 +48,19 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUI(casillaSiguiente)
+					CasillasDisponiblesUI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesUD(casillaSiguiente)
+					CasillasDisponiblesUD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDI(casillaSiguiente)
+					CasillasDisponiblesDI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesI(casillaSiguiente)
 				);
 			}
 		}
@@ -68,7 +68,7 @@ public class Casilla : MonoBehaviour {
 	}
 
 	// Obtiene las casillas disponibles arriba a la derecha y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesUD(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesUD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -79,19 +79,19 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUI(casillaSiguiente)
+					CasillasDisponiblesUI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesUD(casillaSiguiente)
+					CasillasDisponiblesUD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDD(casillaSiguiente)
+					CasillasDisponiblesDD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesI(casillaSiguiente)
+					CasillasDisponiblesI(casillaSiguiente)
 				);
 			}
 		}
@@ -99,7 +99,7 @@ public class Casilla : MonoBehaviour {
 	}
 
 	// Obtiene las casillas disponibles a la derecha y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesD(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -110,19 +110,19 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUI(casillaSiguiente)
+					CasillasDisponiblesUI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesUD(casillaSiguiente)
+					CasillasDisponiblesUD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDD(casillaSiguiente)
+					CasillasDisponiblesDD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDI(casillaSiguiente)
+					CasillasDisponiblesDI(casillaSiguiente)
 				);
 			}
 		}
@@ -130,7 +130,7 @@ public class Casilla : MonoBehaviour {
 	}
 
 	// Obtiene las casillas disponibles abajo a la derecha y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesDD(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesDD(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -141,19 +141,19 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUD(casillaSiguiente)
+					CasillasDisponiblesUD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDD(casillaSiguiente)
+					CasillasDisponiblesDD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDI(casillaSiguiente)
+					CasillasDisponiblesDI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesI(casillaSiguiente)
+					CasillasDisponiblesI(casillaSiguiente)
 				);
 			}
 		}
@@ -161,7 +161,7 @@ public class Casilla : MonoBehaviour {
 	}
 
 	// Obtiene las casillas disponibles abajo a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesDI(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesDI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -172,26 +172,26 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUI(casillaSiguiente)
+					CasillasDisponiblesUI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDD(casillaSiguiente)
+					CasillasDisponiblesDD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDI(casillaSiguiente)
+					CasillasDisponiblesDI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesI(casillaSiguiente)
+					CasillasDisponiblesI(casillaSiguiente)
 				);
 			}
 		}
 		return listaCasillas;
 	}
 	// Obtiene las casillas disponibles a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
-	public List<GameObject> casillasDisponiblesI(GameObject casilla)
+	public List<GameObject> CasillasDisponiblesI(GameObject casilla)
 	{
 		List<GameObject> listaCasillas = new List<GameObject>();
 		Casilla casillaActual = casilla.GetComponent<Casilla>();
@@ -202,22 +202,22 @@ public class Casilla : MonoBehaviour {
 			{
 				listaCasillas.Add(casillaSiguiente);
 				listaCasillas.AddRange(
-					casillasDisponiblesUI(casillaSiguiente)
+					CasillasDisponiblesUI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesUD(casillaSiguiente)
+					CasillasDisponiblesUD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesD(casillaSiguiente)
+					CasillasDisponiblesD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDD(casillaSiguiente)
+					CasillasDisponiblesDD(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesDI(casillaSiguiente)
+					CasillasDisponiblesDI(casillaSiguiente)
 				);
 				listaCasillas.AddRange(
-					casillasDisponiblesI(casillaSiguiente)
+					CasillasDisponiblesI(casillaSiguiente)
 				);
 			}
 		}
@@ -243,22 +243,22 @@ public class Casilla : MonoBehaviour {
 			}
 		}
 		casillasDisponibles.AddRange(
-			casillasDisponiblesUI(this.gameObject)
+			CasillasDisponiblesUI(this.gameObject)
 		);
 		casillasDisponibles.AddRange(
-			casillasDisponiblesUD(this.gameObject)
+			CasillasDisponiblesUD(this.gameObject)
 		);
 		casillasDisponibles.AddRange(
-			casillasDisponiblesD(this.gameObject)
+			CasillasDisponiblesD(this.gameObject)
 		);
 		casillasDisponibles.AddRange(
-			casillasDisponiblesDD(this.gameObject)
+			CasillasDisponiblesDD(this.gameObject)
 		);
 		casillasDisponibles.AddRange(
-			casillasDisponiblesDI(this.gameObject)
+			CasillasDisponiblesDI(this.gameObject)
 		);
 		casillasDisponibles.AddRange(
-			casillasDisponiblesI(this.gameObject)
+			CasillasDisponiblesI(this.gameObject)
 		);
 		
 		return casillasDisponibles;

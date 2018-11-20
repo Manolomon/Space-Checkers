@@ -20,13 +20,24 @@ public class ButtonEvent : MonoBehaviour {
 	{
 		InputField username = GameObject.Find("TFGameCode").GetComponent<InputField>();
 		ConnectionManager.instance.socket.Emit("joinGame", username.text);
+		ConnectionManager.instance.ToJoin = true;
 	}
 
-	public void CopyToClipboard()
+	public void ClickColor()
+	{
+		
+	}
+
+	public void ClickStartGame()
+	{
+		Lobby.instance.StartGame();
+	}
+
+/*/	public void CopyToClipboard()
 	{
 		Text invitationCode = GameObject.Find("TxtCode").GetComponent<Text>();
 		EditorGUIUtility.systemCopyBuffer = invitationCode.text;
 		SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue ("message_lobby_code_copied"),
             SSTools.Position.bottom, SSTools.Time.oneSecond);
-	}
+	}*/
 }

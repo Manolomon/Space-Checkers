@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FBlue
+  - FGreen
+  - FRed
+  - FPurple
+  - FOrange
+  - FYellow
+  - CBlue
+  - CGreen
+  - CRed
+  - CPurple
+  - COrange
+  - CYellow
   layers:
   - Default
   - TransparentFX

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DatosMovimiento : MonoBehaviour {
+public class DatosMovimiento {
 
 	private string ficha;
 	private string casilla;
