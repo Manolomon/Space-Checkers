@@ -49,6 +49,7 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("connect", OnConnect);
 		socket.On("test", OnTest);
 		socket.On("loginCliente", OnLogin);
+		socket.On("loginSuccessCliente", OnLoginSuccess);
 		socket.On("createLobby", OnCreateLobby);
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
 		socket.On("getLobbyInfo", OnGetLobbyInfo);
@@ -70,13 +71,28 @@ public class ConnectionManager : MonoBehaviour {
 
 	private void OnLogin(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Llamada a loginCliente");
+		Debug.Log("Comprobando pass");
+		InputField password = GameObject.Find("TFPassword").GetComponent<InputField>();
+		string hashPass = HashManager.GeneratePasswordHash(password.text);
 		var datosJugador = JSON.Parse(packet.ToString());
-		string jugadorString = datosJugador[1].ToString();
-		Jugador jugador = JsonConvert.DeserializeObject<Jugador>(jugadorString);
-		Debug.Log(jugador.Username);
-		Jugador.instance = jugador;
-		ConnectionManager.instance.socket.Emit("createGame");
+		string passFound = datosJugador[1].ToString().Trim( new Char[] {'"'});
+		Debug.Log(passFound + " vs " + hashPass);
+		if (passFound.Equals(hashPass))
+		{
+			ConnectionManager.instance.socket.Emit("loginSuccess");
+		} else {
+			Debug.Log("Contrasena incorrecta");
+		}
+	}
+
+	private void OnLoginSuccess(Socket socket, Packet packet, params object[] args)
+	{
+		var datosJugador = JSON.Parse(packet.ToString());
+		string jugadorJSON = datosJugador[1].ToString();
+		Debug.Log(jugadorJSON);
+		Jugador.instance = JsonConvert.DeserializeObject<Jugador>(jugadorJSON);
+		Debug.Log(Jugador.instance.Username);
+		SceneManager.LoadScene(4);
 	}
 
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)

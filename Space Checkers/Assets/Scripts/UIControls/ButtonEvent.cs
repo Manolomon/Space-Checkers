@@ -9,10 +9,7 @@ public class ButtonEvent : MonoBehaviour {
 	public void ClickLogin()
 	{
 		InputField username = GameObject.Find("TFUsername").GetComponent<InputField>();
-		InputField password = GameObject.Find("TFPassword").GetComponent<InputField>();
-		string hashPass = HashManager.GeneratePasswordHash(password.text);
 		Debug.Log("Username login: " + username.text);
-		Debug.Log("Password login" + hashPass);
 		ConnectionManager.instance.socket.Emit("login", username.text);
 	}
 

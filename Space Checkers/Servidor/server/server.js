@@ -9,6 +9,8 @@ var http = require('http').Server(express);
 var io = require("socket.io")(http, { 'pingInterval': 5000,'pingTimeout': 15000 });
 var app = module.exports = loopback();
 
+var loggeando = {}
+
 http.listen(5000, function() {
   console.log("socket.io escuchando en 5000");
 });
@@ -35,13 +37,28 @@ io.on("connection", function(cliente) {
   cliente.on("login", function(usernameData){
     var filtro = {where: {username : usernameData}};
     console.log(filtro);
+    loggeando[cliente.id] = usernameData;
+    app.models.Jugador.findOne(filtro, function (err, user) {
+      if (err) throw err;
+    
+      if (user != null) {
+        // manda la info del usuario si lo encuentra
+        console.log(user['pass']);
+        cliente.emit("loginCliente", user['pass']);
+      }
+    });
+  });
+
+  // Evento llamado por cliente al confirmar que la contrasena es correcta
+  cliente.on("loginSuccess", function(){
+    var filtro = {where: {username : loggeando[cliente.id]}};
+    console.log(filtro);
     app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
-      cliente.emit("loginCliente", user);
       if (user != null) {
         // manda la info del usuario si lo encuentra
-        cliente.emit("loginCliente", user);
+        cliente.emit("loginSuccessCliente", user);
         console.log(user);
       }
     });

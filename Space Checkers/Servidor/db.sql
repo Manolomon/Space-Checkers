@@ -15,5 +15,5 @@ CREATE TABLE jugador (
 );
 
 INSERT INTO jugador VALUES (
-    'Deklok','danix100@hotmail.com','5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5',1,1,1
+    'Deklok','danix100@hotmail.com','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5',1,1,1
 );
