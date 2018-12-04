@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using Newtonsoft.Json;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -21,19 +22,34 @@ public class ButtonEvent : MonoBehaviour
     /// </summary>
     public void ClickJoin()
     {
-        InputField username = GameObject.Find("TFGameCode").GetComponent<InputField>();
-        ConnectionManager.instance.socket.Emit("joinGame", username.text);
+        InputField code = GameObject.Find("TFGameCode").GetComponent<InputField>(); 
+		ConnectionManager.instance.socket.Emit("joinGame", code.text); 
         ConnectionManager.instance.ToJoin = true;
     }
 
     public void ClickColor()
     {
-
+        Toggle boton = this.GetComponent<Toggle>();
+        if (boton.isOn)
+        {
+            DatosColor datoscolor = new DatosColor(Lobby.instance.IdLobby, Jugador.instance.Username, gameObject.tag);
+            string dataColor = JsonConvert.SerializeObject(datoscolor);
+            ConnectionManager.instance.socket.Emit("selectColor",dataColor);
+        }
     }
 
-    /// <summary>
-    /// Metodo que se ejecuta al presionar comenzar partida
-    /// </summary>
+    public void ClickJoinAsGuest()
+    {
+        InputField code = GameObject.Find("TFGameCode").GetComponent<InputField>(); 
+		ConnectionManager.instance.socket.Emit("joinGame", code.text); 
+		ConnectionManager.instance.ToJoin = true;
+    }
+
+    public void ClicklCreateGame() 
+	{ 
+		ConnectionManager.instance.socket.Emit("createGame"); 
+	} 
+
     public void ClickStartGame()
     {
         Lobby.instance.StartGame();

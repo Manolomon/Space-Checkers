@@ -283,10 +283,10 @@ public class Casilla : MonoBehaviour {
 
 	private void OnMouseDown()
 	{
-		Mover();
+		MoverLocal();
 	}
 
-	public void Mover()
+	public void MoverLocal()
 	{
 		if (control.ActualTurn == control.MyTurn)
 		{
@@ -317,11 +317,21 @@ public class Casilla : MonoBehaviour {
 						sr = casilla.GetComponent<SpriteRenderer>();
 						sr.color = Color.white;
 					}
-					control.EnviarMovimiento(control.FichaSeleccionada.name, gameObject.name);
-					// terminar turno
+					control.EnviarMovimiento(control.FichaSeleccionada.name, this.gameObject.name);
+					control.TerminarTurno();
 				}
 			}
 		}
+	}
+
+	public void Mover()
+	{
+		control.FichaSeleccionada.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);
+		Ficha scriptFicha = control.FichaSeleccionada.GetComponent<Ficha>();
+		Casilla scriptCasilla = scriptFicha.casilla.GetComponent<Casilla>();
+		scriptCasilla.Ocupada = false;
+		scriptFicha.casilla = this.gameObject;
+		this.Ocupada = true;
 	}
 
 }

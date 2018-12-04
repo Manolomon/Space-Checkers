@@ -16167,6 +16167,7 @@ GameObject:
   - component: {fileID: 1996357919}
   - component: {fileID: 1996357918}
   - component: {fileID: 1996357917}
+  - component: {fileID: 1996357916}
   - component: {fileID: 1996357915}
   m_Layer: 5
   m_Name: CreateGameButton
@@ -16204,6 +16205,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04842023874f17b42b81770cdb92983f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1996357916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996357913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1996357917
@@ -16245,9 +16257,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996357915}
-        m_MethodName: LoadByIndex
-        m_Mode: 3
+      - m_Target: {fileID: 1996357916}
+        m_MethodName: ClicklCreateGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

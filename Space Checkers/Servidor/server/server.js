@@ -6,10 +6,11 @@ var express = require('express')();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var http = require('http').Server(express);
-var io = require("socket.io")(http, { 'pingInterval': 5000,'pingTimeout': 15000 });
+var io = require("socket.io")(http, { 'pingInterval': 5000,'pingTimeout': 25000 });
 var app = module.exports = loopback();
 
 var loggeando = {}
+var rooms = {}
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -75,6 +76,24 @@ io.on("connection", function(cliente) {
     });
   });
 
+  cliente.on("leaderboardWins", function(){
+    var filtro = {order: 'partidasGanadas DESC', limit: 10, fields: {pass: false, correo: false} }
+    app.models.Jugador.find(filtro, function(err, users) {
+      if (err) throw err;
+      console.log(users);
+      cliente.emit("leaderboardWinsCliente", users);
+    });
+  });
+
+  cliente.on("leaderboardGames", function(){
+    var filtro = {order: 'partidasJugadas DESC', limit: 10, fields: {pass: false, correo: false} }
+    app.models.Jugador.find(filtro, function(err, users) {
+      if (err) throw err;
+      console.log(users);
+      cliente.emit("leaderboardGamesCliente", users);
+    });
+  });
+
   // Evento llamado por cliente al clicker registrar (TO DO in client)
   cliente.on("registro", function(datos){
     app.models.Jugador.create(datos, function(err, response) {
@@ -85,18 +104,25 @@ io.on("connection", function(cliente) {
   // Evento llamado por cliente al clickear create game (implemented in ButtonLogin.cs atm)
   cliente.on("createGame", function(){
     var codigo = randomCode(5); //generacion de codigo
+    rooms[codigo] = 1;
     cliente.join(codigo);
     cliente.emit("createLobby", codigo);
   });
 
   // Evento llamado por cliente al clicker join game (TO DO in client)
-  cliente.on("joinGame", function(user){
-    var codigo = '1A2B'; //codigo que llega del cliente
-    io.to(codigo).emit('userJoinedRoomCliente', user);
-    cliente.join(codigo);
-    //console.log(io.sockets.clients(codigo));
-    io.sockets.in(codigo).emit("getLobbyInfo");
-    console.log("Usuario uniendose a sala " + codigo);
+  cliente.on("joinGame", function(code){
+    var codigo = code; //codigo que llega del cliente
+    if (rooms[code] < 6 && (code in rooms)) {
+      io.to(codigo).emit('userJoinedRoomCliente', 'Guest'+rooms[code]);
+      cliente.emit("guestUsername", 'Guest'+rooms[code]);
+      cliente.join(codigo);
+      rooms[code] = rooms[code] + 1;
+      //console.log(io.sockets.clients(codigo));
+      io.sockets.in(codigo).emit("getLobbyInfo");
+      console.log("Usuario uniendose a sala " + codigo);
+    } else {
+      cliente.emit("errorJoin");
+    }
   });
 
   cliente.on("setLobbyInfo", function(lobby){
@@ -109,6 +135,13 @@ io.on("connection", function(cliente) {
     io.sockets.in(jsonlobby['idLobby']).emit("setLobbyInfo", stringlobby);
   });
 
+  cliente.on("selectColor", function(datos){
+    console.log("Usuario selecciono color");
+    var jsoncolor = JSON.parse(datos);
+    var stringcolor = JSON.stringify(jsoncolor);
+    io.sockets.in(jsoncolor['IdLobby']).emit("userSelectedColor", stringcolor);
+  });
+
   // Evento llamado por cliente al dar click en Start Game (no se ha definido aun, probably clase nueva)
   cliente.on("startGame", function(room){
     console.log("iniciando juego en: " + room);
@@ -117,8 +150,11 @@ io.on("connection", function(cliente) {
 
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
-    var movement = {ficha: datos[1], casilla: datos[2]};
-    io.sockets.in('1A2B').emit('moverPiezaCliente', movement); //codigo del lobby
+    io.sockets.in(datos['Lobby']).emit("moverPiezaCliente", datos); //codigo del lobby
+  });
+
+  cliente.on("terminarTurno", function(code) {
+    io.sockets.in(code).emit("terminarTurnoCliente"); //codigo del lobby
   });
 
   // Metodos para enviar correos
@@ -199,14 +235,14 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
-let emailData = [
+/*let emailData = [
   {
     name: nombre,
     email: correo,
     code: codigo,
     sender: senderName,
   },
-];
+];*/
 
 function sendEmail (obj) {
   return transporter.sendMail(obj);

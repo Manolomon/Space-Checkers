@@ -22,15 +22,19 @@ public class Ficha : MonoBehaviour {
 	// Al dar click a la ficha, comprueba la casilla en donde esta e ilumina las casillas disponibles para moverse
 	private void OnMouseDown()
 	{
-		Debug.Log("Click a ficha" + this.gameObject.name.ToString());
-		// && control.Color == this.gameObject.tag
-		if (control.SeleccionCasilla == false)
+		if (control.ActualTurn == control.MyTurn)
 		{
-			control.FichaSeleccionada = this.gameObject;
-			Casilla scriptCasilla = casilla.GetComponent<Casilla>();
-			scriptCasilla.iluminarCasillasDisponibles();
-			control.SeleccionCasilla = true;
-			control.CasillasValidas = scriptCasilla.CasillasDisponibles;
+			Debug.Log("Click a ficha" + this.gameObject.name.ToString());
+			if (control.SeleccionCasilla == false && control.Color == gameObject.tag)
+			{
+				control.FichaSeleccionada = this.gameObject;
+				Casilla scriptCasilla = casilla.GetComponent<Casilla>();
+				scriptCasilla.iluminarCasillasDisponibles();
+				control.SeleccionCasilla = true;
+				control.CasillasValidas = scriptCasilla.CasillasDisponibles;
+			} else {
+				Debug.Log("Ficha no valida para movimiento");
+			}
 		}
 	}	
 }

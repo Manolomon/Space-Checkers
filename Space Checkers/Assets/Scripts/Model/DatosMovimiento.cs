@@ -4,23 +4,15 @@ using UnityEngine;
 
 [System.Serializable]
 public class DatosMovimiento {
+	public string Lobby {get; set;}
+	public string Ficha {get; set;}
+	public string Casilla {get; set;}
 
-	private string ficha;
-	private string casilla;
+	public DatosMovimiento(string lobby,string ficha, string casilla)
+	{
+		Lobby = lobby;
+		Ficha = ficha;
+		Casilla = casilla;
+	}
 
-	public DatosMovimiento(string ficha, string casilla)
-	{
-		this.ficha = ficha;
-		this.casilla = casilla;
-	}
-	public string Ficha
-	{
-		get {return ficha;}
-		set {ficha = value;}
-	}
-	public string Casilla
-	{
-		get {return casilla;}
-		set {casilla = value;}
-	}
 }

@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 795646}
   m_Layer: 0
   m_Name: FY10
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 13410353}
   m_Layer: 0
   m_Name: FO6
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 18129402}
   m_Layer: 0
   m_Name: R6
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 22774984}
   m_Layer: 0
   m_Name: FY4
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 96449516}
   m_Layer: 0
   m_Name: FP2
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 105754843}
   m_Layer: 0
   m_Name: R7
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1527,7 +1527,7 @@ GameObject:
   - component: {fileID: 118210124}
   m_Layer: 0
   m_Name: FO10
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1648,7 +1648,7 @@ GameObject:
   - component: {fileID: 129496809}
   m_Layer: 0
   m_Name: Y5
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2299,7 +2299,7 @@ GameObject:
   - component: {fileID: 165479423}
   m_Layer: 0
   m_Name: P3
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2427,7 +2427,7 @@ GameObject:
   - component: {fileID: 181159438}
   m_Layer: 0
   m_Name: FY3
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2547,7 +2547,7 @@ GameObject:
   - component: {fileID: 186432112}
   m_Layer: 5
   m_Name: FU10
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2668,7 +2668,7 @@ GameObject:
   - component: {fileID: 199579944}
   m_Layer: 0
   m_Name: R3
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2797,7 +2797,7 @@ GameObject:
   - component: {fileID: 202262663}
   m_Layer: 0
   m_Name: R10
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2925,7 +2925,7 @@ GameObject:
   - component: {fileID: 206848065}
   m_Layer: 0
   m_Name: FP5
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3046,7 +3046,7 @@ GameObject:
   - component: {fileID: 215032832}
   m_Layer: 0
   m_Name: O4
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3174,7 +3174,7 @@ GameObject:
   - component: {fileID: 219728288}
   m_Layer: 0
   m_Name: FO4
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3295,7 +3295,7 @@ GameObject:
   - component: {fileID: 226468087}
   m_Layer: 0
   m_Name: V4
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3547,7 +3547,7 @@ GameObject:
   - component: {fileID: 245553347}
   m_Layer: 0
   m_Name: FR9
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3667,7 +3667,7 @@ GameObject:
   - component: {fileID: 245700828}
   m_Layer: 0
   m_Name: FG8
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3788,7 +3788,7 @@ GameObject:
   - component: {fileID: 246631197}
   m_Layer: 0
   m_Name: P5
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3917,7 +3917,7 @@ GameObject:
   - component: {fileID: 268014293}
   m_Layer: 0
   m_Name: V5
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4119,7 +4119,7 @@ GameObject:
   - component: {fileID: 280469195}
   m_Layer: 0
   m_Name: R5
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4327,7 +4327,7 @@ GameObject:
   - component: {fileID: 292533406}
   m_Layer: 0
   m_Name: Y10
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4456,7 +4456,7 @@ GameObject:
   - component: {fileID: 296188603}
   m_Layer: 0
   m_Name: U8
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4709,7 +4709,7 @@ GameObject:
   - component: {fileID: 304706941}
   m_Layer: 0
   m_Name: U1
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4838,7 +4838,7 @@ GameObject:
   - component: {fileID: 315624114}
   m_Layer: 0
   m_Name: R9
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5328,7 +5328,7 @@ GameObject:
   - component: {fileID: 383175744}
   m_Layer: 0
   m_Name: Y4
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5793,7 +5793,7 @@ GameObject:
   - component: {fileID: 461608960}
   m_Layer: 0
   m_Name: Y8
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6046,7 +6046,7 @@ GameObject:
   - component: {fileID: 469058818}
   m_Layer: 0
   m_Name: O5
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6174,7 +6174,7 @@ GameObject:
   - component: {fileID: 472587614}
   m_Layer: 0
   m_Name: FR10
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6294,7 +6294,7 @@ GameObject:
   - component: {fileID: 473878022}
   m_Layer: 0
   m_Name: FP8
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6538,7 +6538,7 @@ GameObject:
   - component: {fileID: 492513230}
   m_Layer: 0
   m_Name: FO1
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6658,7 +6658,7 @@ GameObject:
   - component: {fileID: 493822074}
   m_Layer: 0
   m_Name: FP6
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7134,7 +7134,7 @@ GameObject:
   - component: {fileID: 539802330}
   m_Layer: 0
   m_Name: FR7
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7503,7 +7503,7 @@ GameObject:
   - component: {fileID: 580088097}
   m_Layer: 0
   m_Name: U9
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7632,7 +7632,7 @@ GameObject:
   - component: {fileID: 581925046}
   m_Layer: 0
   m_Name: O3
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7760,7 +7760,7 @@ GameObject:
   - component: {fileID: 595039561}
   m_Layer: 0
   m_Name: FR3
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8105,7 +8105,7 @@ GameObject:
   - component: {fileID: 634531822}
   m_Layer: 0
   m_Name: P8
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8308,7 +8308,7 @@ GameObject:
   - component: {fileID: 649938294}
   m_Layer: 5
   m_Name: FU6
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8429,7 +8429,7 @@ GameObject:
   - component: {fileID: 656437512}
   m_Layer: 0
   m_Name: Y1
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8558,7 +8558,7 @@ GameObject:
   - component: {fileID: 656865100}
   m_Layer: 0
   m_Name: P2
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8810,7 +8810,7 @@ GameObject:
   - component: {fileID: 660801113}
   m_Layer: 5
   m_Name: FU4
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8931,7 +8931,7 @@ GameObject:
   - component: {fileID: 662754867}
   m_Layer: 0
   m_Name: O6
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9183,7 +9183,7 @@ GameObject:
   - component: {fileID: 669551755}
   m_Layer: 0
   m_Name: FO8
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9303,7 +9303,7 @@ GameObject:
   - component: {fileID: 673653168}
   m_Layer: 0
   m_Name: FP9
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9796,7 +9796,7 @@ GameObject:
   - component: {fileID: 716557193}
   m_Layer: 0
   m_Name: Y6
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9924,7 +9924,7 @@ GameObject:
   - component: {fileID: 716627321}
   m_Layer: 0
   m_Name: FO3
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10119,7 +10119,7 @@ GameObject:
   - component: {fileID: 799388904}
   m_Layer: 5
   m_Name: FU2
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10393,7 +10393,7 @@ GameObject:
   - component: {fileID: 817841080}
   m_Layer: 0
   m_Name: U6
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10894,7 +10894,7 @@ GameObject:
   - component: {fileID: 880671652}
   m_Layer: 0
   m_Name: R4
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11146,7 +11146,7 @@ GameObject:
   - component: {fileID: 890993108}
   m_Layer: 0
   m_Name: FO9
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11304,7 +11304,7 @@ GameObject:
   - component: {fileID: 905424527}
   m_Layer: 0
   m_Name: FG9
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11425,7 +11425,7 @@ GameObject:
   - component: {fileID: 906537209}
   m_Layer: 0
   m_Name: O9
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11553,7 +11553,7 @@ GameObject:
   - component: {fileID: 909779288}
   m_Layer: 0
   m_Name: FY1
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11951,7 +11951,7 @@ GameObject:
   - component: {fileID: 938328853}
   m_Layer: 0
   m_Name: O8
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12154,7 +12154,7 @@ GameObject:
   - component: {fileID: 995874408}
   m_Layer: 5
   m_Name: FU9
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12562,7 +12562,7 @@ GameObject:
   - component: {fileID: 1055308056}
   m_Layer: 0
   m_Name: FP7
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12969,7 +12969,7 @@ GameObject:
   - component: {fileID: 1110840048}
   m_Layer: 0
   m_Name: O7
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13097,7 +13097,7 @@ GameObject:
   - component: {fileID: 1111805035}
   m_Layer: 0
   m_Name: FY6
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13342,7 +13342,7 @@ GameObject:
   - component: {fileID: 1133708921}
   m_Layer: 0
   m_Name: O2
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13470,7 +13470,7 @@ GameObject:
   - component: {fileID: 1135628069}
   m_Layer: 5
   m_Name: FU5
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13755,7 +13755,7 @@ GameObject:
   - component: {fileID: 1185523393}
   m_Layer: 0
   m_Name: FY7
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13875,7 +13875,7 @@ GameObject:
   - component: {fileID: 1188756768}
   m_Layer: 0
   m_Name: FR1
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14120,7 +14120,7 @@ GameObject:
   - component: {fileID: 1199413536}
   m_Layer: 0
   m_Name: P1
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14625,7 +14625,7 @@ GameObject:
   - component: {fileID: 1279553713}
   m_Layer: 0
   m_Name: V9
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14754,7 +14754,7 @@ GameObject:
   - component: {fileID: 1289550293}
   m_Layer: 0
   m_Name: R8
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14883,7 +14883,7 @@ GameObject:
   - component: {fileID: 1299257568}
   m_Layer: 0
   m_Name: U4
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15011,7 +15011,7 @@ GameObject:
   - component: {fileID: 1299486154}
   m_Layer: 0
   m_Name: FG2
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19756,7 +19756,7 @@ GameObject:
   - component: {fileID: 1325369099}
   m_Layer: 0
   m_Name: V3
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19884,7 +19884,7 @@ GameObject:
   - component: {fileID: 1327422936}
   m_Layer: 0
   m_Name: FO2
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20362,7 +20362,7 @@ GameObject:
   - component: {fileID: 1346351621}
   m_Layer: 0
   m_Name: Y2
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20614,7 +20614,7 @@ GameObject:
   - component: {fileID: 1378496719}
   m_Layer: 0
   m_Name: FG7
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20735,7 +20735,7 @@ GameObject:
   - component: {fileID: 1380643318}
   m_Layer: 0
   m_Name: P10
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21026,7 +21026,7 @@ GameObject:
   - component: {fileID: 1420972963}
   m_Layer: 0
   m_Name: Y9
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21279,7 +21279,7 @@ GameObject:
   - component: {fileID: 1430056763}
   m_Layer: 0
   m_Name: U10
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21408,7 +21408,7 @@ GameObject:
   - component: {fileID: 1447320001}
   m_Layer: 0
   m_Name: O1
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21661,7 +21661,7 @@ GameObject:
   - component: {fileID: 1459940244}
   m_Layer: 0
   m_Name: Y3
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21825,7 +21825,7 @@ GameObject:
   - component: {fileID: 1468137113}
   m_Layer: 0
   m_Name: P9
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21954,7 +21954,7 @@ GameObject:
   - component: {fileID: 1473978375}
   m_Layer: 0
   m_Name: U5
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22206,7 +22206,7 @@ GameObject:
   - component: {fileID: 1496514310}
   m_Layer: 0
   m_Name: FG4
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22326,7 +22326,7 @@ GameObject:
   - component: {fileID: 1511852206}
   m_Layer: 0
   m_Name: FG3
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22446,7 +22446,7 @@ GameObject:
   - component: {fileID: 1517272264}
   m_Layer: 0
   m_Name: FO7
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22567,7 +22567,7 @@ GameObject:
   - component: {fileID: 1519200130}
   m_Layer: 0
   m_Name: P6
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22695,7 +22695,7 @@ GameObject:
   - component: {fileID: 1520301376}
   m_Layer: 0
   m_Name: FY9
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22816,7 +22816,7 @@ GameObject:
   - component: {fileID: 1532052550}
   m_Layer: 0
   m_Name: V10
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22945,7 +22945,7 @@ GameObject:
   - component: {fileID: 1549642846}
   m_Layer: 0
   m_Name: V7
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23445,7 +23445,7 @@ GameObject:
   - component: {fileID: 1571023960}
   m_Layer: 0
   m_Name: FG1
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23689,7 +23689,7 @@ GameObject:
   - component: {fileID: 1578669031}
   m_Layer: 0
   m_Name: FR8
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23810,7 +23810,7 @@ GameObject:
   - component: {fileID: 1580380378}
   m_Layer: 0
   m_Name: R2
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24082,7 +24082,7 @@ GameObject:
   - component: {fileID: 1586146491}
   m_Layer: 0
   m_Name: U3
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24335,7 +24335,7 @@ GameObject:
   - component: {fileID: 1631984251}
   m_Layer: 0
   m_Name: V6
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24587,7 +24587,7 @@ GameObject:
   - component: {fileID: 1652606694}
   m_Layer: 5
   m_Name: FU8
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24812,7 +24812,7 @@ GameObject:
   - component: {fileID: 1657896986}
   m_Layer: 0
   m_Name: V2
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25142,7 +25142,7 @@ GameObject:
   - component: {fileID: 1677712138}
   m_Layer: 5
   m_Name: FU3
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25262,7 +25262,7 @@ GameObject:
   - component: {fileID: 1679594070}
   m_Layer: 0
   m_Name: FP1
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25382,7 +25382,7 @@ GameObject:
   - component: {fileID: 1680446078}
   m_Layer: 0
   m_Name: FR6
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25626,7 +25626,7 @@ GameObject:
   - component: {fileID: 1715996974}
   m_Layer: 0
   m_Name: FR4
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25896,7 +25896,7 @@ GameObject:
   - component: {fileID: 1718671716}
   m_Layer: 0
   m_Name: FP4
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26017,7 +26017,7 @@ GameObject:
   - component: {fileID: 1722093956}
   m_Layer: 0
   m_Name: O10
-  m_TagString: COrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26145,7 +26145,7 @@ GameObject:
   - component: {fileID: 1742191780}
   m_Layer: 0
   m_Name: FR2
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26390,7 +26390,7 @@ GameObject:
   - component: {fileID: 1757976913}
   m_Layer: 0
   m_Name: V8
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26945,7 +26945,7 @@ GameObject:
   - component: {fileID: 1825898916}
   m_Layer: 5
   m_Name: FU7
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27065,7 +27065,7 @@ GameObject:
   - component: {fileID: 1842735790}
   m_Layer: 0
   m_Name: FP3
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27309,7 +27309,7 @@ GameObject:
   - component: {fileID: 1848455016}
   m_Layer: 5
   m_Name: FU1
-  m_TagString: FBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27429,7 +27429,7 @@ GameObject:
   - component: {fileID: 1854923962}
   m_Layer: 0
   m_Name: FY2
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27549,7 +27549,7 @@ GameObject:
   - component: {fileID: 1861721103}
   m_Layer: 0
   m_Name: FO5
-  m_TagString: FOrange
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27831,7 +27831,7 @@ GameObject:
   - component: {fileID: 1888121885}
   m_Layer: 0
   m_Name: FP10
-  m_TagString: FPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28324,7 +28324,7 @@ GameObject:
   - component: {fileID: 1951558177}
   m_Layer: 0
   m_Name: U2
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28453,7 +28453,7 @@ GameObject:
   - component: {fileID: 1976231440}
   m_Layer: 0
   m_Name: P7
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28705,7 +28705,7 @@ GameObject:
   - component: {fileID: 2001073436}
   m_Layer: 0
   m_Name: FY5
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28825,7 +28825,7 @@ GameObject:
   - component: {fileID: 2004619344}
   m_Layer: 0
   m_Name: FG6
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29050,7 +29050,7 @@ GameObject:
   - component: {fileID: 2023084891}
   m_Layer: 0
   m_Name: R1
-  m_TagString: CRed
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29216,7 +29216,7 @@ GameObject:
   - component: {fileID: 2029756686}
   m_Layer: 0
   m_Name: FG10
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29500,7 +29500,7 @@ GameObject:
   - component: {fileID: 2054243505}
   m_Layer: 0
   m_Name: Y7
-  m_TagString: CYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29629,7 +29629,7 @@ GameObject:
   - component: {fileID: 2060208897}
   m_Layer: 0
   m_Name: P4
-  m_TagString: CPurple
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29981,7 +29981,7 @@ GameObject:
   - component: {fileID: 2094344938}
   m_Layer: 0
   m_Name: FR5
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30101,7 +30101,7 @@ GameObject:
   - component: {fileID: 2115047205}
   m_Layer: 0
   m_Name: FY8
-  m_TagString: FYellow
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30419,7 +30419,7 @@ GameObject:
   - component: {fileID: 2138522609}
   m_Layer: 0
   m_Name: FG5
-  m_TagString: FGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30540,7 +30540,7 @@ GameObject:
   - component: {fileID: 2139516203}
   m_Layer: 0
   m_Name: U7
-  m_TagString: CBlue
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30700,7 +30700,7 @@ GameObject:
   - component: {fileID: 2146559437}
   m_Layer: 0
   m_Name: V1
-  m_TagString: CGreen
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -50,16 +50,20 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("test", OnTest);
 		socket.On("loginCliente", OnLogin);
 		socket.On("loginSuccessCliente", OnLoginSuccess);
+		socket.On("leaderboardWinsCliente", OnLeaderboardWins);
+		socket.On("leaderboardGamesCliente", OnLeaderboardGames);
 		socket.On("sendInvitation", OnSendInvitation);
 		socket.On("sendActivationCode", OnSendActivationCode);
-		socket.On("activationSuccess", OnActivationSuccess);
+		socket.On("guestUsername", OnGuestUsername);
 		socket.On("createLobby", OnCreateLobby);
+		socket.On("errorJoin", OnErrorJoin); 
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
 		socket.On("getLobbyInfo", OnGetLobbyInfo);
 		socket.On("userJoinedRoomCliente", OnUserJoinedRoom);
 		socket.On("userSelectedColor", OnUserSelectedColor);
 		socket.On("startGameCliente", OnStartGame);
 		socket.On("moverPiezaCliente", OnMoverPieza);
+		socket.On("terminarTurnoCliente", OnTerminarTurno);
 	}
 
 	private void OnConnect(Socket socket, Packet packet, params object[] args)
@@ -98,6 +102,33 @@ public class ConnectionManager : MonoBehaviour {
 		Jugador.instance = JsonConvert.DeserializeObject<Jugador>(jugadorJSON);
 		Debug.Log(Jugador.instance.Username);
 		SceneManager.LoadScene(4);
+		socket.Emit("leaderboardWins");
+		/*Text username = GameObject.Find("TextUsername").GetComponent<Text>();
+		Text correo = GameObject.Find("TextUserMail").GetComponent<Text>();
+		username.text = Jugador.instance.Username;
+		correo.text = Jugador.instance.Correo;*/
+	}
+	IEnumerator ActualizarHome()
+	{
+		yield return new WaitForSeconds(1);
+		Text username = GameObject.Find("TextUsername").GetComponent<Text>();
+		Text correo = GameObject.Find("TextUserMail").GetComponent<Text>();
+		username.text = Jugador.instance.Username;
+		correo.text = Jugador.instance.Correo;
+	}
+
+	private void OnLeaderboardWins(Socket socket, Packet packet, params object[] args)
+	{
+		var datos = JSON.Parse(packet.ToString());
+		string JSONLeaderboard = datos[1].ToString();
+		Debug.Log(JSONLeaderboard);
+	}
+
+	private void OnLeaderboardGames(Socket socket, Packet packet, params object[] args)
+	{
+		var datos = JSON.Parse(packet.ToString());
+		string JSONLeaderboard = datos[1].ToString();
+		Debug.Log(JSONLeaderboard);
 	}
 
 	public void OnSendInvitation(Socket socket, Packet packet, params object[] args)
@@ -123,6 +154,13 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	public void OnGuestUsername(Socket socket, Packet packet, params object[] args)
+	{
+		var datos = JSON.Parse(packet.ToString());
+		string username = datos[1].ToString().Trim( new Char[] {'"'});
+		Jugador.instance.Username = username;
+	}
+
 	public void OnActivationSuccess(Socket socket, Packet packet, params object[] args)
 	{
 		// guardar en la BD los datos del jugador
@@ -131,23 +169,36 @@ public class ConnectionManager : MonoBehaviour {
 	
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)
 	{
+		SceneManager.LoadScene(3);
 		var datos = JSON.Parse(packet.ToString());
 		string idlobby = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log(idlobby);
 		Lobby.instance.IdLobby = idlobby;
 		Debug.Log("Dueno: " + Jugador.instance.Username);
-		if (!Lobby.instance.Players.ContainsKey(Jugador.instance.Username))
-		{
-			Lobby.instance.Players.Add(Jugador.instance.Username, null);
-		}
+		Lobby.instance.Players.Add(Jugador.instance.Username, null);
 		Lobby.instance.PrintLobby();
 		isOwner = true;
+		StartCoroutine(ActualizarLobby());
 	}
+
+	IEnumerator ActualizarLobby()
+	{
+		yield return new WaitForSeconds(1);
+		Text codigo = GameObject.Find("TxtCode").GetComponent<Text>();
+		codigo.text = Lobby.instance.IdLobby;
+	}
+
+	private void OnErrorJoin(Socket socket, Packet packet, params object[] args) 
+	{ 
+		Debug.Log("Error al entrar a la sala. Sala llena o expirada"); 
+	} 
 
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
 		if (ToJoin)
 		{
+			Debug.Log("Llamada a setlobbyinfo");
+			SceneManager.LoadScene(3);
 			var datos = JSON.Parse(packet.ToString());
 			string lobbyInfo = datos[1].ToString();
 			lobbyInfo = lobbyInfo.Substring(1, lobbyInfo.Length - 2);
@@ -159,6 +210,7 @@ public class ConnectionManager : MonoBehaviour {
 			Lobby.instance.PrintLobby();
 			//Lobby.instance = lobby;
 			//Lobby.instance.PrintLobby();
+			ToJoin = false;
 		}
 	}
 
@@ -167,8 +219,6 @@ public class ConnectionManager : MonoBehaviour {
 		if (isOwner)
 		{
 			Debug.Log("obteniendo info de lobby");
-			//string idLobby = Lobby.instance.IdLobby;
-			//Dictionary<string, string> players = Lobby.instance.Players;
 			DatosLobby datosLobby = new DatosLobby(Lobby.instance.IdLobby, Lobby.instance.Players);
 			string dataLobby = JsonConvert.SerializeObject(datosLobby);
 			socket.Emit("setLobbyInfo", dataLobby);
@@ -185,12 +235,17 @@ public class ConnectionManager : MonoBehaviour {
 
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
 	{
+		Debug.Log("Usuario selecciono color");
 		var datos = JSON.Parse(packet.ToString());
-		string playerData = datos[1].ToString();
-		KeyValuePair<string, string> playerWithNewColor = JsonConvert.DeserializeObject<KeyValuePair<string, string>>(playerData);
+		string colorInfo = datos[1].ToString();
+		colorInfo = colorInfo.Substring(1, colorInfo.Length - 2);
+		colorInfo = colorInfo.Replace(@"\", "");
+		Debug.Log(colorInfo);
+		DatosColor color = JsonConvert.DeserializeObject<DatosColor>(colorInfo);
+		KeyValuePair<string, string> playerWithNewColor = new KeyValuePair<string, string>(color.Jugador, color.Color);
 		Lobby.instance.Players.Remove(playerWithNewColor.Key);
 		Lobby.instance.Players.Add(playerWithNewColor.Key, playerWithNewColor.Value);
-		Toggle button = GameObject.Find("Toggle"+playerWithNewColor.Value).GetComponent<Toggle>();
+		Toggle button = GameObject.FindGameObjectWithTag(color.Color).GetComponent<Toggle>();
 		// togglear a encendido el boton del color encontrado
 		button.isOn = true;
 	}
@@ -216,12 +271,25 @@ public class ConnectionManager : MonoBehaviour {
 	private void OnMoverPieza(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
-		string dataMovement = datos[1].ToString();
-		DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(dataMovement);
+		string movementInfo = datos[1].ToString();
+		movementInfo = movementInfo.Substring(1, movementInfo.Length - 2);
+		movementInfo = movementInfo.Replace(@"\", "");
+		DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(movementInfo);
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 		control.FichaSeleccionada = GameObject.Find(movimiento.Ficha);
 		Casilla casilla = control.FichaSeleccionada.GetComponent<Ficha>().casilla.GetComponent<Casilla>();
 		casilla.Mover();
+	}
+
+	private void OnTerminarTurno(Socket socket, Packet packet, params object[] args)
+	{
+		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+		if (control.ActualTurn + 1 > Lobby.instance.Players.Count)
+		{
+			control.ActualTurn = 1;
+		} else {
+			control.ActualTurn++;
+		}
 	}
 
 	void Start () 
