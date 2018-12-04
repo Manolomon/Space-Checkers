@@ -11,12 +11,6 @@ var app = module.exports = loopback();
 
 var loggeando = {}
 
-// Variables utilizadas para enviar los dos tipos de correos
-var correo;
-var nombre;
-var codigo;
-var senderName;
-
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -136,10 +130,11 @@ io.on("connection", function(cliente) {
 
       if (user != null) {
         // si encuentra el username
-        nombre = user['username'];
-        correo = user['correo'];
-        codigo = ""; // como lo paso del lobby hasta aca
-        senderName = ""; // en donde debo  guardarlo antes para poderlo usar aqui
+        var nombre = user['username'];
+        var correo = user['correo'];
+        var codigo = jsonlobby['idLobby'];
+        //codigo = idLobby; // Esta bien?
+        var senderName = ""; // en donde debo guardarlo antes para poderlo usar aqui
              
         loadTemplate('Invitation', emailData).then((results) => {
           return Promise.all(results.map((result) => {
@@ -161,10 +156,9 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("sendActivationCode", function(newuserData) {
-    nombre = newuserData['username'];
-    correo = newuserData['correo'];
-    codigo = randomCode(5);
-    //senderName = '';
+    var nombre = newuserData['username'];
+    var correo = newuserData['correo'];
+    var codigo = randomCode(5);
           
     loadTemplate('Activation Code', emailData).then((results) => {
       return Promise.all(results.map((result) => {
@@ -182,12 +176,12 @@ io.on("connection", function(cliente) {
     cliente.emit("sendActivationCode", codigo);
   });
 
-  cliente.on('mensaje', function(data) {
-    io.sockets.emit('mensaje', {
-      name : 
-      msj : data.message;
-    });
-  });
+  // cliente.on('mensaje', function(data) {
+  //   io.sockets.emit('mensaje', {
+  //     name : 
+  //     msj : data.message;
+  //   });
+  // });
 
 });
 

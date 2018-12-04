@@ -6,7 +6,9 @@ using UnityEditor;
 
 public class ButtonEvent : MonoBehaviour
 {
-
+    /// <summary>
+    /// Metodo que se ejecuta al presionar el boton login.
+    /// </summary>
     public void ClickLogin()
     {
         InputField username = GameObject.Find("TFUsername").GetComponent<InputField>();
@@ -14,6 +16,9 @@ public class ButtonEvent : MonoBehaviour
         ConnectionManager.instance.socket.Emit("login", username.text);
     }
 
+    /// <summary>
+    /// Metodo que se ejecuta al presionar Join para unirse a una partida.
+    /// </summary>
     public void ClickJoin()
     {
         InputField username = GameObject.Find("TFGameCode").GetComponent<InputField>();
@@ -26,11 +31,17 @@ public class ButtonEvent : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Metodo que se ejecuta al presionar comenzar partida
+    /// </summary>
     public void ClickStartGame()
     {
         Lobby.instance.StartGame();
     }
 
+    /// <summary>
+    /// Metodo que se ejecuta al presionar enviar codigo (envia el codigo de activacion para registrarse)
+    /// </summary>
     public void ClickSendConfirmation()
     {
         Dictionary<string, string> newUserInfo = new Dictionary<string, string>();
@@ -49,7 +60,9 @@ public class ButtonEvent : MonoBehaviour
             newUserInfo.Add("email",email.text);
             newUserInfo.Add("username",username.text);
             newUserInfo.Add("password", hashPass);
-        } else {
+        } 
+        else 
+        {
             Debug.Log("La contraseña y la confirmacion de la contraseña son diferentes");
         }
 
@@ -65,13 +78,19 @@ public class ButtonEvent : MonoBehaviour
     //     ConnectionManager.instance.socket.Emit("activation", email.text);
     // }
 
+    /// <summary>
+    /// Metodo que se ejecuta al presionar invitar (invitar jugadores a la partida)
+    /// </summary>
     public void ClickInvite()
     {
-        InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
-        Debug.Log("Invitation to: " + email.text);
-        ConnectionManager.instance.socket.Emit("invitation", email.text);
+        InputField invitado = GameObject.Find("TFEmail").GetComponent<InputField>();
+        Debug.Log("Invitation to: " + invitado.text);
+        ConnectionManager.instance.socket.Emit("invitation", invitado.text);
     }
 
+    /// <summary>
+    /// Metodo que se ejecuta al presionar validar (Valida el codigo ingresado contra el codigo de activacion)
+    /// </summary>
     public void ClickValidate()
     {
         // comparacion entre el codigo enviado y el codigo ingresado

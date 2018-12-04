@@ -31,14 +31,15 @@ public class ChatManager : MonoBehaviour
 
     public Font chatFont;
     public Color textColor;
-    public int fontSize = 20;
+    public int fontSize = 15;
     public InputField chatBox;
     public Button sendButton;
 
     private VerticalLayoutGroup verticalLayoutGroup;
 
-    // ratio = heightinoriginalscreenheight/originalscreenheight
-    // Use this for initialization
+    /// <summary>
+    /// Metodo utilizado para inicializar el chat
+    /// </summary>
     void Start()
     {
         string[] chats = new string[]{
@@ -54,9 +55,13 @@ public class ChatManager : MonoBehaviour
         {
 
             if (Random.Range(0, 2) == 0)
+            {
                 chatData.Add(chats[Random.Range(0, chats.Length)] + "~0");
+            }
             else
+            {
                 chatData.Add(chats[Random.Range(0, chats.Length)] + "~1");
+            }
         }
 
         ShowUserMsg();
@@ -88,6 +93,9 @@ public class ChatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Método para enviar el mensaje al presionar enviar
+    /// </summary>
     public void ClickSend()
     {
         if (chatBox.text != "")
@@ -114,6 +122,10 @@ public class ChatManager : MonoBehaviour
         chatBox.text = "";
     }
 
+    /// <summary>
+    /// Metodo que recibe el mensaje y lo muestra en el chat
+    /// </summary>
+    /// <param name="message">Message.</param>
     public void ReceiveChatMessage(string message)
     {
         chatData.Add(message);

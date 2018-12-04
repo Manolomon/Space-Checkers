@@ -83,7 +83,9 @@ public class ConnectionManager : MonoBehaviour {
 		if (passFound.Equals(hashPass))
 		{
 			ConnectionManager.instance.socket.Emit("loginSuccess");
-		} else {
+		} 
+		else 
+		{
 			Debug.Log("Contrasena incorrecta");
 		}
 	}
@@ -114,7 +116,9 @@ public class ConnectionManager : MonoBehaviour {
 		if (codigoActivacion.Equals("")) // como pasar el codigo ingresado a aqui
 		{
 			ConnectionManager.instance.socket.Emit("");
-		} else {
+		} 
+		else 
+		{
 			Debug.Log("Codigo de activacion incorrecto");
 		}
 	}
