@@ -1047,6 +1047,36 @@
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="Servidor/node_modules" t="ExcludeRecursive">
+        <e p="@types" t="IncludeRecursive">
+          <e p="babel-types" t="IncludeRecursive" />
+          <e p="body-parser" t="IncludeRecursive" />
+          <e p="connect" t="IncludeRecursive" />
+          <e p="Events" t="IncludeRecursive" />
+          <e p="express-serve-static-core" t="IncludeRecursive" />
+          <e p="mime" t="IncludeRecursive" />
+          <e p="node" t="IncludeRecursive" />
+          <e p="range-parser" t="IncludeRecursive" />
+          <e p="serve-static" t="IncludeRecursive" />
+        </e>
+        <e p="bluebird" t="IncludeRecursive" />
+        <e p="compression" t="IncludeRecursive" />
+        <e p="cors" t="IncludeRecursive" />
+        <e p="email-templates" t="IncludeRecursive" />
+        <e p="eslint" t="IncludeRecursive" />
+        <e p="eslint-config-loopback" t="IncludeRecursive" />
+        <e p="handlebars" t="IncludeRecursive" />
+        <e p="helmet" t="IncludeRecursive" />
+        <e p="loopback" t="IncludeRecursive" />
+        <e p="loopback-boot" t="IncludeRecursive" />
+        <e p="loopback-component-explorer" t="IncludeRecursive" />
+        <e p="loopback-connector-mysql" t="IncludeRecursive" />
+        <e p="nodemailer" t="IncludeRecursive" />
+        <e p="pug" t="IncludeRecursive" />
+        <e p="serve-favicon" t="IncludeRecursive" />
+        <e p="socket.io" t="IncludeRecursive" />
+        <e p="strong-error-handler" t="IncludeRecursive" />
+      </e>
       <e p="Space Checkers.sln" t="IncludeFlat" />
       <e p="Temp" t="ExcludeRecursive">
         <e p="bin" t="ExcludeRecursive" />

@@ -108,11 +108,20 @@ public class ConnectionManager : MonoBehaviour {
 
 	public void OnSendActivationCode(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Enviado codigo de activacion");
-		var datosUsuario = JSON.Parse(packet.ToString());
-		string usuarioString = datosUsuario[2].ToString();
-		Jugador.instance.Correo = usuarioString;
-		ConnectionManager.instance.socket.Emit("sendActivationCode");
+		var datos = JSON.Parse(packet.ToString());
+		string codigoActivacion = datos[1].ToString().Trim( new Char[] {'"'});
+		if (codigoActivacion.Equals("")) // como pasar el codigo ingresado a aqui
+		{
+			ConnectionManager.instance.socket.Emit("")
+		} else {
+			Debug.Log("Codigo de activacion incorrecto");
+		}
+	}
+
+	public void OnActivationSuccess(Socket socket, Packet packet, params object[] args)
+	{
+		
+		SceneManager.LoadScene(4);	
 	}
 	
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)

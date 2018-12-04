@@ -139,7 +139,7 @@ io.on("connection", function(cliente) {
         nombre = user['username'];
         correo = user['correo'];
         codigo = ""; // de donde y como lo saco
-        senderName = ''; // de donde saco el parametro y como lo paso
+        senderName = ""; // de donde saco el parametro y como lo paso
              
         loadTemplate('Invitation', emailData).then((results) => {
           return Promise.all(results.map((result) => {
@@ -160,13 +160,13 @@ io.on("connection", function(cliente) {
     });
   });
 
-  cliente.on("sendActivationCode", function(usernameData) {
-    var usuario = {where: {username : usernameData}};
-    console.log(usuario);
-    app.models.Jugador.findOne(usuario, function(err, user) {
-      if (err) throw err;
+  cliente.on("sendActivationCode", function(newuserData) {
+    //var usuario = {where: {username : usernameData}};
+    //console.log(usuario);
+    //app.models.Jugador.findOne(usuario, function(err, user) {
+      //if (err) throw err;
 
-      if (user != null) {
+      //if (user != null) {
         // si encuentra el username busca el correo de ese usuario
         nombre = user['username'];
         correo = user['correo'];
@@ -189,8 +189,8 @@ io.on("connection", function(cliente) {
         
         cliente.emit("sendActivationCode", user);
         console.log(user);
-      }
-    });
+      //}
+    //});
   });
 
 });

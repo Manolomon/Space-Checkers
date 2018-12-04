@@ -163,7 +163,6 @@ public class ChatManager : MonoBehaviour
 
         clb.childText.color = Color.black;
 
-
         yield return new WaitForEndOfFrame();
 
         float height = chatObj.GetComponent<RectTransform>().rect.height;
@@ -226,8 +225,13 @@ public class ChatManager : MonoBehaviour
         clb.parentText.text = msg;
 
         clb.childText.color = Color.black;
-
-
+    
+        // conseguir de la BD el nombre
+        var sender = "Dany";
+        
+        clb.senderName.text = sender;
+        clb.senderName.color = Color.white;
+        
         yield return new WaitForEndOfFrame();
 
         float height = chatObj.GetComponent<RectTransform>().rect.height;
@@ -236,10 +240,7 @@ public class ChatManager : MonoBehaviour
         clb.chatbarImage.rectTransform.sizeDelta = new Vector2(width + 5, height + 6);
         clb.childText.rectTransform.sizeDelta = new Vector2(width, height);
 
-        //clb.senderName.text = "Santa Claus";
         clb.childText.text = msg;
-        //clb.childText.rectTransform.anchoredPosition();
-
 
         clb.chatbarImage.color = user1ImageColor;
 
@@ -275,6 +276,9 @@ public class ChatManager : MonoBehaviour
 
         clb.parentText.text = msg;
 
+        clb.senderName.text = "Manolo";
+        clb.senderName.color = Color.white;
+        
         clb.childText.color = Color.black;
 
 
@@ -286,9 +290,7 @@ public class ChatManager : MonoBehaviour
         clb.chatbarImage.rectTransform.sizeDelta = new Vector2(width + 5, height + 6);
         clb.childText.rectTransform.sizeDelta = new Vector2(width, height);
 
-        // clb.senderName.text = "Santa Claus";
         clb.childText.text = msg;
-        // clb.childText.rectTransform.anchoredPosition();
 
 
         clb.chatbarImage.color = user2ImageColor;

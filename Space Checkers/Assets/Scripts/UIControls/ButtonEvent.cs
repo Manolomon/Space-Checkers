@@ -33,9 +33,28 @@ public class ButtonEvent : MonoBehaviour
 
     public void ClickSendConfirmation()
     {
+        Dictionary<string, string> newUserInfo = new Dictionary<string, string>();
+        
         InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
-        Debug.Log("Activation code to: " + email.text);
-        ConnectionManager.instance.socket.Emit("activation", email.text);
+        InputField username = GameObject.Find("TFUsername").GetComponent<InputField>();
+        InputField password = GameObject.Find("TFPassword").GetComponent<InputField>();
+        InputField confirmationPass = GameObject.Find("TFConfirmation").GetComponent<InputField>();
+        
+        Debug.Log("Comparacion de contrasenas");
+        string hashPass = HashManager.GeneratePasswordHash(password.text);
+        string hashPassConfirmation = HashManager.GeneratePasswordHash(confirmationPass.text);
+        
+        if (hashPassConfirmation.Equals(hashPass))
+        {
+            newUserInfo.Add("email",email.text);
+            newUserInfo.Add("username",username.text);
+            newUserInfo.Add("password", hashPass);
+        } else {
+            Debug.Log("La contraseña y la confirmacion de la contraseña son diferentes");
+        }
+
+        Debug.Log("Enviando codigo de activacion a " + email.text);
+        ConnectionManager.instance.socket.Emit("activation", newUserInfo);
     }
 
     public void ClickResend()
