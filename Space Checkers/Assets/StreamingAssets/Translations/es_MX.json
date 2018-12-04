@@ -1,13 +1,11 @@
 {"items":
     [
         {"key":"login_button","value":"Iniciar Sesión"},
-        {"key":"sign_up_button","value":"Crear Cuenta"},
-        {"key":"join_game_button","value":"Unirse a Partida"},
-        {"key":"quit_button","value":"Salir"},
             {"key":"login_panel_title","value":"Iniciar Sesión"},
             {"key":"login_text_field_username","value":"Nombre de Usuario"},
             {"key":"login_text_field_password","value":"Contraseña"},
             {"key":"login_panel_button","value":"Acceder"},
+        {"key":"sign_up_button","value":"Crear Cuenta"},
             {"key":"sign_up_title","value":"Crear Cuenta"},
             {"key":"sign_up_text_field_username","value":"Nombre de Usuario"},
             {"key":"sign_up_text_field_mail","value":"Correo Electrónico"},
@@ -18,10 +16,12 @@
                 {"key":"sign_up_text_field_code","value":"Ingreses su código"},
                 {"key":"sign_up_resend_button","value":"Reenviar"},
                 {"key":"sign_up_verify_button","value":"Validar"},
+        {"key":"join_game_button","value":"Unirse a Partida"},
             {"key":"code_panel_title","value":"Código de Invitado"},
             {"key":"code_text_field_hint","value":"Ingrese su código"},
             {"key":"code_join_game_button","value":"Unirse como Invitado"},
-
+        {"key":"quit_button","value":"Salir"},
+            
         {"key":"game_quit_button", "value":"ABANDONAR"},
         {"key":"game_chat_title", "value":"Chat de Partida"},
         {"key":"game_chat_hint_message", "value":"Escribe tu mensaje"},
@@ -30,6 +30,9 @@
         {"key":"lobby_back_button", "value":"VOLVER"},
         {"key":"lobby_prediction_toggle", "value":"PREDICCIÓN"},
         {"key":"lobby_invite_friends_button", "value":"INVITAR"},
+            {"key":"lobby_invite_friend_panel_title","value":"Invitar Jugador"},
+            {"key":"lobby_invite_friend_text_field_hint","value":"Correo electrónico"},
+            {"key":"lobby_invite_friend_button","value":"Invitar"},
         {"key":"lobby_start_button", "value":"COMENZAR"},
 
         {"key":"home_leaderboard_title", "value":"LÍDERES"},
@@ -41,7 +44,11 @@
         {"key":"home_games_played", "value":"Juegos Jugados"},
         {"key":"home_games_won", "value":"Juegos Ganados"},
         {"key":"home_games_lost", "value":"Juegos Perdidos"},
+        {"key":"home_code", "value":"CÓDIGO"},
+        {"key":"home_join_button", "value":"UNIRSE"},
 
+        {"key":"message_data_required", "value": "Faltan datos por ingresar"},
+        {"key":"message_login_invalid_data", "value":"Nombre de usuario y contraseña no registrados"},
         {"key":"message_lobby_code_copied", "value":"Código copiado en Portapapeles"}
 
     ]

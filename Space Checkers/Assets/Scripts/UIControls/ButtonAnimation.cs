@@ -27,47 +27,60 @@ IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandle
     bool tracking;
     bool inBounds;
     
-    void Start() {
+    void Start() 
+    {
         normalSprite = targetImage.sprite;
         normalTextColor = targetText.color;
     }
  
-    public void OnPointerEnter(PointerEventData eventData) {
+    public void OnPointerEnter(PointerEventData eventData)
+    {
         inBounds = true;
         UpdateStyle();
         targetFx.PlayOneShot(hoverFx);
     }
  
-    public void OnPointerExit(PointerEventData eventData) {
+    public void OnPointerExit(PointerEventData eventData)
+    {
         inBounds = false;
         UpdateStyle();
     }
    
-    public void OnPointerDown(PointerEventData eventData) {
+    public void OnPointerDown(PointerEventData eventData)
+    {
         tracking = true;
         inBounds = true;
         UpdateStyle();
         targetFx.PlayOneShot (pressedFx);
     }
    
-    public void OnPointerUp(PointerEventData eventData) {
-        if (tracking && inBounds && OnClick != null) OnClick.Invoke();
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (tracking && inBounds && OnClick != null)
+        {
+            OnClick.Invoke();
+        }
         tracking = false;
         inBounds = false;
         UpdateStyle();
     }
     
-    void Set(Sprite sprite, Color textColor) {
+    void Set(Sprite sprite, Color textColor)
+    {
         targetImage.sprite = sprite;
         targetText.color = textColor;
     }
 
-    void UpdateStyle() {
-        if (!inBounds) {
+    void UpdateStyle()
+    {
+        if (!inBounds)
+        {
             Set(normalSprite, normalTextColor);
-        } else if (tracking) {
+        } else if (tracking)
+        {
             Set(pressedSprite, pressedTextColor);
-        } else {
+        } else
+        {
             Set(hoverSprite, hoverTextColor);
         }
     }

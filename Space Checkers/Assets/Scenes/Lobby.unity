@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356ab61c6f8dc418576840f0c4eb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: code_text_field_hint
+  key: lobby_invite_friend_text_field_hint
 --- !u!114 &218202626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2854,7 +2854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356ab61c6f8dc418576840f0c4eb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: code_panel_title
+  key: lobby_invite_friend_panel_title
 --- !u!114 &1005197172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9471,7 +9471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356ab61c6f8dc418576840f0c4eb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: code_join_game_button
+  key: lobby_invite_friend_button
 --- !u!114 &1802774819
 MonoBehaviour:
   m_ObjectHideFlags: 0

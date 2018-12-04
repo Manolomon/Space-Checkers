@@ -14,7 +14,8 @@ public class ToggleSwitchLanguage : MonoBehaviour
 	public Color disactiveColor;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		toggleLanguage = GetComponent<Toggle>();
         //Add listener for when the state of the Toggle changes, to take action
         toggleLanguage.onValueChanged.AddListener(delegate {
@@ -30,7 +31,8 @@ public class ToggleSwitchLanguage : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
 

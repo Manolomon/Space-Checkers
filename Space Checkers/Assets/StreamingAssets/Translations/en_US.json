@@ -1,13 +1,11 @@
 {"items":
     [
         {"key":"login_button","value":"Log In"},
-        {"key":"sign_up_button","value":"Sign Up"},
-        {"key":"join_game_button","value":"Join Game"},
-        {"key":"quit_button","value":"Quit"},
             {"key":"login_panel_title","value":"Sign In"},
             {"key":"login_text_field_username","value":"Username"},
             {"key":"login_text_field_password","value":"Password"},
             {"key":"login_panel_button","value":"Log In"},
+        {"key":"sign_up_button","value":"Sign Up"},
             {"key":"sign_up_title","value":"Sign Up"},
             {"key":"sign_up_text_field_username","value":"Username"},
             {"key":"sign_up_text_field_mail","value":"Email"},
@@ -18,10 +16,12 @@
                 {"key":"sign_up_text_field_code","value":"Enter your code"},
                 {"key":"sign_up_resend_button","value":"Resend"},
                 {"key":"sign_up_verify_button","value":"Verify"},
+        {"key":"join_game_button","value":"Join Game"},
             {"key":"code_panel_title","value":"Invitation Code"},
             {"key":"code_text_field_hint","value":"Enter your code"},
-            {"key":"code_join_game_button","value":"Join as Guest"},
-
+            {"key":"code_join_game_button","value":"Join as Guest"},    
+        {"key":"quit_button","value":"Quit"},
+            
         {"key":"game_quit_button", "value":"QUIT GAME"},
         {"key":"game_chat_title", "value":"Game Chat"},
         {"key":"game_chat_hint_message", "value":"Type your message"},
@@ -30,6 +30,9 @@
         {"key":"lobby_back_button", "value":"BACK"},
         {"key":"lobby_prediction_toggle", "value":"PREDICTION"},
         {"key":"lobby_invite_friends_button", "value":"INVITE"},
+            {"key":"lobby_invite_friend_panel_title","value":"Invite Player"},
+            {"key":"lobby_invite_friend_text_field_hint","value":"Email"},
+            {"key":"lobby_invite_friend_button","value":"Invite"},
         {"key":"lobby_start_button", "value":"START GAME"},
 
         {"key":"home_leaderboard_title", "value":"LEADERBOARD"},
@@ -41,7 +44,11 @@
         {"key":"home_games_played", "value":"Games Played"},
         {"key":"home_games_won", "value":"Games  Won"},
         {"key":"home_games_lost", "value":"Games  Lost"},
+        {"key":"home_code", "value":"CODE"},
+        {"key":"home_join_button", "value":"JOIN"},
 
+        {"key":"message_data_required", "value": "Please fill the required fields"},
+        {"key":"message_login_invalid_data", "value":"The username and password did not match our records"},
         {"key":"message_lobby_code_copied", "value":"Code copied to Clipboard"}
 
     ]
