@@ -161,20 +161,12 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("sendActivationCode", function(newuserData) {
-    //var usuario = {where: {username : usernameData}};
-    //console.log(usuario);
-    //app.models.Jugador.findOne(usuario, function(err, user) {
-      //if (err) throw err;
-
-      //if (user != null) {
-        // si encuentra el username busca el correo de ese usuario
-        nombre = user['username'];
-        correo = user['correo'];
-        codigo = ""; // de donde y como lo saco
-        emailType = 'Invitation';
-        senderName = ''; // de donde saco el parametro y como lo paso
+        nombre = newuserData['username'];
+        correo = newuserData['correo'];
+        codigo = randomCode(5);
+        //senderName = '';
              
-        loadTemplate('Activation', emailData).then((results) => {
+        loadTemplate('Activation Code', emailData).then((results) => {
           return Promise.all(results.map((result) => {
               sendEmail({
                   to: result.context.email,
@@ -187,10 +179,7 @@ io.on("connection", function(cliente) {
           console.log('La invitacion ha sido enviado');
         })
         
-        cliente.emit("sendActivationCode", user);
-        console.log(user);
-      //}
-    //});
+        cliente.emit("sendActivationCode", codigo);
   });
 
 });
