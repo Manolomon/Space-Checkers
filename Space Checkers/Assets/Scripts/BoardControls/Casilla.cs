@@ -243,22 +243,22 @@ public class Casilla : MonoBehaviour {
 			}
 		}
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesUI(this.gameObject)
+			CasillasDisponiblesUI(gameObject)
 		);
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesUD(this.gameObject)
+			CasillasDisponiblesUD(gameObject)
 		);
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesD(this.gameObject)
+			CasillasDisponiblesD(gameObject)
 		);
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesDD(this.gameObject)
+			CasillasDisponiblesDD(gameObject)
 		);
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesDI(this.gameObject)
+			CasillasDisponiblesDI(gameObject)
 		);
 		casillasDisponibles.AddRange(
-			CasillasDisponiblesI(this.gameObject)
+			CasillasDisponiblesI(gameObject)
 		);
 		
 		return casillasDisponibles;
@@ -290,13 +290,13 @@ public class Casilla : MonoBehaviour {
 	{
 		if (control.ActualTurn == control.MyTurn)
 		{
-			Debug.Log(this.gameObject.name.ToString());
+			Debug.Log(gameObject.name.ToString());
 			if (control.SeleccionCasilla == true)
 			{
 				bool movimientovalido = false;
 				foreach (GameObject casilla in control.CasillasValidas)
 				{
-					if (casilla.Equals(this.gameObject))
+					if (casilla.Equals(gameObject))
 					{
 						movimientovalido = true;
 						break;
@@ -308,8 +308,8 @@ public class Casilla : MonoBehaviour {
 					Ficha scriptFicha = control.FichaSeleccionada.GetComponent<Ficha>();
 					Casilla scriptCasilla = scriptFicha.casilla.GetComponent<Casilla>();
 					scriptCasilla.Ocupada = false;
-					scriptFicha.casilla = this.gameObject;
-					this.Ocupada = true;
+					scriptFicha.casilla = gameObject;
+					Ocupada = true;
 					control.SeleccionCasilla = false;
 					SpriteRenderer sr;
 					foreach (GameObject casilla in control.CasillasValidas)
@@ -317,7 +317,7 @@ public class Casilla : MonoBehaviour {
 						sr = casilla.GetComponent<SpriteRenderer>();
 						sr.color = Color.white;
 					}
-					control.EnviarMovimiento(control.FichaSeleccionada.name, this.gameObject.name);
+					control.EnviarMovimiento(control.FichaSeleccionada.name, gameObject.name);
 					// terminar turno
 				}
 			}

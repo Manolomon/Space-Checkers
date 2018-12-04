@@ -106,7 +106,7 @@ public class ConnectionManager : MonoBehaviour {
 		var datosInvitado = JSON.Parse(packet.ToString());
 		string invitadoString = datosInvitado[2].ToString();
 		Jugador.instance.Correo = invitadoString;
-		ConnectionManager.instance.socket.Emit("sendInvitation");
+		instance.socket.Emit("sendInvitation");
 	}
 
 	public void OnSendActivationCode(Socket socket, Packet packet, params object[] args)

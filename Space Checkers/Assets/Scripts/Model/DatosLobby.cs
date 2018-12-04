@@ -8,10 +8,10 @@ public class DatosLobby {
 	private string idLobby; 
 	private Dictionary <string, string> players = new Dictionary<string, string>(); 
  
-    public DatosLobby (string idlobby, Dictionary<string, string> players) 
+    public DatosLobby (string idlobby, Dictionary<string, string> playersDictionary) 
     { 
-        this.idLobby = idlobby; 
-        this.players = players; 
+        idLobby = idlobby; 
+        players = playersDictionary; 
     } 
  
 	public string IdLobby 
