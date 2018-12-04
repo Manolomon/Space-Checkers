@@ -52,6 +52,7 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("loginSuccessCliente", OnLoginSuccess);
 		socket.On("sendInvitation", OnSendInvitation);
 		socket.On("sendActivationCode", OnSendActivationCode);
+		socket.On("activationSuccess", OnActivationSuccess);
 		socket.On("createLobby", OnCreateLobby);
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
 		socket.On("getLobbyInfo", OnGetLobbyInfo);
@@ -112,7 +113,7 @@ public class ConnectionManager : MonoBehaviour {
 		string codigoActivacion = datos[1].ToString().Trim( new Char[] {'"'});
 		if (codigoActivacion.Equals("")) // como pasar el codigo ingresado a aqui
 		{
-			ConnectionManager.instance.socket.Emit("")
+			ConnectionManager.instance.socket.Emit("");
 		} else {
 			Debug.Log("Codigo de activacion incorrecto");
 		}
@@ -120,7 +121,7 @@ public class ConnectionManager : MonoBehaviour {
 
 	public void OnActivationSuccess(Socket socket, Packet packet, params object[] args)
 	{
-		
+		// guardar en la BD los datos del jugador
 		SceneManager.LoadScene(4);	
 	}
 	

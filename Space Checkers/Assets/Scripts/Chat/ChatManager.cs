@@ -31,13 +31,11 @@ public class ChatManager : MonoBehaviour
 
     public Font chatFont;
     public Color textColor;
-    public int fontSize;
+    public int fontSize = 20;
     public InputField chatBox;
     public Button sendButton;
 
     private VerticalLayoutGroup verticalLayoutGroup;
-
-
 
     // ratio = heightinoriginalscreenheight/originalscreenheight
     // Use this for initialization
@@ -105,6 +103,10 @@ public class ChatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Metodo que carga el mensaje ingresado y llama al metodo que lo muestra.
+    /// </summary>
+    /// <param name="message">Message.</param>
     public void SendChatMessage(string message)
     {
         chatData.Add(message);
@@ -201,8 +203,10 @@ public class ChatManager : MonoBehaviour
         }
     }
 
+    // Color, mensaje y quien lo envia
+
     /// <summary>
-    /// Metodo que envia todos los mensajes del jugador.
+    /// Metodo que muestra los mensajes recibidos de otros jugadores
     /// </summary>
     /// <returns>The player message.</returns>
     /// <param name="msg">Message.</param>
@@ -225,12 +229,11 @@ public class ChatManager : MonoBehaviour
         clb.parentText.text = msg;
 
         clb.childText.color = Color.black;
-    
-        // conseguir de la BD el nombre
-        var sender = "Dany";
+
+        //var sender = "Dany";
         
-        clb.senderName.text = sender;
-        clb.senderName.color = Color.white;
+        //clb.senderName.text = sender;
+        //clb.senderName.color = Color.white;
         
         yield return new WaitForEndOfFrame();
 
@@ -242,19 +245,12 @@ public class ChatManager : MonoBehaviour
 
         clb.childText.text = msg;
 
-        clb.chatbarImage.color = user1ImageColor;
-
-        clb.chatbarImage.sprite = user1ChatBarSprite;
-
         clb.chatbarImage.rectTransform.anchoredPosition = new Vector2(-3f,
             clb.chatbarImage.rectTransform.anchoredPosition.y);
     }
 
-
-    // Color, mensaje y quien lo envia
-
     /// <summary>
-    /// Recolecta todos los mensajes de los demas jugadores.
+    /// Metodo que muestra todos los mensajes enviados por el usuario
     /// </summary>
     /// <returns>The message.</returns>
     /// <param name="msg">Message.</param>
@@ -276,8 +272,8 @@ public class ChatManager : MonoBehaviour
 
         clb.parentText.text = msg;
 
+        // conseguir nombre actual de la BD
         clb.senderName.text = "Manolo";
-        clb.senderName.color = Color.white;
         
         clb.childText.color = Color.black;
 
@@ -291,11 +287,6 @@ public class ChatManager : MonoBehaviour
         clb.childText.rectTransform.sizeDelta = new Vector2(width, height);
 
         clb.childText.text = msg;
-
-
-        clb.chatbarImage.color = user2ImageColor;
-
-        clb.chatbarImage.sprite = user2ChatBarSprite;
 
         clb.chatbarImage.rectTransform.anchoredPosition = new Vector2(
             ((content.GetComponent<RectTransform>().rect.width -

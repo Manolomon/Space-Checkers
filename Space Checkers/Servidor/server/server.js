@@ -135,11 +135,11 @@ io.on("connection", function(cliente) {
       if (err) throw err;
 
       if (user != null) {
-        // si encuentra el username busca el correo de ese usuario
+        // si encuentra el username
         nombre = user['username'];
         correo = user['correo'];
-        codigo = ""; // de donde y como lo saco
-        senderName = ""; // de donde saco el parametro y como lo paso
+        codigo = ""; // como lo paso del lobby hasta aca
+        senderName = ""; // en donde debo  guardarlo antes para poderlo usar aqui
              
         loadTemplate('Invitation', emailData).then((results) => {
           return Promise.all(results.map((result) => {
@@ -151,7 +151,7 @@ io.on("connection", function(cliente) {
               });
           }));
         }).then(() => {
-          console.log('La invitacion ha sido enviado');
+          console.log('El correo de invitacion ha sido enviado');
         })
         
         cliente.emit("sendInvitation", user);
@@ -161,25 +161,32 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("sendActivationCode", function(newuserData) {
-        nombre = newuserData['username'];
-        correo = newuserData['correo'];
-        codigo = randomCode(5);
-        //senderName = '';
-             
-        loadTemplate('Activation Code', emailData).then((results) => {
-          return Promise.all(results.map((result) => {
-              sendEmail({
-                  to: result.context.email,
-                  from: 'Space Checkers',
-                  subject: result.email.subject,
-                  html: result.email.html,
-              });
-          }));
-        }).then(() => {
-          console.log('La invitacion ha sido enviado');
-        })
-        
-        cliente.emit("sendActivationCode", codigo);
+    nombre = newuserData['username'];
+    correo = newuserData['correo'];
+    codigo = randomCode(5);
+    //senderName = '';
+          
+    loadTemplate('Activation Code', emailData).then((results) => {
+      return Promise.all(results.map((result) => {
+          sendEmail({
+              to: result.context.email,
+              from: 'Space Checkers',
+              subject: result.email.subject,
+              html: result.email.html,
+          });
+      }));
+    }).then(() => {
+      console.log('El correo de activacion ha sido enviado');
+    })
+    
+    cliente.emit("sendActivationCode", codigo);
+  });
+
+  cliente.on('mensaje', function(data) {
+    io.sockets.emit('mensaje', {
+      name : 
+      msj : data.message;
+    });
   });
 
 });

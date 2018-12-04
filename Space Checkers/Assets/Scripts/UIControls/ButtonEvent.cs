@@ -57,13 +57,13 @@ public class ButtonEvent : MonoBehaviour
         ConnectionManager.instance.socket.Emit("activation", newUserInfo);
     }
 
-    public void ClickResend()
-    {
-        // Si necesito el email de la pantalla anterior deberia guardar el email en una variable fuera del metodo?
-        InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
-        Debug.Log("Activation code to: " + email.text);
-        ConnectionManager.instance.socket.Emit("activation", email.text);
-    }
+    // public void ClickResend()
+    // {
+    //     // Si necesito el email de la pantalla anterior deberia guardar el email en una variable fuera del metodo?
+    //     InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+    //     Debug.Log("Activation code to: " + email.text);
+    //     ConnectionManager.instance.socket.Emit("activation", email.text);
+    // }
 
     public void ClickInvite()
     {
@@ -72,10 +72,14 @@ public class ButtonEvent : MonoBehaviour
         ConnectionManager.instance.socket.Emit("invitation", email.text);
     }
 
-    public void ClickJoinAsGuest()
+    public void ClickValidate()
     {
-
+        // comparacion entre el codigo enviado y el codigo ingresado
+        InputField code = GameObject.Find("TFCode").GetComponent<InputField>();
+        Debug.Log("Validando codigo");
+        ConnectionManager.instance.socket.Emit("sendActivationCode", code.text);
     }
+
     /*/	public void CopyToClipboard()
         {
             Text invitationCode = GameObject.Find("TxtCode").GetComponent<Text>();
