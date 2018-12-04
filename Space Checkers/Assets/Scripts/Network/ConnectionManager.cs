@@ -50,6 +50,8 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("test", OnTest);
 		socket.On("loginCliente", OnLogin);
 		socket.On("loginSuccessCliente", OnLoginSuccess);
+		socket.On("sendInvitation", OnSendInvitation);
+		socket.On("sendActivationCode", OnSendActivationCode);
 		socket.On("createLobby", OnCreateLobby);
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
 		socket.On("getLobbyInfo", OnGetLobbyInfo);
@@ -95,6 +97,24 @@ public class ConnectionManager : MonoBehaviour {
 		SceneManager.LoadScene(4);
 	}
 
+	public void OnSendInvitation(Socket socket, Packet packet, params object[] args)
+	{
+		Debug.Log("Enviando Invitacion");
+		var datosInvitado = JSON.Parse(packet.ToString());
+		string invitadoString = datosInvitado[2].ToString();
+		Jugador.instance.Correo = invitadoString;
+		ConnectionManager.instance.socket.Emit("sendInvitation");
+	}
+
+	public void OnSendActivationCode(Socket socket, Packet packet, params object[] args)
+	{
+		Debug.Log("Enviado codigo de activacion");
+		var datosUsuario = JSON.Parse(packet.ToString());
+		string usuarioString = datosUsuario[2].ToString();
+		Jugador.instance.Correo = usuarioString;
+		ConnectionManager.instance.socket.Emit("sendActivationCode");
+	}
+	
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());

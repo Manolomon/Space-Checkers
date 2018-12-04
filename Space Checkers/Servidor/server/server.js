@@ -11,6 +11,23 @@ var app = module.exports = loopback();
 
 var loggeando = {}
 
+// Variables utilizadas para enviar los dos tipos de correos
+var correo;
+var nombre;
+var codigo;
+var senderName;
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'spacecheckers@gmail.com',
+      pass: 'anitalavalatina',
+  },
+}),
+EmailTemplate = require('email-templates').EmailTemplate,
+path = require('path'),
+Promise = require('bluebird');
+
 http.listen(5000, function() {
   console.log("socket.io escuchando en 5000");
 });
@@ -73,7 +90,7 @@ io.on("connection", function(cliente) {
 
   // Evento llamado por cliente al clickear create game (implemented in ButtonLogin.cs atm)
   cliente.on("createGame", function(){
-    var codigo = '1A2B'; //generacion de codigo
+    var codigo = randomCode(5); //generacion de codigo
     cliente.join(codigo);
     cliente.emit("createLobby", codigo);
   });
@@ -95,7 +112,7 @@ io.on("connection", function(cliente) {
     console.log("lobby en json");
     console.log(jsonlobby);
     var stringlobby = JSON.stringify(jsonlobby);
-    io.sockets.in('1A2B').emit("setLobbyInfo", stringlobby);
+    io.sockets.in(jsonlobby['idLobby']).emit("setLobbyInfo", stringlobby);
   });
 
   // Evento llamado por cliente al dar click en Start Game (no se ha definido aun, probably clase nueva)
@@ -107,8 +124,75 @@ io.on("connection", function(cliente) {
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
     var movement = {ficha: datos[1], casilla: datos[2]};
-    io.sockets.in('1A2B').emit('moverPiezaCliente', movement);
+    io.sockets.in('1A2B').emit('moverPiezaCliente', movement); //codigo del lobby
   });
+
+  // Metodos para enviar correos
+  cliente.on("sendInvitation", function(usernameData) {
+    var usuario = {where: {username : usernameData}};
+    console.log(usuario);
+    app.models.Jugador.findOne(usuario, function(err, user) {
+      if (err) throw err;
+
+      if (user != null) {
+        // si encuentra el username busca el correo de ese usuario
+        nombre = user['username'];
+        correo = user['correo'];
+        codigo = ""; // de donde y como lo saco
+        senderName = ''; // de donde saco el parametro y como lo paso
+             
+        loadTemplate('Invitation', emailData).then((results) => {
+          return Promise.all(results.map((result) => {
+              sendEmail({
+                  to: result.context.email,
+                  from: 'Space Checkers',
+                  subject: result.email.subject,
+                  html: result.email.html,
+              });
+          }));
+        }).then(() => {
+          console.log('La invitacion ha sido enviado');
+        })
+        
+        cliente.emit("sendInvitation", user);
+        console.log(user);
+      }
+    });
+  });
+
+  cliente.on("sendActivationCode", function(usernameData) {
+    var usuario = {where: {username : usernameData}};
+    console.log(usuario);
+    app.models.Jugador.findOne(usuario, function(err, user) {
+      if (err) throw err;
+
+      if (user != null) {
+        // si encuentra el username busca el correo de ese usuario
+        nombre = user['username'];
+        correo = user['correo'];
+        codigo = ""; // de donde y como lo saco
+        emailType = 'Invitation';
+        senderName = ''; // de donde saco el parametro y como lo paso
+             
+        loadTemplate('Activation', emailData).then((results) => {
+          return Promise.all(results.map((result) => {
+              sendEmail({
+                  to: result.context.email,
+                  from: 'Space Checkers',
+                  subject: result.email.subject,
+                  html: result.email.html,
+              });
+          }));
+        }).then(() => {
+          console.log('La invitacion ha sido enviado');
+        })
+        
+        cliente.emit("sendActivationCode", user);
+        console.log(user);
+      }
+    });
+  });
+
 });
 
 function getKeyByValue(object, value) {
@@ -125,72 +209,13 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
-/*
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: 'spacecheckers@gmail.com',
-      pass: 'anitalavalatina',
-  },
-}),
-EmailTemplate = require('email-templates').EmailTemplate,
-path = require('path'),
-Promise = require('bluebird');
-
-// Metodo generador de codigos
-var randomCode = function(length){
-  var codigo = "";
-  var caracteresPermitidos = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
-  for(var i = 0; i < length; i++) {
-      codigo += caracteresPermitidos.charAt(Math.floor(Math.random() * caracteresPermitidos.length)); 
-  }
-  return codigo;
-}
-
-//Metodo para sacar la informacion del usuario
-var correo;
-var nombre;
-var codigo;
-var senderName;
-var emailType;
-io.on("connection", function(cliente) {
-     console.log("Email: Recolectando datos");
-    // Evento llamado por cliente al clicker Partida (EnviarCodigo.cs)
-    cliente.on("enviarCorreo", function(usernameData) {
-        var usuario = {where: {username : usernameData}};
-        console.log(usuario);
-        app.models.Jugador.findOne(usuario, function(err, user) {
-            if (err) throw err;
-
-            if (user != null) {
-                // si encuentra el username busca el correo de ese usuario
-                nombre = user['username'];
-                correo = user['correo'];
-                codigo = randomCode(7);
-                emailType = 'Activation Code';
-                senderName = 'Manolo';
-                cliente.emit("correoCliente", user);
-                console.log(user);
-            } else {
-                // 
-            }
-         });
-     });
- });
-
-// codigo = randomCode(7);
-// nombre = 'Dany';
-// correo = 'dannyhvalenz@gmail.com'
-// senderName = 'Manolo'
-// emailType = 'Invitation'
-
 let emailData = [
-    {
-        name: nombre,
-        email: correo,
-        code: codigo,
-        sender: senderName,
-    },
+  {
+    name: nombre,
+    email: correo,
+    code: codigo,
+    sender: senderName,
+  },
 ];
 
 function sendEmail (obj) {
@@ -212,15 +237,13 @@ function loadTemplate (templateName, contexts) {
   }));
 }
 
-loadTemplate(emailType, emailData).then((results) => {
-  return Promise.all(results.map((result) => {
-      sendEmail({
-          to: result.context.email,
-          from: 'Space Checkers',
-          subject: result.email.subject,
-          html: result.email.html,
-      });
-  }));
-}).then(() => {
-  console.log('The email has been sent');
-});*/
+
+// Metodo generador de codigos
+var randomCode = function(length){
+  var codigo = "";
+  var caracteresPermitidos = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+  for(var i = 0; i < length; i++) {
+      codigo += caracteresPermitidos.charAt(Math.floor(Math.random() * caracteresPermitidos.length)); 
+  }
+  return codigo;
+}

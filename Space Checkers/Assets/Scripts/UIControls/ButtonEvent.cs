@@ -30,6 +30,32 @@ public class ButtonEvent : MonoBehaviour {
 		Lobby.instance.StartGame();
 	}
 
+	public void ClickSendConfirmation()
+	{
+		InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+		Debug.Log("Activation code to: " + email.text);
+		ConnectionManager.instance.socket.Emit("activation", email.text);
+	}
+
+	public void ClickResend()
+	{
+		// Si necesito el email de la pantalla anterior deberia guardar el email en una variable fuera del metodo?
+		InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+		Debug.Log("Activation code to: " + email.text);
+		ConnectionManager.instance.socket.Emit("activation", email.text);
+	}
+	
+	public void ClickInvite()
+	{
+		InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+		Debug.Log("Invitation to: " + email.text);
+		ConnectionManager.instance.socket.Emit("invitation", email.text);
+	}
+
+	public void ClickJoinAsGuest()
+	{
+		
+	}
 /*/	public void CopyToClipboard()
 	{
 		Text invitationCode = GameObject.Find("TxtCode").GetComponent<Text>();
