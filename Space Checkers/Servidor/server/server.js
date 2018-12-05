@@ -221,9 +221,9 @@ io.on("connection", function(cliente) {
     console.log("mail en json");
     console.log(jsonmail);
 
-    var usuario = {where: {username : mailData}};
-    console.log(usuario);
-    app.models.Jugador.findOne(usuario, function(err, user) {
+    var filtro = {where: {username : jsonmail['Name']}, fields: {pass: false, correo: true, id: false}};
+    console.log(filtro);
+    app.models.Jugador.findOne(filtro, function(err, user) {
       if (err) throw err;
 
       if (user != null) {
@@ -231,7 +231,7 @@ io.on("connection", function(cliente) {
         let emailData = [
           {
             name: user['Username'],
-            email: user['Correo'],
+            email: user['Email'],
             code: jsonmail['Codigo'],
             senderName: jsonmail['Sender'],
           },
@@ -292,7 +292,7 @@ io.on("connection", function(cliente) {
     console.log("mensaje en json");
     console.log(jsonmessage);
 
-    io.sockets.in(jsoncolor['IdLobby']).emit("userSelectedColor", stringcolor);
+    io.sockets.in(jsonmessage['IdLobby']).emit("userSelectedColor", stringcolor);
    });
 
 });

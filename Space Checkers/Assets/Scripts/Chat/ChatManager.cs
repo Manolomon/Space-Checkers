@@ -104,7 +104,8 @@ public class ChatManager : MonoBehaviour
             SendChatMessage(chatBox.text);
             ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
             string color = control.Color;
-            Message mensaje = new Message(color, chatBox.text);
+            string id = Lobby.instance.IdLobby;
+            Message mensaje = new Message(id,color, chatBox.text);
             string msj = JsonConvert.SerializeObject(mensaje);
             ConnectionManager.instance.socket.Emit("mensaje", msj);
 

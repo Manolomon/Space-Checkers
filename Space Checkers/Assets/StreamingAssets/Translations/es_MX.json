@@ -57,6 +57,7 @@
         {"key":"message_lobby_code_copied", "value":"Código copiado en Portapapeles"},
 
         {"key":"message_empty_fields", "value": "Verifica que no haya campos vacios"},
-        {"key":"passwords_diferent", "value":"Las constraseñas no coinciden"}
+        {"key":"passwords_diferent", "value":"Las constraseñas no coinciden"},
+        {"key":"activation_code_diferent", "value":"Ese no es el codigo correcto"}
     ]
 }
