@@ -26,6 +26,7 @@ public class Lobby : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		DontDestroyOnLoad(gameObject);
+		Prediction = true;
 	}
 
 	public void StartGame()
@@ -40,5 +41,12 @@ public class Lobby : MonoBehaviour {
 		{
 			Debug.Log(string.Format("Player: {0} / Color: {1}", kvp.Key, kvp.Value));
 		}
+	}
+
+	public void LimpiarLobby()
+	{
+		instance.IdLobby = null;
+		instance.Players.Clear();
+		instance.Prediction = true;
 	}
 }

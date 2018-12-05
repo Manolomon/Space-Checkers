@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour {
     /// <summary>
@@ -23,7 +24,7 @@ public class ButtonEvent : MonoBehaviour {
     {
         InputField code = GameObject.Find("TFCode").GetComponent<InputField>(); 
         Dictionary<string, string> join = new Dictionary<string, string>();
-        join.Add("IdLobby", Lobby.instance.IdLobby);
+        join.Add("IdLobby", code.text);
         join.Add("Jugador", Jugador.instance.Username);
         string json = JsonConvert.SerializeObject(join);
 		ConnectionManager.instance.socket.Emit("joinGame", json); 
@@ -45,6 +46,22 @@ public class ButtonEvent : MonoBehaviour {
 		ConnectionManager.instance.socket.Emit("createGame"); 
 	} 
 
+    public void ClickLeave()
+    {
+        if (Jugador.instance.Correo != null)
+        {
+            SceneManager.LoadScene(4);
+        } else {
+            SceneManager.LoadScene(1);
+        }
+        Dictionary<string, string> leave = new Dictionary<string, string>();
+        leave.Add("IdLobby", Lobby.instance.IdLobby);
+        leave.Add("Jugador", Jugador.instance.Username);
+        string json = JsonConvert.SerializeObject(leave);
+        ConnectionManager.instance.socket.Emit("leaveGame", json);
+        Lobby.instance.LimpiarLobby();
+    }
+
     public void ClickStartGame()
     {
         Lobby.instance.StartGame();
@@ -57,6 +74,7 @@ public class ButtonEvent : MonoBehaviour {
         string prediccion = GameObject.Find("TogglePrediction").GetComponent<Toggle>().isOn.ToString();
         predictionn.Add("Prediccion", prediccion);
         string json = JsonConvert.SerializeObject(predictionn);
+        ConnectionManager.instance.socket.Emit("prediction",json);
         Debug.Log(json);
     }
 

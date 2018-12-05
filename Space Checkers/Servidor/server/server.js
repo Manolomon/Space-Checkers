@@ -116,14 +116,13 @@ io.on("connection", function(cliente) {
     cliente.emit("createLobby", codigo);
   });
 
-  cliente.on("joinGame", function(code){
-    var codigo = code; //codigo que llega del cliente
-    if (rooms[code] < 6 && (code in rooms)) {
-      io.to(codigo).emit('userJoinedRoomCliente', 'Guest'+rooms[code]);
-      cliente.emit("guestUsername", 'Guest'+rooms[code]);
+  cliente.on("joinGame", function(datos){
+    var json = JSON.parse(datos); //codigo que llega del cliente
+    if (rooms[json['IdLobby']] < 6 && (json['IdLobby'] in rooms)) {
+      io.to(codigo).emit('userJoinedRoomCliente', json['Jugador']);
       cliente.join(codigo);
-      rooms[code] = rooms[code] + 1;
-      console.log("Usuario uniendose a sala " + codigo);
+      rooms[json['IdLobby']] = rooms[json['IdLobby']] + 1;
+      console.log("Usuario uniendose a sala " + json['IdLobby']);
     } else {
       cliente.emit("aviso","La sala esta llena o ya no existe");
     }
@@ -154,7 +153,6 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("selectColor", function(datos){
-    console.log("Usuario selecciono color");
     var jsoncolor = JSON.parse(datos);
     var stringcolor = JSON.stringify(jsoncolor);
     console.log(jsoncolor['Jugador'] + " selecciono color " + jsoncolor['Color'] + " en lobby " + jsoncolor['IdLobby']);
@@ -173,6 +171,12 @@ io.on("connection", function(cliente) {
     io.sockets.in(room).emit("startGameCliente");
   });
 
+  cliente.on("leaveGame", function(datos){
+    var json = JSON.parse(datos);
+    cliente.leave(json['IdLobby']);
+    io.sockets.in(json['IdLobby']).emit("leaveGameCliente", json['Jugador']);
+  });
+
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
     var movimiento = JSON.parse(datos);
@@ -186,6 +190,12 @@ io.on("connection", function(cliente) {
     io.sockets.in(code).emit("terminarTurnoCliente"); //codigo del lobby
   });
 
+  cliente.on("winner", function(datos) {
+    var winner = JSON.parse(datos);
+    console.log("Ganador: " + winner['Jugador'] + " en sala " + winner['IdLobby']);
+    var stringwinner = JSON.stringify(winner);
+    io.sockets.in(winner['IdLobby']).emit("winnerCliente", stringwinner);
+  });
   
   cliente.on("sendInvitation", function(mailData) {
     console.log("Info de mailData raw");

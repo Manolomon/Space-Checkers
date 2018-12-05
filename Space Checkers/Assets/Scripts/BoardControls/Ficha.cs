@@ -29,9 +29,12 @@ public class Ficha : MonoBehaviour {
 			{
 				control.FichaSeleccionada = this.gameObject;
 				Casilla scriptCasilla = casilla.GetComponent<Casilla>();
-				scriptCasilla.iluminarCasillasDisponibles();
 				control.SeleccionCasilla = true;
-				control.CasillasValidas = scriptCasilla.CasillasDisponibles;
+				control.CasillasValidas = scriptCasilla.obtenerCasillasDisponibles();
+				if (Lobby.instance.Prediction)
+				{
+					scriptCasilla.iluminarCasillasDisponibles();
+				}
 			} else {
 				Debug.Log("Ficha no valida para movimiento");
 				Debug.Log("Fase seleccion casilla: " + control.SeleccionCasilla);

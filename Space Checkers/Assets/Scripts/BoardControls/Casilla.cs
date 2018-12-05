@@ -304,7 +304,7 @@ public class Casilla : MonoBehaviour {
 	public void iluminarCasillasDisponibles() 
 	{
 		SpriteRenderer sr;
-		obtenerCasillasDisponibles();
+		//obtenerCasillasDisponibles();
 		foreach (GameObject casilla in casillasDisponibles)
 		{
 			sr = casilla.GetComponent<SpriteRenderer>();

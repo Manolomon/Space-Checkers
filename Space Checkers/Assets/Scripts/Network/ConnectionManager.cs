@@ -62,6 +62,7 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("predictionCliente", OnPrediction);
 		socket.On("userSelectedColor", OnUserSelectedColor);
 		socket.On("startGameCliente", OnStartGame);
+		socket.On("leaveGameCliente", OnLeave);
 		socket.On("moverPiezaCliente", OnMoverPieza);
 		socket.On("terminarTurnoCliente", OnTerminarTurno);
 		socket.On("winnerCliente", OnWinner);
@@ -278,6 +279,21 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Game starting!");
 		SceneManager.LoadScene(2);
 		StartCoroutine(ActualizarGameBoard());
+	}
+
+	private void OnLeave(Socket socket, Packet packet, params object[] args)
+	{
+		var datos = JSON.Parse(packet.ToString());
+		string leavingUser = datos[1].ToString().Trim( new Char[] {'"'});
+		Debug.Log("Salio de la sala: " + leavingUser);
+		Lobby.instance.Players.Remove(leavingUser);
+		if (SceneManager.GetSceneByName("Lobby").isLoaded)
+		{
+			GameObject.Find("Toggle"+Lobby.instance.Players[leavingUser]).GetComponent<Toggle>().isOn = false;
+			GameObject.Find(Lobby.instance.Players[leavingUser]+"PlayerName").SetActive(false);
+		} else {
+			GameObject.Find(Lobby.instance.Players[leavingUser]+"PlayerName").SetActive(false);	
+		}
 	}
 
 	IEnumerator ActualizarGameBoard()
