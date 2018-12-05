@@ -196,7 +196,7 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Llamada a setlobbyinfo");
 		if (ToJoin)
 		{
-			//SceneManager.LoadScene(3);
+			SceneManager.LoadScene(3);
 			var datos = JSON.Parse(packet.ToString());
 			string lobbyInfo = datos[1].ToString();
 			lobbyInfo = lobbyInfo.Substring(1, lobbyInfo.Length - 2);
@@ -249,10 +249,17 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log(colorInfo);
 		DatosColor color = JsonConvert.DeserializeObject<DatosColor>(colorInfo);
 		Debug.Log("Color elegido " + color.Color + " por " + color.Jugador);
-		KeyValuePair<string, string> playerWithNewColor = new KeyValuePair<string, string>(color.Jugador, color.Color);
-		Lobby.instance.Players.Remove(playerWithNewColor.Key);
-		Lobby.instance.Players.Add(playerWithNewColor.Key, playerWithNewColor.Value);
-		Toggle button = GameObject.FindGameObjectWithTag(color.Color).GetComponent<Toggle>();
+		if (Lobby.instance.Players[color.Jugador] != null)
+		{
+			Debug.Log("Cambiando color de jugador");
+			GameObject.Find("Toggle"+Lobby.instance.Players[color.Jugador]).GetComponent<Toggle>().isOn = false;
+			//GameObject.Find("Toggle"+color.Color+"/"+color.Color+"PlayerName").SetActive(false);
+		}
+		Lobby.instance.Players[color.Jugador] = color.Color;
+		Toggle button = GameObject.Find("Toggle"+color.Color).GetComponent<Toggle>();
+		//GameObject nombre = GameObject.Find("Toggle"+color.Color+"/"+color.Color+"PlayerName");
+		//nombre.SetActive(true);
+		//nombre.GetComponent<Text>().text = color.Jugador;
 		// togglear a encendido el boton del color encontrado
 		button.isOn = true;
 		Lobby.instance.PrintLobby();
@@ -294,12 +301,15 @@ public class ConnectionManager : MonoBehaviour {
 		DatosMovimiento movimiento = JsonConvert.DeserializeObject<DatosMovimiento>(movementInfo);
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 		control.FichaSeleccionada = GameObject.Find(movimiento.Ficha);
-		Casilla casilla = control.FichaSeleccionada.GetComponent<Ficha>().casilla.GetComponent<Casilla>();
+		Debug.Log("Ficha a mover " + control.FichaSeleccionada);
+		Casilla casilla = GameObject.Find(movimiento.Casilla).GetComponent<Casilla>();
 		casilla.Mover();
+		Debug.Log("Casilla destino " + casilla.name);
 	}
 
 	private void OnTerminarTurno(Socket socket, Packet packet, params object[] args)
 	{
+		Debug.Log("Terminando Turno");
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 		if (control.ActualTurn + 1 > Lobby.instance.Players.Count)
 		{

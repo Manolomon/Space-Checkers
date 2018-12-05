@@ -92,7 +92,9 @@ public class ControlTurnos : MonoBehaviour {
 	public void EnviarMovimiento(string ficha, string casilla)
 	{
 		DatosMovimiento movimiento = new DatosMovimiento(Lobby.instance.IdLobby,ficha,casilla);
-		ConnectionManager.instance.socket.Emit("moverPieza", JsonConvert.SerializeObject(movimiento));
+		string movementData = JsonConvert.SerializeObject(movimiento);
+		Debug.Log(movementData);
+		ConnectionManager.instance.socket.Emit("moverPieza", movementData);
 	}
 
 	private bool JugadorActualWinner()
@@ -114,7 +116,7 @@ public class ControlTurnos : MonoBehaviour {
 		{
 			//emit winner jugador actual
 		} else {
-			ConnectionManager.instance.socket.Emit("terminarTurno");
+			ConnectionManager.instance.socket.Emit("terminarTurno", Lobby.instance.IdLobby);
 		}
 	}
 		

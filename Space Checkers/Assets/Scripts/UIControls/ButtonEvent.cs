@@ -27,12 +27,12 @@ public class ButtonEvent : MonoBehaviour
         ConnectionManager.instance.ToJoin = true;
     }
 
-    public void ClickColor()
-    {
+    private void ClickColor(string color)
+    {        
         Toggle boton = this.GetComponent<Toggle>();
         if (boton.isOn)
         {
-            DatosColor datoscolor = new DatosColor(Lobby.instance.IdLobby, Jugador.instance.Username, this.gameObject.tag);
+            DatosColor datoscolor = new DatosColor(Lobby.instance.IdLobby, Jugador.instance.Username, color);
             string dataColor = JsonConvert.SerializeObject(datoscolor);
             ConnectionManager.instance.socket.Emit("selectColor",dataColor);
         }

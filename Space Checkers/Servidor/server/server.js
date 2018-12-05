@@ -151,10 +151,14 @@ io.on("connection", function(cliente) {
 
   // Evento llamado por cliente al hacer un movimiento en su turno correspondiente
   cliente.on("moverPieza", function(datos) {
-    io.sockets.in(datos['Lobby']).emit("moverPiezaCliente", datos); //codigo del lobby
+    var movimiento = JSON.parse(datos);
+    var stringmovimiento = JSON.stringify(movimiento);
+    console.log("Movimiento pieza "+ movimiento['Ficha'] + " a la casilla " + movimiento['Casilla'] + " en el lobby " + movimiento['Lobby']);
+    io.sockets.in(movimiento['Lobby']).emit("moverPiezaCliente", stringmovimiento); //codigo del lobby
   });
 
   cliente.on("terminarTurno", function(code) {
+    console.log("Terminando turno en sala " + code);
     io.sockets.in(code).emit("terminarTurnoCliente"); //codigo del lobby
   });
 

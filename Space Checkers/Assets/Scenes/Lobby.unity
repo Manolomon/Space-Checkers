@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 87161027}
   m_Layer: 5
   m_Name: Checkmark
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 143626891}
   m_Layer: 5
   m_Name: AdarianIcon
-  m_TagString: Untagged
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -779,7 +779,7 @@ GameObject:
   - component: {fileID: 323198672}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1050,6 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364643926}
   - component: {fileID: 364643927}
+  - component: {fileID: 364643929}
   - component: {fileID: 364643928}
   m_Layer: 5
   m_Name: ToggleOrange
@@ -1121,18 +1122,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364643928}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -1145,6 +1135,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &364643929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364643925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &395240051
@@ -1237,7 +1238,7 @@ GameObject:
   - component: {fileID: 465362636}
   m_Layer: 5
   m_Name: Checkmark
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1541,7 +1542,7 @@ GameObject:
   - component: {fileID: 552115981}
   m_Layer: 5
   m_Name: Checkmark
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1610,7 +1611,7 @@ GameObject:
   - component: {fileID: 601075617}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1884,7 +1885,7 @@ GameObject:
   - component: {fileID: 642874662}
   m_Layer: 5
   m_Name: Checkmark
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2029,7 +2030,7 @@ GameObject:
   - component: {fileID: 728763813}
   m_Layer: 5
   m_Name: AdarianIcon
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2094,6 +2095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748725937}
   - component: {fileID: 748725938}
+  - component: {fileID: 748725940}
   - component: {fileID: 748725939}
   m_Layer: 5
   m_Name: ToggleBlue
@@ -2165,18 +2167,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364643928}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -2191,6 +2182,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &748725940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748725936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780137021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,6 +2202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780137022}
   - component: {fileID: 780137023}
+  - component: {fileID: 780137025}
   - component: {fileID: 780137024}
   m_Layer: 5
   m_Name: ToggleYellow
@@ -2271,18 +2274,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364643928}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -2297,6 +2289,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &780137025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 780137021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &784476471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2312,7 @@ GameObject:
   - component: {fileID: 784476473}
   m_Layer: 5
   m_Name: Checkmark
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2463,6 +2466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851553639}
   - component: {fileID: 851553640}
+  - component: {fileID: 851553642}
   - component: {fileID: 851553641}
   m_Layer: 5
   m_Name: ToggleGreen
@@ -2534,18 +2538,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 851553641}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -2558,6 +2551,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &851553642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851553638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &875085827
@@ -2760,7 +2764,7 @@ GameObject:
   - component: {fileID: 943053357}
   m_Layer: 5
   m_Name: AdarianIcon
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3058,7 +3062,7 @@ GameObject:
   - component: {fileID: 1074896494}
   m_Layer: 5
   m_Name: OrangeSideName
-  m_TagString: Untagged
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3130,6 +3134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119526942}
   - component: {fileID: 1119526943}
+  - component: {fileID: 1119526945}
   - component: {fileID: 1119526944}
   m_Layer: 5
   m_Name: TogglePurple
@@ -3201,18 +3206,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364643928}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -3225,6 +3219,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1119526945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1119526941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1123911022
@@ -7859,7 +7864,7 @@ GameObject:
   - component: {fileID: 1172564690}
   m_Layer: 5
   m_Name: YellowSideName
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8270,7 +8275,7 @@ GameObject:
   - component: {fileID: 1354315518}
   m_Layer: 5
   m_Name: GreenSideName
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8345,7 +8350,7 @@ GameObject:
   - component: {fileID: 1371322428}
   m_Layer: 5
   m_Name: BlueSideName
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8420,7 +8425,7 @@ GameObject:
   - component: {fileID: 1403668396}
   m_Layer: 5
   m_Name: RedSideName
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8495,7 +8500,7 @@ GameObject:
   - component: {fileID: 1439641912}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8797,7 +8802,7 @@ GameObject:
   - component: {fileID: 1494354034}
   m_Layer: 5
   m_Name: CalibanIcon
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8946,7 +8951,7 @@ GameObject:
   - component: {fileID: 1567153052}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9016,7 +9021,7 @@ GameObject:
   - component: {fileID: 1581421033}
   m_Layer: 5
   m_Name: EchelonIcon
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9143,6 +9148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599343281}
   - component: {fileID: 1599343282}
+  - component: {fileID: 1599343284}
   - component: {fileID: 1599343283}
   m_Layer: 5
   m_Name: ToggleRed
@@ -9214,18 +9220,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364643928}
-        m_MethodName: ClickColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -9238,6 +9233,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 417e2ea92d779e44e8cbcaf6bb722ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1599343284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1599343280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe446ea9dbadebc4899129e5d275b0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1603483048
@@ -9400,7 +9406,7 @@ GameObject:
   - component: {fileID: 1682266275}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9557,12 +9563,12 @@ GameObject:
   - component: {fileID: 1731965751}
   - component: {fileID: 1731965750}
   m_Layer: 5
-  m_Name: GreenPalyerName
-  m_TagString: Untagged
+  m_Name: GreenPlayerName
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1731965749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9720,12 +9726,12 @@ GameObject:
   - component: {fileID: 1803214695}
   - component: {fileID: 1803214694}
   m_Layer: 5
-  m_Name: YellowPalyerName
-  m_TagString: Untagged
+  m_Name: YellowPlayerName
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1803214693
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9795,12 +9801,12 @@ GameObject:
   - component: {fileID: 1820017751}
   - component: {fileID: 1820017750}
   m_Layer: 5
-  m_Name: GreenPalyerName
-  m_TagString: Untagged
+  m_Name: OrangePlayerName
+  m_TagString: Orange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1820017749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9870,12 +9876,12 @@ GameObject:
   - component: {fileID: 1832624840}
   - component: {fileID: 1832624839}
   m_Layer: 5
-  m_Name: RedPalyerName
-  m_TagString: Untagged
+  m_Name: RedPlayerName
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1832624838
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10065,7 +10071,7 @@ GameObject:
   - component: {fileID: 1867100184}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10223,7 +10229,7 @@ GameObject:
   - component: {fileID: 1909941528}
   m_Layer: 5
   m_Name: PurpleSideName
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10297,12 +10303,12 @@ GameObject:
   - component: {fileID: 1943502681}
   - component: {fileID: 1943502680}
   m_Layer: 5
-  m_Name: BluePalyerName
-  m_TagString: Untagged
+  m_Name: BluePlayerName
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1943502679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10373,7 +10379,7 @@ GameObject:
   - component: {fileID: 1955604554}
   m_Layer: 5
   m_Name: VardianIcon
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10515,12 +10521,12 @@ GameObject:
   - component: {fileID: 2129469934}
   - component: {fileID: 2129469933}
   m_Layer: 5
-  m_Name: PurplePalyerName
-  m_TagString: Untagged
+  m_Name: PurplePlayerName
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2129469932
 RectTransform:
   m_ObjectHideFlags: 0
