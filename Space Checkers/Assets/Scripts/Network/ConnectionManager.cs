@@ -14,7 +14,7 @@ using System.Linq;
 public class ConnectionManager : MonoBehaviour {
 	private SocketManager refSocket;
 	public Socket socket;
-	private bool isOwner = false;
+	public bool IsOwner = false;
 	private string url;
 	public static ConnectionManager instance;
 	public bool ToJoin { get; set; }
@@ -33,6 +33,9 @@ public class ConnectionManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 	
+	/// <summary>
+    /// Metodo para crear la referencia al servidor
+    /// </summary>
 	public void CreateSocketRef()
 	{
         SocketOptions options = new SocketOptions ();
@@ -47,6 +50,9 @@ public class ConnectionManager : MonoBehaviour {
 		SetAllEvents();
 	}
 
+	/// <summary>
+    /// Metodo para registrar todos los eventos ante los que puede responder el cliente
+    /// </summary>
 	private void SetAllEvents()
 	{
 		socket.On("connect", OnConnect);
@@ -74,6 +80,9 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Conectado al servidor");
 	}
 
+	/// <summary>
+    /// Metodo que se llama para avisos del servidor
+    /// </summary>
 	private void OnAviso(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -82,6 +91,9 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log(mensaje);
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor que envia el hash de la pass para comprobar que sea correcta
+    /// </summary>
 	private void OnLogin(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Comprobando pass");
@@ -100,6 +112,9 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor cuando el loggeo fue correcto y envia la informacion del usuario
+    /// </summary>
 	private void OnLoginSuccess(Socket socket, Packet packet, params object[] args)
 	{
 		var datosJugador = JSON.Parse(packet.ToString());
@@ -112,15 +127,32 @@ public class ConnectionManager : MonoBehaviour {
 		StartCoroutine(ActualizarHome());
 	}
 
+	/// <summary>
+    /// Corutina para actualizar la escena de home (esperando al cambio de escena)
+    /// </summary>
 	IEnumerator ActualizarHome()
 	{
 		yield return new WaitForSeconds(1);
 		Text username = GameObject.Find("ContentPanel/UserDataPanel/TextUsername").GetComponent<Text>();
 		Text correo = GameObject.Find("ContentPanel/UserDataPanel/TextUserMail").GetComponent<Text>();
+		Text gamesPlayed = GameObject.Find("ContentPanel/UserDataPanel/UserPerformance/GamesPlayed/TextTotalGamesPlayed").GetComponent<Text>();
+		Text gamesWon = GameObject.Find("ContentPanel/UserDataPanel/UserPerformance/GamesWon/TextTotalGamesWon").GetComponent<Text>();
+		Text gamesLost = GameObject.Find("ContentPanel/UserDataPanel/UserPerformance/GamesLost/TextTotalGamesLost").GetComponent<Text>();
+		Text winrate = GameObject.Find("ContentPanel/UserDataPanel/UserPerformance/Panel/Graph/Bar Chart Component(Clone)/ValueText").GetComponent<Text>();
 		username.text = Jugador.instance.Username;
 		correo.text = Jugador.instance.Correo;
+		gamesPlayed.text = Jugador.instance.PartidasJugadas.ToString();
+		gamesWon.text = Jugador.instance.PartidasGanadas.ToString();
+		int losses = Jugador.instance.PartidasJugadas - Jugador.instance.PartidasGanadas;
+		float winrateP = (float)Jugador.instance.PartidasGanadas / (float)Jugador.instance.PartidasJugadas * 100;
+		gamesLost.text = losses.ToString();
+		winrate.text = winrateP.ToString();
+		GameObject.Find("ContentPanel/UserDataPanel/UserPerformance/Panel/Graph/Bar Chart Component(Clone)").GetComponent<Slider>().value = winrateP;
 	}
 
+	/// <summary>
+    /// Metodo que llama el servidor para pasar el top de jugadores con mas partidas ganadas
+    /// </summary>
 	private void OnLeaderboardWins(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -131,6 +163,9 @@ public class ConnectionManager : MonoBehaviour {
 	    board.SetLeaderData(leaderItems);
     }
 
+	/// <summary>
+    /// Metodo que llama el servidor para pasar el top de jugadores con mas partidas jugadas
+    /// </summary>
 	private void OnLeaderboardGames(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -148,6 +183,9 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Codigo de activacion " + Code);
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para asignar el nombre de invitado a la partida
+    /// </summary>
 	public void OnGuestUsername(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -161,6 +199,9 @@ public class ConnectionManager : MonoBehaviour {
 		SceneManager.LoadScene(4);	
 	}
 	
+	/// <summary>
+    /// Metodo llamado por servidor para pasar el codigo de la partida creada
+    /// </summary>
 	private void OnCreateLobby(Socket socket, Packet packet, params object[] args)
 	{
 		SceneManager.LoadScene(3);
@@ -171,10 +212,13 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Dueno: " + Jugador.instance.Username);
 		Lobby.instance.Players.Add(Jugador.instance.Username, null);
 		Lobby.instance.PrintLobby();
-		isOwner = true;
+		IsOwner = true;
 		StartCoroutine(ActualizarLobby());
 	}
 
+	/// <summary>
+    /// Corutina llamada para actualizar el codigo del lobby en la GUI
+    /// </summary>
 	IEnumerator ActualizarLobby()
 	{
 		yield return new WaitForSeconds(1);
@@ -182,6 +226,9 @@ public class ConnectionManager : MonoBehaviour {
 		codigo.text = Lobby.instance.IdLobby;
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para asignar ña informaciond de lobby a usuario que esta entrando
+    /// </summary>
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Llamada a setlobbyinfo");
@@ -197,13 +244,14 @@ public class ConnectionManager : MonoBehaviour {
 			Lobby.instance.IdLobby = lobby.IdLobby;
 			Lobby.instance.Players = lobby.Players;
 			Lobby.instance.PrintLobby();
-			//Lobby.instance = lobby;
-			//Lobby.instance.PrintLobby();
 			ToJoin = false;
 			StartCoroutine(ActualizarLobby());
 		}
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para asignar si la prediccion de movimiento esta activada o no
+    /// </summary>
 	private void OnPrediction(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -218,13 +266,16 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para avisar y mandar el nuevo usuario uniendose a lobby
+    /// </summary>
 	private void OnUserJoinedRoom(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
 		string newUser = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log("Se unio: " + newUser);
 		Lobby.instance.Players.Add(newUser, null);
-		if (isOwner)
+		if (IsOwner)
 		{
 			Debug.Log("obteniendo info de lobby");
 			DatosLobby datosLobby = new DatosLobby(Lobby.instance.IdLobby, Lobby.instance.Players);
@@ -234,6 +285,9 @@ public class ConnectionManager : MonoBehaviour {
 		// Mensaje: Usuario se unio a la sala
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para avisar cuando un usuario selecciono un color
+    /// </summary>
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Usuario selecciono color");
@@ -260,6 +314,9 @@ public class ConnectionManager : MonoBehaviour {
 		Lobby.instance.PrintLobby();
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para marcar el inicio de la partida
+    /// </summary>
 	private void OnStartGame(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Game starting!");
@@ -267,12 +324,16 @@ public class ConnectionManager : MonoBehaviour {
 		StartCoroutine(ActualizarGameBoard());
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para avisar que un jugador a abandonado la partida o lobby
+    /// </summary>
 	private void OnLeave(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
 		string leavingUser = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log("Salio de la sala: " + leavingUser);
 		Lobby.instance.Players.Remove(leavingUser);
+		// mensaje salida
 		if (SceneManager.GetSceneByName("Lobby").isLoaded)
 		{
 			GameObject.Find("Toggle"+Lobby.instance.Players[leavingUser]).GetComponent<Toggle>().isOn = false;
@@ -282,6 +343,9 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+    /// Corutina para cargar las fichas y nombres correspondientes a los colores elegidos
+    /// </summary>
 	IEnumerator ActualizarGameBoard()
 	{
 		yield return new WaitForSeconds(1);
@@ -316,6 +380,9 @@ public class ConnectionManager : MonoBehaviour {
 		control.IniciarControl();
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para mover una pieza a todo el lobby
+    /// </summary>
 	private void OnMoverPieza(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -331,6 +398,9 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Casilla destino " + casilla.name);
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para terminar el turno de un jugador en determinado lobby
+    /// </summary>
 	private void OnTerminarTurno(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Terminando Turno");
@@ -343,6 +413,9 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+    /// Metodo para buscar objetos inactivos en la escena para su activacion
+    /// </summary>
 	private GameObject BuscarObjetoInactivo(string nombre)
 	{
 		GameObject resultado = null;
@@ -357,6 +430,9 @@ public class ConnectionManager : MonoBehaviour {
 		return resultado;
 	}
 
+	/// <summary>
+    /// Metodo llamado por servidor para avisar cuando un jugador a ganado la partida
+    /// </summary>
 	private void OnWinner(Socket socket, Packet packet, params object[] args)	
 	{
 		var datos = JSON.Parse(packet.ToString());
@@ -368,6 +444,11 @@ public class ConnectionManager : MonoBehaviour {
 		BuscarObjetoInactivo("Blurred Sheet").SetActive(true);
 		BuscarObjetoInactivo("Game Over Panel").SetActive(true);
 		BuscarObjetoInactivo("Winner Name Text").GetComponent<Text>().text = winner.Jugador;
+		Jugador.instance.PartidasJugadas++;
+		if (Jugador.instance.Username.Equals(winner.Jugador))
+		{
+			Jugador.instance.PartidasGanadas++;
+		}
 	}
 
 	void Start () 

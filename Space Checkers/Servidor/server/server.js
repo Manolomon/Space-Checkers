@@ -136,8 +136,8 @@ io.on("connection", function(cliente) {
   cliente.on("joinGame", function(datos){
     var json = JSON.parse(datos); //codigo que llega del cliente
     if (rooms[json['IdLobby']] < 6 && (json['IdLobby'] in rooms)) {
-      io.to(codigo).emit('userJoinedRoomCliente', json['Jugador']);
-      cliente.join(codigo);
+      io.to(json['IdLobby']).emit('userJoinedRoomCliente', json['Jugador']);
+      cliente.join(json['IdLobby']);
       rooms[json['IdLobby']] = rooms[json['IdLobby']] + 1;
       console.log("Usuario uniendose a sala " + json['IdLobby']);
     } else {
@@ -212,6 +212,16 @@ io.on("connection", function(cliente) {
     console.log("Ganador: " + winner['Jugador'] + " en sala " + winner['IdLobby']);
     var stringwinner = JSON.stringify(winner);
     io.sockets.in(winner['IdLobby']).emit("winnerCliente", stringwinner);
+  });
+
+  cliente.on("updateJugador", function(datos) {
+    var json = JSON.parse(datos);
+    var filtro = {where:{id: json['idPlayer']}};
+    app.models.Jugador.updateAll({id: json['idPlayer']}, function(err, info) {
+      if (err) throw err;
+
+      console.log(info);
+    });
   });
   
   cliente.on("sendInvitation", function(mailData) {

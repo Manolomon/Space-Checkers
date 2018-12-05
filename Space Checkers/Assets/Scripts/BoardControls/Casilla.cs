@@ -4,15 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 public class Casilla : MonoBehaviour {
-	private bool ocupada;
+	public bool Ocupada {get; set;}
 	private List<GameObject> casillasDisponibles = new List<GameObject>();
 	private ControlTurnos control;
-	public bool Ocupada
-	{
-		get {return ocupada;}
-		set {ocupada = value;}	
-	}
-
 	public List<GameObject> CasillasDisponibles
 	{
 		get {return casillasDisponibles;}
@@ -323,6 +317,9 @@ public class Casilla : MonoBehaviour {
 		MoverLocal();
 	}
 
+	/// <summary>
+    /// Metodo para el movimiento local, con las comprobaciones de si es el turno actual y si es movimiento valido
+    /// </summary>
 	public void MoverLocal()
 	{
 		if (control.ActualTurn == control.MyTurn)
@@ -361,6 +358,9 @@ public class Casilla : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+    /// Metodo llamado desde fuera para mover una ficha a la casilla desde donde se llama
+    /// </summary>
 	public void Mover()
 	{
 		control.FichaSeleccionada.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10);

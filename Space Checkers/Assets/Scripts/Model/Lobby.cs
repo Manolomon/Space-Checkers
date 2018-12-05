@@ -31,7 +31,12 @@ public class Lobby : MonoBehaviour {
 
 	public void StartGame()
 	{
-		ConnectionManager.instance.socket.Emit("startGame", IdLobby);
+		if (ConnectionManager.instance.IsOwner)
+		{
+			ConnectionManager.instance.socket.Emit("startGame", IdLobby);
+		} else {
+			Debug.Log("No es owner del lobby");
+		}
 	}
 
 	public void PrintLobby()

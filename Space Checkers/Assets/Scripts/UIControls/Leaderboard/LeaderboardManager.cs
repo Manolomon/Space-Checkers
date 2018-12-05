@@ -24,7 +24,8 @@ public class LeaderboardManager : MonoBehaviour {
         for (int i = 0; i < leaderData.Count; i++)
         {
             leaderboard[i].username.text = leaderData[i].username;
-            var rate = leaderData[i].partidasGanadas / leaderData[i].partidasJugadas * 100;
+            float rate = (float)leaderData[i].partidasGanadas / (float)leaderData[i].partidasJugadas * 100;
+            Debug.Log(rate);
             leaderboard[i].barChart.value = rate;
             leaderboard[i].percentageText.text = rate.ToString();
             if (toggleBoard.isOn)
