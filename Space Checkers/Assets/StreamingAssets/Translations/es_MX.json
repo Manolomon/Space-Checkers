@@ -23,6 +23,8 @@
         {"key":"quit_button","value":"Salir"},
             
         {"key":"game_quit_button", "value":"ABANDONAR"},
+            {"key":"game_quit_panel_text", "value":"¿Deseas abandonar la partida?"},
+            {"key":"game_quit_panel_quit_button", "value":"Abandonar"},
         {"key":"game_chat_title", "value":"Chat de Partida"},
         {"key":"game_chat_hint_message", "value":"Escribe tu mensaje"},
             {"key":"game_game_over_title", "value":"FIN DEL JUEGO"},

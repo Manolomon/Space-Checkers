@@ -23,6 +23,8 @@
         {"key":"quit_button","value":"Quit"},
             
         {"key":"game_quit_button", "value":"QUIT GAME"},
+            {"key":"game_quit_panel_text", "value":"Do you really want to quit the game?"},
+            {"key":"game_quit_panel_quit_button", "value":"Quit"},
         {"key":"game_chat_title", "value":"Game Chat"},
         {"key":"game_chat_hint_message", "value":"Type your message"},
             {"key":"game_game_over_title", "value":"GAME OVER"},

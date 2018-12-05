@@ -14,15 +14,15 @@
 
 Consiste en desarrollar una aplicación (juego) multijugador que permita:
 * [ ] Registro de usuarios y confirmación vía email
-* [ ] Inicio de sesión de usuarios
+* [x] Inicio de sesión de usuarios
 * [x] Generación del tablero y colocación de fichas
 * [x] Administrar los tiros por jugador
-* [ ] Generación de puntuación
-* [ ] Tabla de mejores jugadores
-* [ ] Monitoreo del avance de cada jugador
+* [x] Generación de puntuación
+* [x] Tabla de mejores jugadores
+* [x] Monitoreo del avance de cada jugador
 * [x] Envío de invitación al juego
 * [ ] Unirse al juego (invitado y usuarios registrados)
-* [x] Sección para comunicarse en tiempo real
+* [x]Sección para comunicarse en tiempo real
 
 ## Consideraciones	técnicas
 	

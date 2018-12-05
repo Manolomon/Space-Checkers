@@ -2286,7 +2286,7 @@ GameObject:
   - component: {fileID: 476478917}
   - component: {fileID: 476478916}
   m_Layer: 5
-  m_Name: ToggleLanguage
+  m_Name: ToggleBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7656,6 +7656,7 @@ MonoBehaviour:
   - {fileID: 1010877052}
   - {fileID: 1914460091}
   - {fileID: 2034346763}
+  toggleBoard: {fileID: 476478917}
 --- !u!224 &1187812043
 RectTransform:
   m_ObjectHideFlags: 0

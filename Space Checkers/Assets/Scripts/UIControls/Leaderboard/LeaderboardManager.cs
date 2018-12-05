@@ -1,24 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+/// <summary>Gestor del Leaderboard y sus elementos</summary>
 public class LeaderboardManager : MonoBehaviour {
 
     public List<LeaderboardItem> leaderboard = new List<LeaderboardItem>();
-    // Use this for initialization
+    public Toggle toggleBoard;
+
+    /// <summary>Inicialización de los elementos del Leaderboard</summary>
     void Start()
     {
-        foreach (LeaderboardItem userRow in leaderboard)
+        ConnectionManager.instance.socket.Emit("leaderboardWins");    
+    }
+
+    /// <summary>
+    /// Se resetea la información de la tabla
+    /// </summary>
+    /// <param name="leaderData">La información para llenar</param>
+    public void SetLeaderData(List<Leader> leaderData)
+    {
+        for (int i = 0; i < leaderData.Count; i++)
         {
-            userRow.username.text = "Manolo";
-            userRow.barChart.value = 75;
-            userRow.percentageText.text = "75%";
-            userRow.gamesText.text = "44";
+            leaderboard[i].username.text = leaderData[i].username;
+            var rate = leaderData[i].partidasGanadas / leaderData[i].partidasJugadas * 100;
+            leaderboard[i].barChart.value = rate;
+            leaderboard[i].percentageText.text = rate.ToString();
+            if (toggleBoard.isOn)
+            {
+                leaderboard[i].gamesText.text = leaderData[i].partidasGanadas.ToString();
+            }
+            else
+            {
+                leaderboard[i].gamesText.text = leaderData[i].partidasJugadas.ToString();
+            }
         }
     }
 
-    // Update is called once per frame
-	void Update () {
+    /// <summary>Actualización por cada frame del GameObject</summary>
+    void Update ()
+    {
 		
 	}
 }

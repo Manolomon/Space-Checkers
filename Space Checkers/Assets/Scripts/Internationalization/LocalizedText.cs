@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Clase que funciona para la asociación con el inspector y la clave del Item
+/// </summary>
 public class LocalizedText : MonoBehaviour {
 
 	public string key;
-	// Use this for initialization
-	void Start () {
-		Text text = GetComponent<Text> ();
-		text.text = LocalizationManager.instance.GetLocalizedValue (key);
+
+    /// <summary>
+    /// Inicia la instancia
+    /// </summary>
+    void Start() {
+		Text text = GetComponent<Text>();
+		text.text = LocalizationManager.instance.GetLocalizedValue(key);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    /// <summary>
+    /// Actualización de instancia
+    /// </summary>
+    void Update() {
 		
 	}
 }

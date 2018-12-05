@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleSwitch : MonoBehaviour
-{
+/// <summary>Gestor del elemento gráfico del switch en el leaderboard</summary>
+public class ToggleSwitch : MonoBehaviour {
     Toggle toggleView;
 
 	public Text firstLabel;
@@ -13,8 +13,9 @@ public class ToggleSwitch : MonoBehaviour
 	public Text secondLabel;
 	public Color disactiveColor;
 
-	// Use this for initialization
-	void Start ()
+
+    /// <summary>Inicialización del switch y su estado</summary>
+    void Start()
 	{
 		toggleView = GetComponent<Toggle>();
         //Add listener for when the state of the Toggle changes, to take action
@@ -29,14 +30,9 @@ public class ToggleSwitch : MonoBehaviour
 		}
         Debug.Log(toggleView.isOn);
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
 
-	//Output the new state of the Toggle into Text
+    /// <summary>Evento de cambio de estado del switch</summary>
+    /// <param name="change">Instancia del ToggleSwitch en cuestión</param>
     void ToggleValueChanged(Toggle change)
     {
         Debug.Log(toggleView.isOn);
@@ -45,13 +41,15 @@ public class ToggleSwitch : MonoBehaviour
 			firstLabel.color = activeColor;
 			secondLabel.color = disactiveColor;
 			secondState.SetActive(false);
-		}
+		    ConnectionManager.instance.socket.Emit("leaderboardWins");
+        }
 		else
 		{
 			firstLabel.color = disactiveColor;
 			secondLabel.color = activeColor;
 			secondState.SetActive(true);
-		}
+		    ConnectionManager.instance.socket.Emit("leaderboardGames");
+        }
     }
 }
 

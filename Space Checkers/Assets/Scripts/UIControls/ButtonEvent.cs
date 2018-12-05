@@ -5,24 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using Newtonsoft.Json;
 
-
-public class ButtonEvent : MonoBehaviour
-{
-
-    private GameObject BuscarObjetoInactivo(string nombre)
-    {
-        GameObject resultado = null;
-        GameObject[] objetos = Resources.FindObjectsOfTypeAll<GameObject>();
-        foreach (GameObject go in objetos)
-        {
-            if (go.name == nombre)
-            {
-                resultado = go;
-            }
-        }
-        return resultado;
-    }
-
+public class ButtonEvent : MonoBehaviour {
     /// <summary>
     /// Metodo que se ejecuta al presionar el boton login.
     /// </summary>
@@ -76,46 +59,30 @@ public class ButtonEvent : MonoBehaviour
     /// </summary>
     public void ClickSendConfirmation()
     {
-        InputField username = GameObject.Find("/Canvas/SignUpPanel/TFUsername").GetComponent<InputField>();
-        Debug.Log(username);
-        InputField correo = GameObject.Find("/Canvas/SignUpPanel/TFEmail").GetComponent<InputField>();
-        InputField password = GameObject.Find("/Canvas/SignUpPanel/TFPassword").GetComponent<InputField>();
-        InputField confirmationPass = GameObject.Find("/Canvas/SignUpPanel/TFConfirmation").GetComponent<InputField>();
+        Dictionary<string, string> newUserInfo = new Dictionary<string, string>();
         
-        Debug.Log("Comparando contraseñas");
+        InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+        InputField username = GameObject.Find("TFUsername").GetComponent<InputField>();
+        InputField password = GameObject.Find("TFPassword").GetComponent<InputField>();
+        InputField confirmationPass = GameObject.Find("TFConfirmation").GetComponent<InputField>();
+        
+        Debug.Log("Comparacion de contrasenas");
         string hashPass = HashManager.GeneratePasswordHash(password.text);
         string hashPassConfirmation = HashManager.GeneratePasswordHash(confirmationPass.text);
         
         if (hashPassConfirmation.Equals(hashPass))
         {
-            Debug.Log("La contraseña y la confirmacion de la contraseña coinciden");
-            GameObject.Find("/Canvas/SignUpPanel").SetActive(false);
-            GameObject VerificationSignUpPanel = BuscarObjetoInactivo("VerificationSignUpPanel");
-            VerificationSignUpPanel.SetActive(true);
-
-            string nombre = username.text;
-            string email = correo.text;
-
-            Jugador.instance.Username = nombre;
-            Jugador.instance.Pass = hashPass;
-            Jugador.instance.Correo = email;
-            Jugador.instance.PartidasGanadas = 0;
-            Jugador.instance.PartidasJugadas = 0;
-
-            Debug.Log("Datos antes de clase mail = " + nombre + ", " + email);
-            MailMessage mail = new MailMessage(nombre, email);
-            string mailData = JsonConvert.SerializeObject(mail);
-            Debug.Log("JSON = " + mailData);
-
-            Debug.Log("Enviando codigo de activacion a " + correo.text);
-            ConnectionManager.instance.socket.Emit("sendActivationCode", mailData);
+            newUserInfo.Add("email",email.text);
+            newUserInfo.Add("username",username.text);
+            newUserInfo.Add("password", hashPass);
         } 
         else 
         {
             Debug.Log("La contraseña y la confirmacion de la contraseña son diferentes");
         }
 
-
+        Debug.Log("Enviando codigo de activacion a " + email.text);
+        ConnectionManager.instance.socket.Emit("activation", newUserInfo);
     }
 
     // public void ClickResend()
@@ -131,18 +98,9 @@ public class ButtonEvent : MonoBehaviour
     /// </summary>
     public void ClickInvite()
     {
-        InputField invitado = GameObject.Find("/Canvas/InvitationPanel/TFEmail").GetComponent<InputField>();
-
-        string sender = Jugador.instance.Username;
-        string nombre = invitado.text;
-        string codigo = Lobby.instance.IdLobby;
-
-        MailMessage mail = new MailMessage(sender, nombre, codigo);
-
-        string mailData = JsonConvert.SerializeObject(mail);
-
-        Debug.Log("Enviando invitacion a " + invitado.text);
-        ConnectionManager.instance.socket.Emit("sendInvitation", mailData);
+        InputField invitado = GameObject.Find("TFEmail").GetComponent<InputField>();
+        Debug.Log("Invitation to: " + invitado.text);
+        ConnectionManager.instance.socket.Emit("invitation", invitado.text);
     }
 
     /// <summary>
@@ -151,31 +109,19 @@ public class ButtonEvent : MonoBehaviour
     public void ClickValidate()
     {
         // comparacion entre el codigo enviado y el codigo ingresado
-        InputField code = GameObject.Find("/Canvas/VerificationSignUpPanel/TFCode").GetComponent<InputField>();
+        InputField code = GameObject.Find("TFCode").GetComponent<InputField>();
         Debug.Log("Validando codigo");
-        string codigo = ConnectionManager.instance.Code;
-
-        if (codigo.Equals(code.text))
-        {
-            Debug.Log("Codigo valido");
-            Jugador nuevoJugador = Jugador.instance;
-
-            string jugador = JsonConvert.SerializeObject(nuevoJugador);
-            Debug.Log("JSON = " + jugador);
-            ConnectionManager.instance.socket.Emit("registro", jugador);
-        }
-        else
-        {
-            Debug.Log("Codigo incorrecto");
-
-        }
+        ConnectionManager.instance.socket.Emit("sendActivationCode", code.text);
     }
 
-    /*/	public void CopyToClipboard()
-        {
-            Text invitationCode = GameObject.Find("TxtCode").GetComponent<Text>();
-            EditorGUIUtility.systemCopyBuffer = invitationCode.text;
-            SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue ("message_lobby_code_copied"),
-                SSTools.Position.bottom, SSTools.Time.oneSecond);
-        }*/
+    /// <summary>
+    /// Metodo que se ejecuta al presionar el código para copiar en Portapapeles
+    /// </summary>
+    public void CopyToClipboard()
+    {
+        Text invitationCode = GameObject.Find("TxtCode").GetComponent<Text>();
+        EditorGUIUtility.systemCopyBuffer = invitationCode.text;
+        SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue("message_lobby_code_copied"),
+            SSTools.Position.bottom, SSTools.Time.oneSecond);
+    }
 }
