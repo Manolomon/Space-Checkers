@@ -165,20 +165,27 @@ public class ButtonEvent : MonoBehaviour {
                 Debug.Log("Enviando codigo de activacion a " + correo.text);
                 ConnectionManager.instance.socket.Emit("sendActivationCode", mailData);
             }  else  {
-                Debug.Log("La contraseñ y la confirmacion de la contraseñ son diferentes");
+                Debug.Log("La contraseña y la confirmacion de la contraseñ son diferentes");
                 SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue("passwords_diferent"),
                     SSTools.Position.bottom, SSTools.Time.oneSecond);
             }
         }
     }
 
-    // public void ClickResend()
-    // {
-    //     // Si necesito el email de la pantalla anterior deberia guardar el email en una variable fuera del metodo?
-    //     InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
-    //     Debug.Log("Activation code to: " + email.text);
-    //     ConnectionManager.instance.socket.Emit("activation", email.text);
-    // }
+    public void ClickResend()
+    {
+        //     // Si necesito el email de la pantalla anterior deberia guardar el email en una variable fuera del metodo?
+        //     InputField email = GameObject.Find("TFEmail").GetComponent<InputField>();
+        string nombre = Jugador.instance.Username;
+        string email = Jugador.instance.Correo;
+
+        Debug.Log("Reenviando correo a " + email);
+        MailMessage mail = new MailMessage(nombre, email);
+        string mailData = JsonConvert.SerializeObject(mail);
+        Debug.Log("JSON = " + mailData);
+
+        ConnectionManager.instance.socket.Emit("sendActivationCode", mailData);
+    }
 
     /// <summary>
     /// Metodo que se ejecuta al presionar invitar (invitar jugadores a la partida)

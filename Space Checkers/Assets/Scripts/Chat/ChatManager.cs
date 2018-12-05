@@ -83,6 +83,12 @@ public class ChatManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 SendChatMessage(chatBox.text);
+                ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+                string color = control.Color;
+                string id = Lobby.instance.IdLobby;
+                Message mensaje = new Message(id, color, chatBox.text);
+                string msj = JsonConvert.SerializeObject(mensaje);
+                ConnectionManager.instance.socket.Emit("mensaje", msj);
             }
         }
         else
@@ -101,12 +107,14 @@ public class ChatManager : MonoBehaviour
     {
         if (chatBox.text != "")
         {
-            SendChatMessage(chatBox.text);
+
             ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
             string color = control.Color;
             string id = Lobby.instance.IdLobby;
             Message mensaje = new Message(id,color, chatBox.text);
             string msj = JsonConvert.SerializeObject(mensaje);
+
+            SendChatMessage(chatBox.text);
             ConnectionManager.instance.socket.Emit("mensaje", msj);
 
         }
@@ -248,11 +256,6 @@ public class ChatManager : MonoBehaviour
         clb.parentText.text = msg;
 
         clb.childText.color = Color.black;
-
-        //var sender = "Dany";
-        
-        //clb.senderName.text = sender;
-        //clb.senderName.color = Color.white;
         
         yield return new WaitForEndOfFrame();
 
@@ -290,9 +293,6 @@ public class ChatManager : MonoBehaviour
         clb.childText.fontSize = fontSize;
 
         clb.parentText.text = msg;
-
-        // conseguir nombre actual de la BD
-        clb.senderName.text = "Manolo";
         
         clb.childText.color = Color.black;
 

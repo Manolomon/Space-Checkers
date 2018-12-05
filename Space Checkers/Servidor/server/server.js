@@ -238,12 +238,13 @@ io.on("connection", function(cliente) {
 
       if (user != null) {
       
+        var senderName = jsonmail['Sender'];
         let emailData = [
           {
-            name: user['Username'],
-            email: user['Email'],
+            name: user['username'],
+            email: user['correo'],
             code: jsonmail['Codigo'],
-            senderName: jsonmail['Sender'],
+            sender: senderName,
           },
         ]
         
@@ -302,7 +303,7 @@ io.on("connection", function(cliente) {
     console.log("mensaje en json");
     console.log(jsonmessage);
 
-    io.sockets.in(jsonmessage['IdLobby']).emit("userSelectedColor", stringcolor);
+    io.sockets.in(jsonmessage['IdLobby']).emit("mensajes", messageData);
    });
 
 });

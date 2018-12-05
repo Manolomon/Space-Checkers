@@ -17,6 +17,8 @@ public class ConnectionManager : MonoBehaviour {
 	public bool IsOwner = false;
 	private string url;
 	public static ConnectionManager instance;
+
+	public static ChatManager chat;
 	public bool ToJoin { get; set; }
 
 	public string Code { get; set; }
@@ -62,6 +64,7 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("leaderboardWinsCliente", OnLeaderboardWins);
 		socket.On("leaderboardGamesCliente", OnLeaderboardGames);
 		socket.On("sendActivationCode", OnSendActivationCode);
+		socket.On("mensajes", OnMensajes);
 		socket.On("guestUsername", OnGuestUsername);
 		socket.On("createLobby", OnCreateLobby);
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
@@ -181,6 +184,20 @@ public class ConnectionManager : MonoBehaviour {
 		var datos = JSON.Parse(packet.ToString());
 		Code = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log("Codigo de activacion " + Code);
+	}
+
+	public void OnMensajes(Socket socket, Packet packet, params object[] args)
+	{
+		Debug.Log("Usuario envio mensaje");
+		var datosMensaje = JSON.Parse(packet.ToString());
+		Debug.Log(datosMensaje);
+		Message mensaje = JsonConvert.DeserializeObject<Message>(datosMensaje);
+
+		string color = mensaje.Color;
+		string msg = mensaje.Mensaje;
+
+		chat.ReceiveChatMessage(msg);
+
 	}
 
 	/// <summary>
