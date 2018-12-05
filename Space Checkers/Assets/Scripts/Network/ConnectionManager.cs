@@ -18,7 +18,6 @@ public class ConnectionManager : MonoBehaviour {
 	private string url;
 	public static ConnectionManager instance;
 
-	public static ChatManager chat;
 	public bool ToJoin { get; set; }
 
 	public string Code { get; set; }
@@ -191,13 +190,14 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Usuario envio mensaje");
 		var datosMensaje = JSON.Parse(packet.ToString());
 		Debug.Log(datosMensaje);
-		Message mensaje = JsonConvert.DeserializeObject<Message>(datosMensaje);
-
+        string jsonMensaje = datosMensaje[1].ToString();
+        jsonMensaje = jsonMensaje.Substring(1, jsonMensaje.Length - 2);
+        jsonMensaje = jsonMensaje.Replace(@"\", "");
+        Mensaje mensaje = JsonConvert.DeserializeObject<Mensaje>(jsonMensaje);
 		string color = mensaje.Color;
-		string msg = mensaje.Mensaje;
-
-		chat.ReceiveChatMessage(msg);
-
+        string informacionMensaje = mensaje.InformacionMensaje;
+        
+        ChatManager.instance.ReceiveChatMessage(informacionMensaje);
 	}
 
 	/// <summary>
@@ -208,12 +208,6 @@ public class ConnectionManager : MonoBehaviour {
 		var datos = JSON.Parse(packet.ToString());
 		string username = datos[1].ToString().Trim( new Char[] {'"'});
 		Jugador.instance.Username = username;
-	}
-
-	public void OnActivationSuccess(Socket socket, Packet packet, params object[] args)
-	{
-		// guardar en la BD los datos del jugador
-		SceneManager.LoadScene(4);	
 	}
 	
 	/// <summary>

@@ -164,6 +164,11 @@ public class ButtonEvent : MonoBehaviour {
                 
                 Debug.Log("Enviando codigo de activacion a " + correo.text);
                 ConnectionManager.instance.socket.Emit("sendActivationCode", mailData);
+
+                username.text = "";
+                correo.text = "";
+                password.text = "";
+                confirmationPass.text = "";
             }  else  {
                 Debug.Log("La contraseña y la confirmacion de la contraseñ son diferentes");
                 SSTools.ShowMessage(LocalizationManager.instance.GetLocalizedValue("passwords_diferent"),
@@ -232,6 +237,8 @@ public class ButtonEvent : MonoBehaviour {
             
             GameObject Blur = BuscarObjetoInactivo("Blurred Sheet");
             Blur.SetActive(false);
+
+            code.text = "";
             
             }  else  {
                 Debug.Log("Codigo incorrecto");

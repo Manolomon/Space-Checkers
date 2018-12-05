@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 public class ChatManager : MonoBehaviour
 {
+    public static ChatManager instance;
 
     public Transform content;
 
@@ -38,32 +39,47 @@ public class ChatManager : MonoBehaviour
 
     private VerticalLayoutGroup verticalLayoutGroup;
 
+    /// <summary>Función que valida que únicamente se cuente con una instancia en ejecución del GameObject ConfigManager</summary>
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
+    }
+
     /// <summary>
     /// Metodo utilizado para inicializar el chat
     /// </summary>
     void Start()
     {
-        string[] chats = new string[]{
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-            "It was popularized in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            "Where does it come from?",
-            "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-            "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."};
+        //string[] chats = new string[]{
+        //    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        //    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        //    "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+        //    "It was popularized in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        //    "Where does it come from?",
+        //    "Contrary to popular belief, Lorem Ipsum is not simply random text.",
+        //    "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."};
 
-        for (int i = 0; i < 40; i++)
-        {
+        //for (int i = 0; i < 40; i++)
+        //{
 
-            if (Random.Range(0, 2) == 0)
-            {
-                chatData.Add(chats[Random.Range(0, chats.Length)] + "~0");
-            }
-            else
-            {
-                chatData.Add(chats[Random.Range(0, chats.Length)] + "~1");
-            }
-        }
+        //    if (Random.Range(0, 2) == 0)
+        //    {
+        //        chatData.Add(chats[Random.Range(0, chats.Length)] + "~0");
+        //    }
+        //    else
+        //    {
+        //        chatData.Add(chats[Random.Range(0, chats.Length)] + "~1");
+        //    }
+        //}
 
         ShowUserMsg();
         verticalLayoutGroup = content.GetComponent<VerticalLayoutGroup>();
@@ -82,13 +98,17 @@ public class ChatManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                SendChatMessage(chatBox.text);
                 ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+                string message = chatBox.text;
+                Debug.Log("Mensaje: " + message);
                 string color = control.Color;
+
                 string id = Lobby.instance.IdLobby;
-                Message mensaje = new Message(id, color, chatBox.text);
-                string msj = JsonConvert.SerializeObject(mensaje);
-                ConnectionManager.instance.socket.Emit("mensaje", msj);
+                Mensaje mensaje = new Mensaje(id, color, message);
+                string messageData = JsonConvert.SerializeObject(mensaje);
+
+                SendChatMessage(chatBox.text);
+                ConnectionManager.instance.socket.Emit("mensaje", messageData);
             }
         }
         else
@@ -109,13 +129,16 @@ public class ChatManager : MonoBehaviour
         {
 
             ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+            string message = chatBox.text;
+            Debug.Log("Mensaje: " + message);
             string color = control.Color;
+
             string id = Lobby.instance.IdLobby;
-            Message mensaje = new Message(id,color, chatBox.text);
-            string msj = JsonConvert.SerializeObject(mensaje);
+            Mensaje mensaje = new Mensaje(id, color, message);
+            string messageData = JsonConvert.SerializeObject(mensaje);
 
             SendChatMessage(chatBox.text);
-            ConnectionManager.instance.socket.Emit("mensaje", msj);
+            ConnectionManager.instance.socket.Emit("mensaje", messageData);
 
         }
         else
@@ -217,6 +240,7 @@ public class ChatManager : MonoBehaviour
         }
         else if (split[1] == "1")
         {
+
 
             clb.chatbarImage.color = user2ImageColor;
 

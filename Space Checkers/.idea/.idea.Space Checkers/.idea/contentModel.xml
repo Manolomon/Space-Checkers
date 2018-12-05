@@ -1014,17 +1014,25 @@
             <e p="ChatListObject.cs" t="Include" />
             <e p="ChatManager.cs" t="Include" />
           </e>
+          <e p="Config" t="Include">
+            <e p="ConfigData.cs" t="Include" />
+            <e p="ConfigManager.cs" t="Include" />
+          </e>
           <e p="Internationalization" t="Include">
             <e p="LocalizationData.cs" t="Include" />
             <e p="LocalizationManager.cs" t="Include" />
             <e p="LocalizedText.cs" t="Include" />
-            <e p="StartUpManager.cs" t="Include" />
           </e>
           <e p="Model" t="Include">
+            <e p="DatosColor.cs" t="Include" />
             <e p="DatosLobby.cs" t="Include" />
             <e p="DatosMovimiento.cs" t="Include" />
             <e p="Jugador.cs" t="Include" />
+            <e p="JugadorBD.cs" t="Include" />
+            <e p="Leader.cs" t="Include" />
             <e p="Lobby.cs" t="Include" />
+            <e p="MailMessage.cs" t="Include" />
+            <e p="Message.cs" t="Include" />
           </e>
           <e p="Network" t="Include">
             <e p="ConnectionManager.cs" t="Include" />
@@ -1032,12 +1040,18 @@
           <e p="security" t="Include">
             <e p="HashManager.cs" t="Include" />
           </e>
+          <e p="StartUpManager.cs" t="Include" />
           <e p="UIControls" t="Include">
             <e p="ButtonAnimation.cs" t="Include" />
             <e p="ButtonEvent.cs" t="Include" />
+            <e p="Leaderboard" t="Include">
+              <e p="LeaderboardItem.cs" t="Include" />
+              <e p="LeaderboardManager.cs" t="Include" />
+              <e p="ToggleSwitch.cs" t="Include" />
+            </e>
             <e p="LoadSceneOnClick.cs" t="Include" />
+            <e p="LobbyHandler.cs" t="Include" />
             <e p="QuitOnClick.cs" t="Include" />
-            <e p="ToggleSwitchLanguage.cs" t="Include" />
           </e>
         </e>
         <e p="Shaders" t="Include">

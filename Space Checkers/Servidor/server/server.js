@@ -303,7 +303,7 @@ io.on("connection", function(cliente) {
     console.log("mensaje en json");
     console.log(jsonmessage);
 
-    io.sockets.in(jsonmessage['IdLobby']).emit("mensajes", messageData);
+    io.sockets.in(jsonmessage['IdLobby']).broadcast.emit("mensajes", messageData);
    });
 
 });
