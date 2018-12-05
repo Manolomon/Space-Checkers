@@ -25,6 +25,9 @@
         {"key":"game_quit_button", "value":"ABANDONAR"},
         {"key":"game_chat_title", "value":"Chat de Partida"},
         {"key":"game_chat_hint_message", "value":"Escribe tu mensaje"},
+            {"key":"game_game_over_title", "value":"FIN DEL JUEGO"},
+            {"key":"game_game_over_winner", "value":"El ganador es:"},
+            {"key":"game_game_over_close_button", "value":"Cerrar"},
 
         {"key":"lobby_title", "value":"ESCOGE TU LADO"},
         {"key":"lobby_back_button", "value":"VOLVER"},

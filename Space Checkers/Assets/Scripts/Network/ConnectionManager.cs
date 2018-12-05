@@ -14,7 +14,7 @@ public class ConnectionManager : MonoBehaviour {
 	private SocketManager refSocket;
 	public Socket socket;
 	private bool isOwner = false;
-	private string url = "http://localhost:5000/socket.io/";
+	private string url;
 	public static ConnectionManager instance;
 	public bool ToJoin {get; set;}
 	void Awake () 
@@ -28,6 +28,8 @@ public class ConnectionManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		DontDestroyOnLoad(gameObject);
+		url = "http://" + ConfigManager.instance.GetConfigValue ("address") + "/socket.io";
+		Debug.Log("URL: " + url);
 	}
 	
 	public void CreateSocketRef()

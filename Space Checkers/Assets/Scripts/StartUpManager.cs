@@ -7,7 +7,7 @@ public class StartUpManager : MonoBehaviour {
 
 	private IEnumerator Start ()
 	{
-		while (!LocalizationManager.instance.GetIsReady ())
+		while (!LocalizationManager.instance.GetIsReady () || !ConfigManager.instance.GetIsReady())
 		{
 			yield return null;
 		}
