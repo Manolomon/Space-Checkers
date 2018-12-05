@@ -115,10 +115,10 @@ io.on("connection", function(cliente) {
     if (rooms[code] < 6 && (code in rooms)) {
       io.to(codigo).emit('userJoinedRoomCliente', 'Guest'+rooms[code]);
       cliente.emit("guestUsername", 'Guest'+rooms[code]);
+      //io.sockets.in(codigo).emit("getLobbyInfo");
       cliente.join(codigo);
       rooms[code] = rooms[code] + 1;
       //console.log(io.sockets.clients(codigo));
-      io.sockets.in(codigo).emit("getLobbyInfo");
       console.log("Usuario uniendose a sala " + codigo);
     } else {
       cliente.emit("errorJoin");
@@ -132,13 +132,14 @@ io.on("connection", function(cliente) {
     console.log("lobby en json");
     console.log(jsonlobby);
     var stringlobby = JSON.stringify(jsonlobby);
-    io.sockets.in(jsonlobby['idLobby']).emit("setLobbyInfo", stringlobby);
+    io.sockets.in(jsonlobby['IdLobby']).emit("setLobbyInfo", stringlobby);
   });
 
   cliente.on("selectColor", function(datos){
     console.log("Usuario selecciono color");
     var jsoncolor = JSON.parse(datos);
     var stringcolor = JSON.stringify(jsoncolor);
+    console.log(jsoncolor['Jugador'] + " selecciono color " + jsoncolor['Color'] + " en lobby " + jsoncolor['IdLobby']);
     io.sockets.in(jsoncolor['IdLobby']).emit("userSelectedColor", stringcolor);
   });
 

@@ -8,6 +8,7 @@ using BestHTTP;
 using BestHTTP.SocketIO;
 using SimpleJSON;
 using UnityEngine.UI;
+using System.Linq;
 
 
 public class ConnectionManager : MonoBehaviour {
@@ -28,8 +29,6 @@ public class ConnectionManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		DontDestroyOnLoad(gameObject);
-		url = "http://" + ConfigManager.instance.GetConfigValue ("address") + "/socket.io";
-		Debug.Log("URL: " + url);
 	}
 	
 	public void CreateSocketRef()
@@ -105,16 +104,13 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log(Jugador.instance.Username);
 		SceneManager.LoadScene(4);
 		socket.Emit("leaderboardWins");
-		/*Text username = GameObject.Find("TextUsername").GetComponent<Text>();
-		Text correo = GameObject.Find("TextUserMail").GetComponent<Text>();
-		username.text = Jugador.instance.Username;
-		correo.text = Jugador.instance.Correo;*/
+		StartCoroutine(ActualizarHome());
 	}
 	IEnumerator ActualizarHome()
 	{
 		yield return new WaitForSeconds(1);
-		Text username = GameObject.Find("TextUsername").GetComponent<Text>();
-		Text correo = GameObject.Find("TextUserMail").GetComponent<Text>();
+		Text username = GameObject.Find("ContentPanel/UserDataPanel/TextUsername").GetComponent<Text>();
+		Text correo = GameObject.Find("ContentPanel/UserDataPanel/TextUserMail").GetComponent<Text>();
 		username.text = Jugador.instance.Username;
 		correo.text = Jugador.instance.Correo;
 	}
@@ -197,10 +193,10 @@ public class ConnectionManager : MonoBehaviour {
 
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
+		Debug.Log("Llamada a setlobbyinfo");
 		if (ToJoin)
 		{
-			Debug.Log("Llamada a setlobbyinfo");
-			SceneManager.LoadScene(3);
+			//SceneManager.LoadScene(3);
 			var datos = JSON.Parse(packet.ToString());
 			string lobbyInfo = datos[1].ToString();
 			lobbyInfo = lobbyInfo.Substring(1, lobbyInfo.Length - 2);
@@ -213,6 +209,7 @@ public class ConnectionManager : MonoBehaviour {
 			//Lobby.instance = lobby;
 			//Lobby.instance.PrintLobby();
 			ToJoin = false;
+			StartCoroutine(ActualizarLobby());
 		}
 	}
 
@@ -233,6 +230,13 @@ public class ConnectionManager : MonoBehaviour {
 		string newUser = datos[1].ToString().Trim( new Char[] {'"'});
 		Debug.Log("Se unio: " + newUser);
 		Lobby.instance.Players.Add(newUser, null);
+		if (isOwner)
+		{
+			Debug.Log("obteniendo info de lobby");
+			DatosLobby datosLobby = new DatosLobby(Lobby.instance.IdLobby, Lobby.instance.Players);
+			string dataLobby = JsonConvert.SerializeObject(datosLobby);
+			socket.Emit("setLobbyInfo", dataLobby);
+		}
 	}
 
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
@@ -244,30 +248,41 @@ public class ConnectionManager : MonoBehaviour {
 		colorInfo = colorInfo.Replace(@"\", "");
 		Debug.Log(colorInfo);
 		DatosColor color = JsonConvert.DeserializeObject<DatosColor>(colorInfo);
+		Debug.Log("Color elegido " + color.Color + " por " + color.Jugador);
 		KeyValuePair<string, string> playerWithNewColor = new KeyValuePair<string, string>(color.Jugador, color.Color);
 		Lobby.instance.Players.Remove(playerWithNewColor.Key);
 		Lobby.instance.Players.Add(playerWithNewColor.Key, playerWithNewColor.Value);
 		Toggle button = GameObject.FindGameObjectWithTag(color.Color).GetComponent<Toggle>();
 		// togglear a encendido el boton del color encontrado
 		button.isOn = true;
+		Lobby.instance.PrintLobby();
 	}
 
 	private void OnStartGame(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Game starting!");
 		SceneManager.LoadScene(2);
+		StartCoroutine(ActualizarGameBoard());
+	}
+
+	IEnumerator ActualizarGameBoard()
+	{
+		yield return new WaitForSeconds(2);
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 		int count = 1;
-		foreach (KeyValuePair<string, string> kvp in Lobby.instance.Players)
+		var list = Lobby.instance.Players.Keys.ToList();
+		list.Sort();
+		foreach (string player in list)
 		{
-			if (kvp.Key == Jugador.instance.Username)
+			if (player == Jugador.instance.Username)
 			{
 				control.MyTurn = count;
-				control.Color = kvp.Value;
+				control.Color = Lobby.instance.Players[player];
 			}
 			count++;
 		}
 		control.ActualTurn = 1;
+		control.IniciarControl();
 	}
 
 	private void OnMoverPieza(Socket socket, Packet packet, params object[] args)
@@ -296,6 +311,8 @@ public class ConnectionManager : MonoBehaviour {
 
 	void Start () 
 	{
+		url = "http://" + ConfigManager.instance.GetConfigValue ("address") + "/socket.io/";
+		Debug.Log("URL: " + url);
 		CreateSocketRef();
 	}
 

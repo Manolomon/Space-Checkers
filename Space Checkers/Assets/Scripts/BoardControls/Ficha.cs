@@ -34,7 +34,11 @@ public class Ficha : MonoBehaviour {
 				control.CasillasValidas = scriptCasilla.CasillasDisponibles;
 			} else {
 				Debug.Log("Ficha no valida para movimiento");
+				Debug.Log("Fase seleccion casilla: " + control.SeleccionCasilla);
+				Debug.Log("Color jugador: " +  control.Color + "  /  Color ficha: " + gameObject.tag);
 			}
+		} else {
+			Debug.Log(control.ActualTurn + ": turno actual / turno jugador: " + control.MyTurn);
 		}
 	}	
 }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 public class ControlTurnos : MonoBehaviour {
 	// Referencia de la ficha seleccionada a mover
-	private GameObject fichaSeleccionada;
+	public GameObject FichaSeleccionada {get; set;}
 	
 	// True si esta en la fase de seleccion de casilla. False si necesita seleccionar ficha primero
 	private bool seleccionCasilla = false;
@@ -20,15 +20,11 @@ public class ControlTurnos : MonoBehaviour {
 	private List<GameObject> casillasValidas;
 
 	// Color correspondiente al jugador
-	private string color;
+	public string Color {get; set;}
 
 	public string ColorMeta {get; set;}
 	private List<Ficha> fichasJugador = new List<Ficha>();
-	public GameObject FichaSeleccionada
-	{
-		get {return fichaSeleccionada;}
-		set {fichaSeleccionada = value;}	
-	}
+
 	public bool SeleccionCasilla
 	{
 		get {return seleccionCasilla;}
@@ -50,11 +46,6 @@ public class ControlTurnos : MonoBehaviour {
 		set {actualTurn = value;}
 	}
 
-	public string Color
-	{
-		get {return color;}
-		set {color = value;}
-	}
 
 	public void IniciarControl()
 	{
@@ -64,19 +55,19 @@ public class ControlTurnos : MonoBehaviour {
 
 	public void SetColorMeta()
 	{
-		if (color.Equals("Blue"))
+		if (Color.Equals("Blue"))
 		{
 			ColorMeta = "Purple";
-		} else if (color.Equals("Red"))
+		} else if (Color.Equals("Red"))
 		{
 			ColorMeta = "Yellow";
-		} else if (color.Equals("Green"))
+		} else if (Color.Equals("Green"))
 		{
 			ColorMeta = "Orange";
-		} else if (color.Equals("Orange"))
+		} else if (Color.Equals("Orange"))
 		{
 			ColorMeta = "Green";
-		} else if (color.Equals("Purple"))
+		} else if (Color.Equals("Purple"))
 		{
 			ColorMeta = "Blue";
 		} else 
@@ -87,7 +78,7 @@ public class ControlTurnos : MonoBehaviour {
 
 	private void ObtenerCasillasJugador()
 	{
-		GameObject[] fichas = GameObject.FindGameObjectsWithTag(color);
+		GameObject[] fichas = GameObject.FindGameObjectsWithTag(Color);
 		for (int i = 0; i < fichas.Length; i++)
 		{
 			if (fichas[i].GetComponent<Ficha>() != null)
