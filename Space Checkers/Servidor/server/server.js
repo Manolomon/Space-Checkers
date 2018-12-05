@@ -102,10 +102,27 @@ io.on("connection", function(cliente) {
   });
 
   // Evento llamado por cliente al clicker registrar (TO DO in client)
-  cliente.on("registro", function(datos){
-    app.models.Jugador.create(datos, function(err, response) {
+  cliente.on("registro", function(jugadorData){
+    console.log("Info de jugadorData raw");
+    console.log(jugadorData);
+    var jsonjugador = JSON.parse(jugadorData);
+    console.log("Jugador en json");
+    console.log(jsonjugador);
+
+    let nuevoJugador = [
+      {
+        "username": jsonjugador['Username'],
+        "correo": jsonjugador['Correo'],
+        "pass": jsonjugador['Pass'],
+        "partidasJugadas": jsonjugador['PartidasJugadas'],
+        "partidasGanadas": jsonjugador['PartidasGanadas'],
+      },
+    ]
+
+    app.models.Jugador.create(nuevoJugador, function(err, response) {
       if (err) throw err;
     });
+    console.log("Jugador guardado")
   });
 
   // Evento llamado por cliente al clickear create game (implemented in ButtonLogin.cs atm)
@@ -268,12 +285,15 @@ io.on("connection", function(cliente) {
     cliente.emit("sendActivationCode", codigo);
   });
 
-  // cliente.on('mensaje', function(data) {
-  //   io.sockets.emit('mensaje', {
-  //     name : 
-  //     msj : data.message;
-  //   });
-  // });
+  cliente.on('mensaje', function(messageData) {
+    console.log("Info de messageData raw");
+    console.log(messageData);
+    var jsonmessage = JSON.parse(messageData);
+    console.log("mensaje en json");
+    console.log(jsonmessage);
+
+    io.sockets.in(jsoncolor['IdLobby']).emit("userSelectedColor", stringcolor);
+   });
 
 });
 

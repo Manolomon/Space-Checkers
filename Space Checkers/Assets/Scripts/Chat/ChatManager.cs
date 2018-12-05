@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class ChatManager : MonoBehaviour
 {
@@ -101,6 +102,12 @@ public class ChatManager : MonoBehaviour
         if (chatBox.text != "")
         {
             SendChatMessage(chatBox.text);
+            ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
+            string color = control.Color;
+            Message mensaje = new Message(color, chatBox.text);
+            string msj = JsonConvert.SerializeObject(mensaje);
+            ConnectionManager.instance.socket.Emit("mensaje", msj);
+
         }
         else
         {
@@ -215,7 +222,6 @@ public class ChatManager : MonoBehaviour
         }
     }
 
-    // Color, mensaje y quien lo envia
 
     /// <summary>
     /// Metodo que muestra los mensajes recibidos de otros jugadores

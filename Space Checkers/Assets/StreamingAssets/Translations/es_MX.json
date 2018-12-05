@@ -54,7 +54,9 @@
 
         {"key":"message_data_required", "value": "Faltan datos por ingresar"},
         {"key":"message_login_invalid_data", "value":"Nombre de usuario y contraseña no registrados"},
-        {"key":"message_lobby_code_copied", "value":"Código copiado en Portapapeles"}
+        {"key":"message_lobby_code_copied", "value":"Código copiado en Portapapeles"},
 
+        {"key":"message_empty_fields", "value": "Verifica que no haya campos vacios"},
+        {"key":"passwords_diferent", "value":"Las constraseñas no coinciden"}
     ]
 }

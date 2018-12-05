@@ -17,7 +17,9 @@ public class ConnectionManager : MonoBehaviour {
 	private bool isOwner = false;
 	private string url;
 	public static ConnectionManager instance;
-	public bool ToJoin {get; set;}
+	public bool ToJoin { get; set; }
+
+	public string Code { get; set; }
 	void Awake () 
 	{
 		if (instance == null)
@@ -53,7 +55,6 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("loginSuccessCliente", OnLoginSuccess);
 		socket.On("leaderboardWinsCliente", OnLeaderboardWins);
 		socket.On("leaderboardGamesCliente", OnLeaderboardGames);
-		socket.On("sendInvitation", OnSendInvitation);
 		socket.On("sendActivationCode", OnSendActivationCode);
 		socket.On("guestUsername", OnGuestUsername);
 		socket.On("createLobby", OnCreateLobby);
@@ -110,6 +111,7 @@ public class ConnectionManager : MonoBehaviour {
 		socket.Emit("leaderboardWins");
 		StartCoroutine(ActualizarHome());
 	}
+
 	IEnumerator ActualizarHome()
 	{
 		yield return new WaitForSeconds(1);
@@ -139,27 +141,11 @@ public class ConnectionManager : MonoBehaviour {
         board.SetLeaderData(leaderItems);
 	}
 
-	public void OnSendInvitation(Socket socket, Packet packet, params object[] args)
-	{
-		Debug.Log("Enviando Invitacion");
-		var datosInvitado = JSON.Parse(packet.ToString());
-		string invitadoString = datosInvitado[2].ToString();
-		Jugador.instance.Correo = invitadoString;
-		instance.socket.Emit("sendInvitation");
-	}
-
 	public void OnSendActivationCode(Socket socket, Packet packet, params object[] args)
 	{
 		var datos = JSON.Parse(packet.ToString());
-		string codigoActivacion = datos[1].ToString().Trim( new Char[] {'"'});
-		if (codigoActivacion.Equals("")) // como pasar el codigo ingresado a aqui
-		{
-			ConnectionManager.instance.socket.Emit("");
-		} 
-		else 
-		{
-			Debug.Log("Codigo de activacion incorrecto");
-		}
+		Code = datos[1].ToString().Trim( new Char[] {'"'});
+		Debug.Log("Codigo de activacion " + Code);
 	}
 
 	public void OnGuestUsername(Socket socket, Packet packet, params object[] args)
