@@ -162,21 +162,30 @@ io.on("connection", function(cliente) {
     io.sockets.in(code).emit("terminarTurnoCliente"); //codigo del lobby
   });
 
-  // Metodos para enviar correos
-  cliente.on("sendInvitation", function(usernameData) {
-    var usuario = {where: {username : usernameData}};
+  
+  cliente.on("sendInvitation", function(mailData) {
+    console.log("Info de mailData raw");
+    console.log(mailData);
+    var jsonmail = JSON.parse(mailData);
+    console.log("mail en json");
+    console.log(jsonmail);
+
+    var usuario = {where: {username : mailData}};
     console.log(usuario);
     app.models.Jugador.findOne(usuario, function(err, user) {
       if (err) throw err;
 
       if (user != null) {
-        // si encuentra el username
-        var nombre = user['username'];
-        var correo = user['correo'];
-        var codigo = jsonlobby['idLobby'];
-        //codigo = idLobby; // Esta bien?
-        var senderName = ""; // en donde debo guardarlo antes para poderlo usar aqui
-             
+      
+        let emailData = [
+          {
+            name: user['Username'],
+            email: user['Correo'],
+            code: jsonmail['Codigo'],
+            senderName: jsonmail['Sender'],
+          },
+        ]
+        
         loadTemplate('Invitation', emailData).then((results) => {
           return Promise.all(results.map((result) => {
               sendEmail({
@@ -189,19 +198,27 @@ io.on("connection", function(cliente) {
         }).then(() => {
           console.log('El correo de invitacion ha sido enviado');
         })
-        
-        cliente.emit("sendInvitation", user);
-        console.log(user);
       }
     });
   });
 
-  cliente.on("sendActivationCode", function(newuserData) {
-    var nombre = newuserData['username'];
-    var correo = newuserData['correo'];
-    var codigo = randomCode(5);
-          
-    loadTemplate('Activation Code', emailData).then((results) => {
+  cliente.on("sendActivationCode", function(mailData) {
+    console.log("Info de mailData raw");
+    console.log(mailData);
+    var jsonmail = JSON.parse(mailData);
+    console.log("mail en json");
+    console.log(jsonmail);
+    var codigo = randomCode(5);      
+
+    let emailData = [
+      {
+        name: jsonmail['Name'],
+        email: jsonmail['Email'],
+        code: codigo,
+      },
+    ]
+    
+    loadTemplate('Activation', emailData).then((results) => {
       return Promise.all(results.map((result) => {
           sendEmail({
               to: result.context.email,
@@ -240,15 +257,6 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
-/*let emailData = [
-  {
-    name: nombre,
-    email: correo,
-    code: codigo,
-    sender: senderName,
-  },
-];*/
-
 function sendEmail (obj) {
   return transporter.sendMail(obj);
 }
@@ -271,10 +279,10 @@ function loadTemplate (templateName, contexts) {
 
 // Metodo generador de codigos
 var randomCode = function(length){
-  var codigo = "";
+  var code = "";
   var caracteresPermitidos = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
   for(var i = 0; i < length; i++) {
-      codigo += caracteresPermitidos.charAt(Math.floor(Math.random() * caracteresPermitidos.length)); 
+      code += caracteresPermitidos.charAt(Math.floor(Math.random() * caracteresPermitidos.length)); 
   }
-  return codigo;
+  return code;
 }
