@@ -11,6 +11,7 @@ var app = module.exports = loopback();
 
 var loggeando = {}
 var rooms = {}
+var users = []
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -45,26 +46,32 @@ io.on("connection", function(cliente) {
   cliente.on('disconnect', (reason) => {
     console.log(reason + " " + cliente.id);
   });
+
   // Evento llamado por cliente al clicker iniciar sesion (ButtonLogin.cs)
   cliente.on("login", function(usernameData){
-    var filtro = {where: {username : usernameData}};
-    console.log(filtro);
-    loggeando[cliente.id] = usernameData;
-    app.models.Jugador.findOne(filtro, function (err, user) {
-      if (err) throw err;
-    
-      if (user != null) {
-        // manda la info del usuario si lo encuentra
-        console.log(user['pass']);
-        cliente.emit("loginCliente", user['pass']);
-      }
-    });
+    if (!users.includes(usernameData)) {
+      var filtro = {where: {username : usernameData}};
+      console.log(filtro);
+      loggeando[cliente.id] = usernameData;
+      app.models.Jugador.findOne(filtro, function (err, user) {
+        if (err) throw err;
+      
+        if (user != null) {
+          // manda la info del usuario si lo encuentra
+          console.log(user['pass']);
+          cliente.emit("loginCliente", user['pass']);
+        }
+      });
+    } else {
+      cliente.emit("aviso", "Usuario ya tiene sesion iniciada");
+    }
   });
 
   // Evento llamado por cliente al confirmar que la contrasena es correcta
   cliente.on("loginSuccess", function(){
     var filtro = {where: {username : loggeando[cliente.id]}};
     console.log(filtro);
+    users.push(loggeando[cliente.id]);
     app.models.Jugador.findOne(filtro, function (err, user) {
       if (err) throw err;
       
@@ -77,7 +84,7 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("leaderboardWins", function(){
-    var filtro = {order: 'partidasGanadas DESC', limit: 10, fields: {pass: false, correo: false} }
+    var filtro = {order: 'partidasGanadas DESC', limit: 10, fields: {pass: false, correo: false, id: false} }
     app.models.Jugador.find(filtro, function(err, users) {
       if (err) throw err;
       console.log(users);
@@ -86,7 +93,7 @@ io.on("connection", function(cliente) {
   });
 
   cliente.on("leaderboardGames", function(){
-    var filtro = {order: 'partidasJugadas DESC', limit: 10, fields: {pass: false, correo: false} }
+    var filtro = {order: 'partidasJugadas DESC', limit: 10, fields: {pass: false, correo: false, id: false} }
     app.models.Jugador.find(filtro, function(err, users) {
       if (err) throw err;
       console.log(users);
@@ -109,19 +116,30 @@ io.on("connection", function(cliente) {
     cliente.emit("createLobby", codigo);
   });
 
-  // Evento llamado por cliente al clicker join game (TO DO in client)
   cliente.on("joinGame", function(code){
     var codigo = code; //codigo que llega del cliente
     if (rooms[code] < 6 && (code in rooms)) {
       io.to(codigo).emit('userJoinedRoomCliente', 'Guest'+rooms[code]);
       cliente.emit("guestUsername", 'Guest'+rooms[code]);
-      //io.sockets.in(codigo).emit("getLobbyInfo");
       cliente.join(codigo);
       rooms[code] = rooms[code] + 1;
-      //console.log(io.sockets.clients(codigo));
       console.log("Usuario uniendose a sala " + codigo);
     } else {
-      cliente.emit("errorJoin");
+      cliente.emit("aviso","La sala esta llena o ya no existe");
+    }
+  });
+
+  // Evento llamado por cliente al clicker join game (TO DO in client)
+  cliente.on("joinGameGuest", function(code){
+    var codigo = code; //codigo que llega del cliente
+    if (rooms[code] < 6 && (code in rooms)) {
+      io.to(codigo).emit('userJoinedRoomCliente', 'Guest'+rooms[code]);
+      cliente.emit("guestUsername", 'Guest'+rooms[code]);
+      cliente.join(codigo);
+      rooms[code] = rooms[code] + 1;
+      console.log("Usuario uniendose a sala " + codigo);
+    } else {
+      cliente.emit("aviso","La sala esta llena o ya no existe");
     }
   });
 
@@ -141,6 +159,12 @@ io.on("connection", function(cliente) {
     var stringcolor = JSON.stringify(jsoncolor);
     console.log(jsoncolor['Jugador'] + " selecciono color " + jsoncolor['Color'] + " en lobby " + jsoncolor['IdLobby']);
     io.sockets.in(jsoncolor['IdLobby']).emit("userSelectedColor", stringcolor);
+  });
+
+  cliente.on("prediction", function(datos){
+    var json = JSON.parse(datos);
+    console.log("Prediccion: " + json['Prediccion'] + "en sala " + json['IdLobby']);
+    io.sockets.in(json['IdLobby']).emit("predictionCliente", json['Prediccion']);
   });
 
   // Evento llamado por cliente al dar click en Start Game (no se ha definido aun, probably clase nueva)

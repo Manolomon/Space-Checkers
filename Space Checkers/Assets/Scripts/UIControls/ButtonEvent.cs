@@ -21,26 +21,22 @@ public class ButtonEvent : MonoBehaviour {
     /// </summary>
     public void ClickJoin()
     {
-        InputField code = GameObject.Find("TFGameCode").GetComponent<InputField>(); 
-		ConnectionManager.instance.socket.Emit("joinGame", code.text); 
+        InputField code = GameObject.Find("TFCode").GetComponent<InputField>(); 
+        Dictionary<string, string> join = new Dictionary<string, string>();
+        join.Add("IdLobby", Lobby.instance.IdLobby);
+        join.Add("Jugador", Jugador.instance.Username);
+        string json = JsonConvert.SerializeObject(join);
+		ConnectionManager.instance.socket.Emit("joinGame", json); 
         ConnectionManager.instance.ToJoin = true;
     }
 
-    private void ClickColor(string color)
-    {        
-        Toggle boton = this.GetComponent<Toggle>();
-        if (boton.isOn)
-        {
-            DatosColor datoscolor = new DatosColor(Lobby.instance.IdLobby, Jugador.instance.Username, color);
-            string dataColor = JsonConvert.SerializeObject(datoscolor);
-            ConnectionManager.instance.socket.Emit("selectColor",dataColor);
-        }
-    }
-
+    /// <summary>
+    /// Metodo que se ejecuta para unirse a una partida como invitado
+    /// </summary>
     public void ClickJoinAsGuest()
     {
         InputField code = GameObject.Find("TFGameCode").GetComponent<InputField>(); 
-		ConnectionManager.instance.socket.Emit("joinGame", code.text); 
+		ConnectionManager.instance.socket.Emit("joinGameGuest", code.text); 
 		ConnectionManager.instance.ToJoin = true;
     }
 
@@ -52,6 +48,16 @@ public class ButtonEvent : MonoBehaviour {
     public void ClickStartGame()
     {
         Lobby.instance.StartGame();
+    }
+
+    public void ClickPrediction()
+    {
+        Dictionary<string, string> predictionn = new Dictionary<string, string>();
+        predictionn.Add("IdLobby",Lobby.instance.IdLobby);
+        string prediccion = GameObject.Find("TogglePrediction").GetComponent<Toggle>().isOn.ToString();
+        predictionn.Add("Prediccion", prediccion);
+        string json = JsonConvert.SerializeObject(predictionn);
+        Debug.Log(json);
     }
 
     /// <summary>

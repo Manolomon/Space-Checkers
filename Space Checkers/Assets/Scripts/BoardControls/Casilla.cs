@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Casilla : MonoBehaviour {
 	private bool ocupada;
@@ -50,20 +51,26 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesUD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
+		listaCasillas = listaCasillas.Distinct().ToList();
 		return listaCasillas;
 	}
 
@@ -81,20 +88,26 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesUD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
+		listaCasillas = listaCasillas.Distinct().ToList();
 		return listaCasillas;
 	}
 
@@ -112,20 +125,26 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesUD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
+		listaCasillas = listaCasillas.Distinct().ToList();
 		return listaCasillas;
 	}
 
@@ -143,20 +162,26 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
+		listaCasillas = listaCasillas.Distinct().ToList();
 		return listaCasillas;
 	}
 
@@ -174,20 +199,26 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
+		listaCasillas = listaCasillas.Distinct().ToList();
 		return listaCasillas;
 	}
 	// Obtiene las casillas disponibles a la izquierda y vuelve a llamar para confirmar si hay mas disponibles
@@ -204,21 +235,27 @@ public class Casilla : MonoBehaviour {
 				listaCasillas.AddRange(
 					CasillasDisponiblesUI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesUD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDD(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesDI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 				listaCasillas.AddRange(
 					CasillasDisponiblesI(casillaSiguiente)
 				);
+				listaCasillas = listaCasillas.Distinct().ToList();
 			}
 		}
 		return listaCasillas;
@@ -260,7 +297,7 @@ public class Casilla : MonoBehaviour {
 		casillasDisponibles.AddRange(
 			CasillasDisponiblesI(gameObject)
 		);
-		
+		casillasDisponibles = casillasDisponibles.Distinct().ToList();
 		return casillasDisponibles;
 	}
 	// Itera sobre la lista de casillas disponibles para iluminarlas

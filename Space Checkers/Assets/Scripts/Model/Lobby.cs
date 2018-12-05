@@ -5,14 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Lobby : MonoBehaviour {
 
-	private string idLobby;
+	public string IdLobby {get; set;}
 	private Dictionary <string, string> players = new Dictionary<string, string>();
 	public static Lobby instance;
-	public string IdLobby
-	{
-		get {return idLobby;}
-		set {idLobby = value;}
-	}
+	public bool Prediction {get; set;}
 	public Dictionary<string, string> Players
 	{
 		get {return players;}
@@ -34,12 +30,12 @@ public class Lobby : MonoBehaviour {
 
 	public void StartGame()
 	{
-		ConnectionManager.instance.socket.Emit("startGame", idLobby);
+		ConnectionManager.instance.socket.Emit("startGame", IdLobby);
 	}
 
 	public void PrintLobby()
 	{
-		Debug.Log("ID Lobby: " + idLobby);
+		Debug.Log("ID Lobby: " + IdLobby);
 		foreach (KeyValuePair<string, string> kvp in players)
 		{
 			Debug.Log(string.Format("Player: {0} / Color: {1}", kvp.Key, kvp.Value));

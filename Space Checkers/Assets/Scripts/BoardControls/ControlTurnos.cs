@@ -112,9 +112,13 @@ public class ControlTurnos : MonoBehaviour {
 
 	public void TerminarTurno()
 	{
+		Debug.Log("Winner? = " + JugadorActualWinner());
 		if (JugadorActualWinner())
 		{
-			//emit winner jugador actual
+			DatosColor winner = new DatosColor(Lobby.instance.IdLobby, Jugador.instance.Username, null);
+			string winnerData = JsonConvert.SerializeObject(winner);
+			ConnectionManager.instance.socket.Emit("winner",winnerData);
+			Debug.Log("Winner!");
 		} else {
 			ConnectionManager.instance.socket.Emit("terminarTurno", Lobby.instance.IdLobby);
 		}

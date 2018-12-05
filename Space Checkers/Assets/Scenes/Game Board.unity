@@ -5835,7 +5835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &372532182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8613,7 +8613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &626296714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10500,7 +10500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   casillaUI: {fileID: 0}
-  casillaUD: {fileID: 0}
+  casillaUD: {fileID: 292533405}
   casillaD: {fileID: 1420972962}
   casillaDD: {fileID: 129496808}
   casillaDI: {fileID: 1459940243}
@@ -10890,12 +10890,12 @@ GameObject:
   m_Component:
   - component: {fileID: 804880207}
   m_Layer: 0
-  m_Name: TrianguloAmarillo
+  m_Name: YellowTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &804880207
 Transform:
   m_ObjectHideFlags: 0
@@ -12448,12 +12448,12 @@ GameObject:
   m_Component:
   - component: {fileID: 924159738}
   m_Layer: 0
-  m_Name: TrianguloNaranja
+  m_Name: OrangeTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &924159738
 Transform:
   m_ObjectHideFlags: 0
@@ -12737,7 +12737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &951857383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14063,7 +14063,7 @@ MonoBehaviour:
   casillaUD: {fileID: 215032831}
   casillaD: {fileID: 0}
   casillaDD: {fileID: 0}
-  casillaDI: {fileID: 0}
+  casillaDI: {fileID: 1447320000}
   casillaI: {fileID: 0}
 --- !u!212 &1133708923
 SpriteRenderer:
@@ -15586,11 +15586,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db79514826743d45be700fec50019ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  casillaUI: {fileID: 0}
-  casillaUD: {fileID: 1951558176}
-  casillaD: {fileID: 1473978374}
-  casillaDD: {fileID: 296188602}
-  casillaDI: {fileID: 2139516202}
+  casillaUI: {fileID: 1951558176}
+  casillaUD: {fileID: 1473978374}
+  casillaD: {fileID: 296188602}
+  casillaDD: {fileID: 2139516202}
+  casillaDI: {fileID: 0}
   casillaI: {fileID: 0}
 --- !u!212 &1299257570
 SpriteRenderer:
@@ -22779,7 +22779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   casillaUI: {fileID: 0}
-  casillaUD: {fileID: 0}
+  casillaUD: {fileID: 716557192}
   casillaD: {fileID: 129496808}
   casillaDD: {fileID: 1346351620}
   casillaDI: {fileID: 656437511}
@@ -23951,7 +23951,7 @@ MonoBehaviour:
   casillaUD: {fileID: 0}
   casillaD: {fileID: 0}
   casillaDD: {fileID: 0}
-  casillaDI: {fileID: 0}
+  casillaDI: {fileID: 1243919946}
   casillaI: {fileID: 1279553712}
 --- !u!212 &1532052552
 SpriteRenderer:
@@ -25010,7 +25010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1584372848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25772,12 +25772,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1653484472}
   m_Layer: 5
-  m_Name: TrianguloAzul
+  m_Name: BlueTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1653484472
 Transform:
   m_ObjectHideFlags: 0
@@ -26811,12 +26811,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1716509852}
   m_Layer: 0
-  m_Name: TrianguloMorado
+  m_Name: PurpleTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1716509852
 Transform:
   m_ObjectHideFlags: 0
@@ -30231,12 +30231,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2005115162}
   m_Layer: 0
-  m_Name: TrianguloRojo
+  m_Name: RedTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005115162
 Transform:
   m_ObjectHideFlags: 0
@@ -30267,7 +30267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2005737190
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31199,7 +31199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2073043569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31966,12 +31966,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2141810958}
   m_Layer: 0
-  m_Name: TrianguloVerde
+  m_Name: GreenTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2141810958
 Transform:
   m_ObjectHideFlags: 0

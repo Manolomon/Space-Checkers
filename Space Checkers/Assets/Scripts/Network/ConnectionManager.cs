@@ -48,7 +48,7 @@ public class ConnectionManager : MonoBehaviour {
 	private void SetAllEvents()
 	{
 		socket.On("connect", OnConnect);
-		socket.On("test", OnTest);
+		socket.On("aviso", OnAviso);
 		socket.On("loginCliente", OnLogin);
 		socket.On("loginSuccessCliente", OnLoginSuccess);
 		socket.On("leaderboardWinsCliente", OnLeaderboardWins);
@@ -57,14 +57,14 @@ public class ConnectionManager : MonoBehaviour {
 		socket.On("sendActivationCode", OnSendActivationCode);
 		socket.On("guestUsername", OnGuestUsername);
 		socket.On("createLobby", OnCreateLobby);
-		socket.On("errorJoin", OnErrorJoin); 
 		socket.On("setLobbyInfo", OnSetLobbyInfo);
-		socket.On("getLobbyInfo", OnGetLobbyInfo);
 		socket.On("userJoinedRoomCliente", OnUserJoinedRoom);
+		socket.On("predictionCliente", OnPrediction);
 		socket.On("userSelectedColor", OnUserSelectedColor);
 		socket.On("startGameCliente", OnStartGame);
 		socket.On("moverPiezaCliente", OnMoverPieza);
 		socket.On("terminarTurnoCliente", OnTerminarTurno);
+		socket.On("winnerCliente", OnWinner);
 	}
 
 	private void OnConnect(Socket socket, Packet packet, params object[] args)
@@ -72,9 +72,12 @@ public class ConnectionManager : MonoBehaviour {
 		Debug.Log("Conectado al servidor");
 	}
 
-	private void OnTest(Socket socket, Packet packet, params object[] args)
+	private void OnAviso(Socket socket, Packet packet, params object[] args)
 	{
-		Debug.Log("Respuesta a test");
+		var datos = JSON.Parse(packet.ToString());
+		string mensaje = datos[1].ToString().Trim( new Char[] {'"'});
+		// Mensaje dependiendo lo que traiga el string
+		Debug.Log(mensaje);
 	}
 
 	private void OnLogin(Socket socket, Packet packet, params object[] args)
@@ -192,11 +195,6 @@ public class ConnectionManager : MonoBehaviour {
 		codigo.text = Lobby.instance.IdLobby;
 	}
 
-	private void OnErrorJoin(Socket socket, Packet packet, params object[] args) 
-	{ 
-		Debug.Log("Error al entrar a la sala. Sala llena o expirada"); 
-	} 
-
 	private void OnSetLobbyInfo(Socket socket, Packet packet, params object[] args)
 	{
 		Debug.Log("Llamada a setlobbyinfo");
@@ -219,14 +217,17 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
-	private void OnGetLobbyInfo(Socket socket, Packet packet, params object[] args)
+	private void OnPrediction(Socket socket, Packet packet, params object[] args)
 	{
-		if (isOwner)
+		var datos = JSON.Parse(packet.ToString());
+		string prediction = datos[1].ToString().Trim( new Char[] {'"'});
+		if (prediction.Equals("True"))
 		{
-			Debug.Log("obteniendo info de lobby");
-			DatosLobby datosLobby = new DatosLobby(Lobby.instance.IdLobby, Lobby.instance.Players);
-			string dataLobby = JsonConvert.SerializeObject(datosLobby);
-			socket.Emit("setLobbyInfo", dataLobby);
+			GameObject.Find("TogglePrediction").GetComponent<Toggle>().isOn = true;
+			Lobby.instance.Prediction = true;
+		} else {
+			GameObject.Find("TogglePrediction").GetComponent<Toggle>().isOn = false;
+			Lobby.instance.Prediction = false;
 		}
 	}
 
@@ -243,6 +244,7 @@ public class ConnectionManager : MonoBehaviour {
 			string dataLobby = JsonConvert.SerializeObject(datosLobby);
 			socket.Emit("setLobbyInfo", dataLobby);
 		}
+		// Mensaje: Usuario se unio a la sala
 	}
 
 	private void OnUserSelectedColor(Socket socket, Packet packet, params object[] args)
@@ -259,13 +261,13 @@ public class ConnectionManager : MonoBehaviour {
 		{
 			Debug.Log("Cambiando color de jugador");
 			GameObject.Find("Toggle"+Lobby.instance.Players[color.Jugador]).GetComponent<Toggle>().isOn = false;
-			//GameObject.Find("Toggle"+color.Color+"/"+color.Color+"PlayerName").SetActive(false);
+			GameObject.Find(Lobby.instance.Players[color.Jugador]+"PlayerName").SetActive(false);
 		}
 		Lobby.instance.Players[color.Jugador] = color.Color;
 		Toggle button = GameObject.Find("Toggle"+color.Color).GetComponent<Toggle>();
-		//GameObject nombre = GameObject.Find("Toggle"+color.Color+"/"+color.Color+"PlayerName");
-		//nombre.SetActive(true);
-		//nombre.GetComponent<Text>().text = color.Jugador;
+		GameObject user = BuscarObjetoInactivo(color.Color+"PlayerName");
+		user.SetActive(true);
+		user.GetComponent<Text>().text = color.Jugador;
 		// togglear a encendido el boton del color encontrado
 		button.isOn = true;
 		Lobby.instance.PrintLobby();
@@ -280,13 +282,26 @@ public class ConnectionManager : MonoBehaviour {
 
 	IEnumerator ActualizarGameBoard()
 	{
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(1);
 		ControlTurnos control = GameObject.Find("ControlTurnos").GetComponent<ControlTurnos>();
 		int count = 1;
 		var list = Lobby.instance.Players.Keys.ToList();
 		list.Sort();
+		GameObject[] objetos = Resources.FindObjectsOfTypeAll<GameObject>();
 		foreach (string player in list)
 		{
+			foreach (GameObject go in objetos)
+			{
+				if (go.name == Lobby.instance.Players[player]+"Triangle")
+				{
+					go.SetActive(true);
+				}
+				if (go.name == Lobby.instance.Players[player]+"PlayerName")
+				{
+					go.SetActive(true);
+					go.GetComponent<Text>().text = player;
+				}
+			}
 			if (player == Jugador.instance.Username)
 			{
 				control.MyTurn = count;
@@ -294,6 +309,7 @@ public class ConnectionManager : MonoBehaviour {
 			}
 			count++;
 		}
+		
 		control.ActualTurn = 1;
 		control.IniciarControl();
 	}
@@ -323,6 +339,33 @@ public class ConnectionManager : MonoBehaviour {
 		} else {
 			control.ActualTurn++;
 		}
+	}
+
+	private GameObject BuscarObjetoInactivo(string nombre)
+	{
+		GameObject resultado = null;
+		GameObject[] objetos = Resources.FindObjectsOfTypeAll<GameObject>();
+		foreach (GameObject go in objetos)
+		{
+			if (go.name == nombre)
+			{
+				resultado = go;
+			}
+		}
+		return resultado;
+	}
+
+	private void OnWinner(Socket socket, Packet packet, params object[] args)	
+	{
+		var datos = JSON.Parse(packet.ToString());
+		string winnerInfo = datos[1].ToString();
+		winnerInfo = winnerInfo.Substring(1, winnerInfo.Length - 2);
+		winnerInfo = winnerInfo.Replace(@"\", "");
+		Debug.Log(winnerInfo);
+		DatosColor winner = JsonConvert.DeserializeObject<DatosColor>(winnerInfo);
+		BuscarObjetoInactivo("Blurred Sheet").SetActive(true);
+		BuscarObjetoInactivo("Game Over Panel").SetActive(true);
+		BuscarObjetoInactivo("Winner Name Text").GetComponent<Text>().text = winner.Jugador;
 	}
 
 	void Start () 
