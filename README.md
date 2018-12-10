@@ -12,23 +12,7 @@
     </sup>
 </p>
 
-<p align="center">
-  <a alt="Last Commit" href="https://github.com/dannyhvalenz/Space-Checkers/commits/master">
-    <image src="https://img.shields.io/github/last-commit/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge"/>
-  </a>
-  <a alt="Repo Size" href="https://github.com/dannyhvalenz/Space-Checkers">
-    <image src="https://img.shields.io/github/repo-size/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge"/>
-  </a>
-  <a alt="License" href="https://github.com/dannyhvalenz/Space-Checkers/blob/master/LICENSE">
-    <image src="https://img.shields.io/badge/License-MIT-red.svg?longCache=true&style=for-the-badge"/>
-  </a>
-  <a alt="Made With" href="https://unity3d.com/es">
-    <image src="https://img.shields.io/badge/made%20with-unity-lightgrey.svg?longCache=true&colorB=222C37&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxMyAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yNjQwNSA2LjUwMDM3TDEwLjUzNzYgMi41NzE5N0wxMS42MzYyIDYuNTAwMzdMMTAuNTM3NiAxMC40Mjc5TDguMjY0MDUgNi41MDAzN1pNNy4xNTU5IDcuMTM4MzJMOS40Mjk4MiAxMS4wNjYxTDUuNDY5NjIgMTAuMDUwOUwyLjYwODY0IDcuMTM4MzJINy4xNTU5Wk05LjQyOTI5IDEuOTMzNUw3LjE1NTkgNS44NjE5SDIuNjA4NjRMNS40Njk2MiAyLjk0OTEzTDkuNDI5MjkgMS45MzM1Wk0xMi42NzUgNS4xNjM0OUwxMS4yODc5IDBMNi4xMTA4IDEuMzgzOEw1LjM0NDQ1IDIuNzMyMDRMMy43ODkzNSAyLjcyMDg5TDAgNi41MDA3NEwzLjc4OTM1IDEwLjI3OTdIMy43ODk1MUw1LjM0MzkyIDEwLjI2ODJMNi4xMTEzOSAxMS42MTY0TDExLjI4NzkgMTNMMTIuNjc1IDcuODM3NDZMMTEuODg3MyA2LjUwMDM3TDEyLjY3NSA1LjE2MzQ5WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=&style=for-the-badge"/>
-  </a>
-  <a alt="Release" href="https://github.com/dannyhvalenz/Space-Checkers/releases">
-    <image src="https://img.shields.io/github/release/dannyhvalenz/Space-Checkers.svg?longCache=true&colorB=yellow&style=for-the-badge"/>
-  </a>
-</p>
+[![GitHub last commit](https://img.shields.io/github/last-commit/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers/commits/master) [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/dannyhvalenz/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg?longCache=true&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers/blob/master/LICENSE) [![Made With](https://img.shields.io/badge/made%20with-unity-lightgrey.svg?longCache=true&colorB=222C37&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxMyAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yNjQwNSA2LjUwMDM3TDEwLjUzNzYgMi41NzE5N0wxMS42MzYyIDYuNTAwMzdMMTAuNTM3NiAxMC40Mjc5TDguMjY0MDUgNi41MDAzN1pNNy4xNTU5IDcuMTM4MzJMOS40Mjk4MiAxMS4wNjYxTDUuNDY5NjIgMTAuMDUwOUwyLjYwODY0IDcuMTM4MzJINy4xNTU5Wk05LjQyOTI5IDEuOTMzNUw3LjE1NTkgNS44NjE5SDIuNjA4NjRMNS40Njk2MiAyLjk0OTEzTDkuNDI5MjkgMS45MzM1Wk0xMi42NzUgNS4xNjM0OUwxMS4yODc5IDBMNi4xMTA4IDEuMzgzOEw1LjM0NDQ1IDIuNzMyMDRMMy43ODkzNSAyLjcyMDg5TDAgNi41MDA3NEwzLjc4OTM1IDEwLjI3OTdIMy43ODk1MUw1LjM0MzkyIDEwLjI2ODJMNi4xMTEzOSAxMS42MTY0TDExLjI4NzkgMTNMMTIuNjc1IDcuODM3NDZMMTEuODg3MyA2LjUwMDM3TDEyLjY3NSA1LjE2MzQ5WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=&style=for-the-badge)](https://unity3d.com/es) [![GitHub release](https://img.shields.io/github/release/dannyhvalenz/Space-Checkers.svg?longCache=true&colorB=yellow&style=for-the-badge)](https://github.com/dannyhvalenz/Space-Checkers/releases)
 
 ## Especificaciones de Proyecto
 
