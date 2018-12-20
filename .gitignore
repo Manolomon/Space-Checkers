@@ -1,3 +1,5 @@
+# Unity .gitignore
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -41,3 +43,24 @@ sysinfo.txt
 
 # MacOS
 .DS_Store
+
+# node .gitignore
+
+*.csv
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+*.xml
+.idea
+.project
+.strong-pm
+coverage
+node_modules
+npm-debug.log
