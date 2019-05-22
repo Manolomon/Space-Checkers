@@ -12,6 +12,12 @@
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/Manolomon/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/Manolomon/Space-Checkers/commits/master) [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Manolomon/Space-Checkers.svg?longCache=true&style=for-the-badge)](https://github.com/Manolomon/Space-Checkers) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg?longCache=true&style=for-the-badge)](https://github.com/Manolomon/Space-Checkers/blob/master/LICENSE) [![Made With](https://img.shields.io/badge/unity-2018.3.0f2-lightgrey.svg?longCache=true&colorB=222C37&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxMyAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yNjQwNSA2LjUwMDM3TDEwLjUzNzYgMi41NzE5N0wxMS42MzYyIDYuNTAwMzdMMTAuNTM3NiAxMC40Mjc5TDguMjY0MDUgNi41MDAzN1pNNy4xNTU5IDcuMTM4MzJMOS40Mjk4MiAxMS4wNjYxTDUuNDY5NjIgMTAuMDUwOUwyLjYwODY0IDcuMTM4MzJINy4xNTU5Wk05LjQyOTI5IDEuOTMzNUw3LjE1NTkgNS44NjE5SDIuNjA4NjRMNS40Njk2MiAyLjk0OTEzTDkuNDI5MjkgMS45MzM1Wk0xMi42NzUgNS4xNjM0OUwxMS4yODc5IDBMNi4xMTA4IDEuMzgzOEw1LjM0NDQ1IDIuNzMyMDRMMy43ODkzNSAyLjcyMDg5TDAgNi41MDA3NEwzLjc4OTM1IDEwLjI3OTdIMy43ODk1MUw1LjM0MzkyIDEwLjI2ODJMNi4xMTEzOSAxMS42MTY0TDExLjI4NzkgMTNMMTIuNjc1IDcuODM3NDZMMTEuODg3MyA2LjUwMDM3TDEyLjY3NSA1LjE2MzQ5WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=&style=for-the-badge)](https://unity3d.com/es) [![GitHub release](https://img.shields.io/github/release/Manolomon/Space-Checkers.svg?longCache=true&colorB=yellow&style=for-the-badge)](https://github.com/Manolomon/Space-Checkers/releases)
 
+## Preview
+
+<p align="center">
+    <img src="/docs/images/main-title.gif">
+</p>
+
 ## Especificaciones de Proyecto
 
 Consiste en desarrollar una aplicación (juego) multijugador que permita:
